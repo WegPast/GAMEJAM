@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerPool : MonoBehaviour {
 
-	private List<Character> remainingPlayers;
+	private List<PlayerControl> remainingPlayers;
 	private bool gameOver = false;
 		
 	public void Update() {
@@ -13,9 +13,9 @@ public class PlayerPool : MonoBehaviour {
 		}
 	}
 
-	public PlayerPool addPlayer(Character newPlayer) {
+	public PlayerPool addPlayer(PlayerControl newPlayer) {
 		if (remainingPlayers == null) {
-			remainingPlayers = new List<Character>();
+			remainingPlayers = new List<PlayerControl>();
 		}
 		remainingPlayers.Add (newPlayer);
 		return this;
