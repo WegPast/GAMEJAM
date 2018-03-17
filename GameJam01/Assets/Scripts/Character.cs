@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class Character : MonoBehaviour {
+public class Character : NetworkBehaviour {
 
     private float speed = 1.0F;
 	// Use this for initialization
@@ -12,6 +13,10 @@ public class Character : MonoBehaviour {
 
     void Update()
     {
+        if (!isLocalPlayer)
+        {
+            return;
+        }
         move();
     }
 
