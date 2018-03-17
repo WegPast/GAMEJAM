@@ -5,19 +5,12 @@ using UnityEngine;
 public class Projectiles : MonoBehaviour {
 
     private Rigidbody2D body;
-    public float speed = 10f;
-
-
+    public float speed = 300f;
 
 	// Use this for initialization
 	void Start () {
         body = GetComponent<Rigidbody2D>();
-        body.velocity  = new Vector3(0, speed, 0);
-
+        body.velocity = (transform.parent.rotation * Vector2.up) * speed;
     }
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }
