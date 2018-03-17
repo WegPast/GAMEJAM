@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnnemyMovement : MonoBehaviour {
-	private Player[] potentialTarget;
-	private Player currentTarget;
+	private Character[] potentialTarget;
+	private Character currentTarget;
 
 	// Use this for initialization
 	void Start () {
-		potentialTarget = GameObject.FindObjectsOfType<Player>;
+		potentialTarget = GameObject.FindObjectsOfType<Character>();
 		int luckyBastard = Random.Range (0, potentialTarget.Length);
 		currentTarget = potentialTarget [luckyBastard];
 	}
