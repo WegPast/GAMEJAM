@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 public class Character : NetworkBehaviour
 {
 
-    private float speed = 1.0F;
+    private float speed = 5.0F;
 
     //Synchronized variables
     [SyncVar] Vector2 synchronizedPosition;
@@ -16,7 +16,7 @@ public class Character : NetworkBehaviour
     // Use this for initialization
     void Start()
     {
-
+        transform.position = new Vector3(0F, 0F, -5F);
     }
 
     void Update()
@@ -28,6 +28,7 @@ public class Character : NetworkBehaviour
         }
         else
         {
+            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
             Rotate();
             move();
             attack();
