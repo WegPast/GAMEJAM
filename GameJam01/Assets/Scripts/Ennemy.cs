@@ -5,8 +5,9 @@ using UnityEngine;
 public class Ennemy : MonoBehaviour
 {
 
-    private CharaMono currentTarget;
+    private PlayerControl currentTarget;
     private float contactDist = 0F;
+
     [Header("Enemy characteristic")]
     public float movementSpeed = 1F;
 
@@ -24,11 +25,9 @@ public class Ennemy : MonoBehaviour
                 gameObject.transform.Translate(axe * movementSpeed * Time.deltaTime);
             }
         } else {
-            CharaMono[] potentialTarget = GameObject.FindObjectsOfType<CharaMono>();
+            PlayerControl[] potentialTarget = GameObject.FindObjectsOfType<PlayerControl>();
             if (potentialTarget != null && potentialTarget.Length > 0) {
-                Debug.Log(potentialTarget.Length);
-                int luckyBastard = Random.Range(1, potentialTarget.Length+1);
-                Debug.Log("luckyBastard : "+luckyBastard);
+                int luckyBastard = Random.Range(1, potentialTarget.Length + 1);
                 currentTarget = potentialTarget[luckyBastard - 1];
             }
         }
