@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Pool<T> : MonoBehaviour where T : GameObject {
+public abstract class Pool<T> : MonoBehaviour {
 
 	protected List<T> pool;
 
@@ -18,8 +18,5 @@ public abstract class Pool<T> : MonoBehaviour where T : GameObject {
 			pool = new List<T>();
 		}
 		pool.Add (newPlayer);
-	}
-
-	public class DefaultImp : Pool<GameObject> {
 	}
 }
