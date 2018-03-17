@@ -15,6 +15,7 @@ public class Ennemy : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		// if "this" has a taget
 		if (currentTarget != null) {
 			if (Vector2.Distance (transform.position, currentTarget.transform.position) >= contactDist) {
 				// Init mouvement guide line
@@ -25,8 +26,10 @@ public class Ennemy : MonoBehaviour {
 		} else {
 			CharaMono[] potentialTarget = GameObject.FindObjectsOfType<CharaMono>();
 			if (potentialTarget != null && potentialTarget.Length > 0) {
+
 				int luckyBastard = Random.Range (1, potentialTarget.Length);
-				currentTarget = potentialTarget [luckyBastard-1];
+				Debug.Log ("lucky bastard: " + luckyBastard);
+				currentTarget = potentialTarget[luckyBastard-1];
 			}	
 		}
 	}

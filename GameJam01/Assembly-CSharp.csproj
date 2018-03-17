@@ -55,6 +55,7 @@
      <Compile Include="Assets\Scripts\Character.cs" />
      <Compile Include="Assets\Scripts\CharaMono.cs" />
      <Compile Include="Assets\Scripts\Ennemy.cs" />
+     <Compile Include="Assets\Scripts\Spawner.cs" />
  <Reference Include="Facebook.Unity.Settings">
  <HintPath>D:/Devhome/GAMEJAM/GameJam01/Library/FacebookSDK/Facebook.Unity.Settings.dll</HintPath>
  </Reference>
