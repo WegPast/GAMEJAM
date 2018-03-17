@@ -24,7 +24,7 @@ public class Character : NetworkBehaviour
         if (!isLocalPlayer)
         {
             transform.position = Vector2.Lerp(transform.position, synchronizedPosition, Time.deltaTime * 10);
-            transform.Find("character").rotation = synchronizedRotation;
+            transform.Find("Spaceship_base1").rotation = synchronizedRotation;
         }
         else
         {
@@ -69,7 +69,7 @@ public class Character : NetworkBehaviour
         Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         difference.Normalize();
         float rotation = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
-        transform.Find("character").rotation = Quaternion.Euler(0f, 0f, rotation - 90);
+        transform.Find("Spaceship_base1").rotation = Quaternion.Euler(0f, 0f, rotation - 90);
     }
 
     //Network function
@@ -79,7 +79,7 @@ public class Character : NetworkBehaviour
     void SendPosition()
     {
         CmdSendMyPositionToServer(transform.position);
-        CmdSendMyRotationToServer(transform.Find("character").rotation);
+        CmdSendMyRotationToServer(transform.Find("Spaceship_base1").rotation);
     }
 
 
