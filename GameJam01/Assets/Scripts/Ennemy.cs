@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnnemyMovement : MonoBehaviour {
+public class Ennemy : MonoBehaviour {
 	private Character[] potentialTarget;
 	private Character currentTarget;
 	private int contactDist = 5;
