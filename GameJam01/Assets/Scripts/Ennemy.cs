@@ -5,8 +5,9 @@ using UnityEngine;
 public class Ennemy : MonoBehaviour {
 
 	private CharaMono currentTarget;
-	private int contactDist = 0;
-	private int movementSpeed = 1;
+	private float contactDist = 0F;
+	[Header("Enemy characteristic")]
+	public float movementSpeed = 1F;
 
 	// Use this for initialization
 	void Start () {

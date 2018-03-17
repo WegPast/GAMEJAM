@@ -5,8 +5,8 @@ using UnityEngine.Networking;
 
 public class CharaMono : MonoBehaviour
 {
-
-    private float speed = 1.0F;
+	[Header("Player characteristic")]
+    public float speed = 1F;
 
     //Synchronized variables
 
