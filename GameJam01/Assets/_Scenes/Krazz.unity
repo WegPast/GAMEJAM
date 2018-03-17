@@ -150,7 +150,7 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 81fb7563a3f146142a5546a5e26ae263, type: 2}
   m_IsPrefabParent: 0
---- !u!1001 &845954019
+--- !u!1001 &797807583
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -192,7 +192,7 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 740242707e708bf42a0203ae60f039bd, type: 2}
   m_IsPrefabParent: 0
---- !u!1001 &963317819
+--- !u!1001 &1002804740
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -201,15 +201,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4768264790570026, guid: 295a1e316b955e445b2ebe371a8521b2, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -9.060248
+      value: 4.802148
       objectReference: {fileID: 0}
     - target: {fileID: 4768264790570026, guid: 295a1e316b955e445b2ebe371a8521b2, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -1.6075302
+      value: 1.603145
       objectReference: {fileID: 0}
     - target: {fileID: 4768264790570026, guid: 295a1e316b955e445b2ebe371a8521b2, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4768264790570026, guid: 295a1e316b955e445b2ebe371a8521b2, type: 2}
       propertyPath: m_LocalRotation.x
@@ -231,22 +231,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114145987278620932, guid: 295a1e316b955e445b2ebe371a8521b2,
-        type: 2}
-      propertyPath: projectile
-      value: 
-      objectReference: {fileID: 1022714013714692, guid: 114f48073d607b849a8bcd0e8699a38a,
-        type: 2}
-    - target: {fileID: 114145987278620932, guid: 295a1e316b955e445b2ebe371a8521b2,
-        type: 2}
-      propertyPath: gunLeft
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114145987278620932, guid: 295a1e316b955e445b2ebe371a8521b2,
-        type: 2}
-      propertyPath: gunRight
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 295a1e316b955e445b2ebe371a8521b2, type: 2}
   m_IsPrefabParent: 0
@@ -262,6 +246,7 @@ GameObject:
   - component: {fileID: 1317204459}
   - component: {fileID: 1317204458}
   - component: {fileID: 1317204457}
+  - component: {fileID: 1317204461}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -339,6 +324,18 @@ Camera:
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
   m_StereoMirrorMode: 0
+--- !u!114 &1317204461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1317204455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9259edf26f1426e4ca5ca45a37d17a01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
 --- !u!1001 &1905238247
 Prefab:
   m_ObjectHideFlags: 0
