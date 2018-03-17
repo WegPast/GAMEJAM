@@ -3,36 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Ennemy : MonoBehaviour {
-	private Character[] potentialTarget;
-	private Character currentTarget;
-	private int contactDist = 5;
-	private int detectionDist = 10000;
+
+	private CharaMono currentTarget;
+	private int contactDist = 0;
 	private int movementSpeed = 1;
 
 	// Use this for initialization
 	void Start () {
-		potentialTarget = GameObject.FindObjectsOfType<Character>();
-		if (potentialTarget != null && potentialTarget.Length > 0) {
-			int luckyBastard = Random.Range (0, potentialTarget.Length);
-			currentTarget = potentialTarget [luckyBastard+1];
-		}	
-
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (currentTarget != null) {
-			gameObject.transform.LookAt (currentTarget.transform);
 			if (Vector2.Distance (transform.position, currentTarget.transform.position) >= contactDist) {
 				// Init mouvement guide line
 				Vector2 axe = currentTarget.transform.position - gameObject.transform.position;
 				axe.Normalize ();
 				gameObject.transform.Translate (axe * movementSpeed * Time.deltaTime);
-
-				if (Vector2.Distance (transform.position, currentTarget.transform.position) <= detectionDist) {
-					// Attack
-				}
 			}
+		} else {
+			CharaMono[] potentialTarget = GameObject.FindObjectsOfType<CharaMono>();
+			if (potentialTarget != null && potentialTarget.Length > 0) {
+				int luckyBastard = Random.Range (1, potentialTarget.Length);
+				currentTarget = potentialTarget [luckyBastard-1];
+			}	
 		}
 	}
 
