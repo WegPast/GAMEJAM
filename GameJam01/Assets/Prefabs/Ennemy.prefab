@@ -36,6 +36,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4385386345450420}
   - component: {fileID: 212129332515954732}
+  - component: {fileID: 114290563028290422}
   m_Layer: 0
   m_Name: enemy_sprite
   m_TagString: Untagged
@@ -70,6 +71,38 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114290563028290422
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1772260742609244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 76
+    i1: 20
+    i2: 170
+    i3: 112
+    i4: 183
+    i5: 194
+    i6: 3
+    i7: 132
+    i8: 11
+    i9: 49
+    i10: 45
+    i11: 237
+    i12: 238
+    i13: 123
+    i14: 165
+    i15: 193
+  m_ServerOnly: 1
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114909285843629888
 MonoBehaviour:
   m_ObjectHideFlags: 1
