@@ -18,10 +18,9 @@ public class Projectiles : MonoBehaviour
         body.velocity = (projectilRotation * Vector2.up) * speed;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision) {
+    private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.GetComponent<Ennemy>() || collision.gameObject.CompareTag("Wall")) {
             Destroy(gameObject);
         }
     }
-
 }

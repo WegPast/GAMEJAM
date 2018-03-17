@@ -68,4 +68,10 @@ public class PlayerControl : MonoBehaviour
         float rotation = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
         body.transform.rotation = Quaternion.Euler(0f, 0f, rotation - 90);
     }
+
+    private void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.gameObject.GetComponent<Ennemy>()) {
+            Destroy(gameObject);
+        }
+    }
 }

@@ -33,4 +33,10 @@ public class Ennemy : MonoBehaviour
         }
     }
 
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if (collision.gameObject.GetComponent<Projectiles>() || collision.gameObject.GetComponent<PlayerControl>()) {
+            Destroy(gameObject);
+        }
+    }
 }
