@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 public class Character : NetworkBehaviour
 {
 
-    private float speed = 5.0F;
+    public float speed = 5.0F;
 
     //Synchronized variables
     [SyncVar] Vector2 synchronizedPosition;
@@ -84,7 +84,7 @@ public class Character : NetworkBehaviour
     }
 
 
-    //Ccommand
+    //Command
     [Command]
     void CmdSendMyPositionToServer(Vector2 position)
     {
