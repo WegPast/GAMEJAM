@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: 212714986504599458}
   - component: {fileID: 114520380659900480}
   m_Layer: 0
-  m_Name: Arena_tileset_2 (bottom)
+  m_Name: Spawner (bottom)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
