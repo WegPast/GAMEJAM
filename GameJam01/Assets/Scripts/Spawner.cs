@@ -6,7 +6,7 @@ public class Spawner : MonoBehaviour
 {
 
     public GameObject entityToSpawn;
-	public float spawnPerSecond;
+	public float spawnPerSecond = 5f;
 	private float nextUpdate;
 
     // Use this for initialization
