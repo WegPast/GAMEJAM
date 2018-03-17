@@ -10,6 +10,7 @@ public class Character : NetworkBehaviour
 
     //Synchronized variables
     [SyncVar] Vector2 synchronizedPosition;
+    [SyncVar] Quaternion synchronizedRotation;
 
 
     // Use this for initialization
@@ -18,16 +19,18 @@ public class Character : NetworkBehaviour
 
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if (!isLocalPlayer)
         {
             transform.position = Vector2.Lerp(transform.position, synchronizedPosition, Time.deltaTime * 10);
+            transform.Find("character").rotation = synchronizedRotation;
         }
         else
         {
+            Rotate();
             move();
-
+            attack();
             //Network synchronisation
             SendPosition();
         }
@@ -53,17 +56,43 @@ public class Character : NetworkBehaviour
         }
     }
 
+    void attack()
+    {
+        if (Input.GetKey(KeyCode.Mouse0))
+        {
+
+        }
+    }
+
+    void Rotate()
+    {
+        Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        difference.Normalize();
+        float rotation = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
+        transform.Find("character").rotation = Quaternion.Euler(0f, 0f, rotation - 90);
+    }
+
     //Network function
 
+    //Client
     [Client]
     void SendPosition()
     {
         CmdSendMyPositionToServer(transform.position);
+        CmdSendMyRotationToServer(transform.Find("character").rotation);
     }
 
+
+    //Ccommand
     [Command]
     void CmdSendMyPositionToServer(Vector2 position)
     {
         synchronizedPosition = position;
+    }
+
+    [Command]
+    void CmdSendMyRotationToServer(Quaternion rotation)
+    {
+        synchronizedRotation = rotation;
     }
 }
