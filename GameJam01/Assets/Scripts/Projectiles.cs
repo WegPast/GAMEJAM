@@ -1,18 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
 
-public class Projectiles : NetworkBehaviour
+public class Projectiles : MonoBehaviour
 {
 
     private Rigidbody2D body;
-    public float speed = 2f;
+
+    public bool isFromMyPlayer = false;
+    public float speed = 300f;
 
     // Use this for initialization
     void Awake() {
         body = GetComponent<Rigidbody2D>();
-        speed = 2f;
     }
 
     public void Fire(Quaternion projectilRotation) {
