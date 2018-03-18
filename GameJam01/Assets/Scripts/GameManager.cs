@@ -12,6 +12,7 @@ public class GameManager : NetworkBehaviour
     private LevelManager levelManager;
     private NetworkManager netManager;
     private GameObject myPlayer;
+    private GameObject waveCounter;
 
     public int maxDifficultyLvl = 3;
     public bool isGameStarted = false;
@@ -26,12 +27,16 @@ public class GameManager : NetworkBehaviour
         if(SceneManager.GetActiveScene().name == "02 Lost") {
             GameObject.Find("ScoreText").GetComponent<Text>().text = "You killed "+GameManager.nbEnnemiesKilled.ToString() + " ennemies !";
         }
+        waveCounter = GameObject.Find("WaveCounter");
     }
 
     // Update is called once per frame
     void Update() {
         if (CountPlayer() <= 0 && isGameStarted) {
             GameLost();
+        }
+        if (waveCounter) {
+            waveCounter.GetComponent<Text>().text = "Wave #"+GameObject.FindObjectOfType<WaveHandler>().waveNumber.ToString();
         }
     }
 
