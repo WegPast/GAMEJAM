@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -8,15 +9,16 @@ public class GameManager : MonoBehaviour
 
     private int difficultyLvl = 0;
     private LevelManager levelManager;
-    private NetworkManager netManger;
+    private NetworkManager netManager;
 
     public int maxDifficultyLvl = 3;
     public bool isGameStarted = false;
+    public Text textAddress;
 
     // Use this for initialization
     void Start() {
         levelManager = GetComponent<LevelManager>();
-        netManger = GameObject.FindObjectOfType<NetworkManager>();
+        netManager = GameObject.FindObjectOfType<NetworkManager>();
     }
 
     // Update is called once per frame
@@ -48,8 +50,8 @@ public class GameManager : MonoBehaviour
 
     public void GameLost() {
         isGameStarted = false;
-        if (netManger && netManger.IsClientConnected()) {
-            netManger.StopHost();
+        if (netManager && netManager.IsClientConnected()) {
+            netManager.StopHost();
         }
         levelManager.ChangeScene("02 Lost");
     }
@@ -69,8 +71,16 @@ public class GameManager : MonoBehaviour
     }
 
     public void StartHost() {
-        if (netManger) {
-            netManger.StartHost();
+        if (netManager) {
+            netManager.StartHost();
+        }
+    }
+
+    public void ConnectTo() {
+        string ip = textAddress.text;
+        if (netManager) {
+            netManager.networkAddress = ip;
+            netManager.StartClient();
         }
     }
 }
