@@ -847,9 +847,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed9ff6048d3d39441a553a6d42d6c0e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityToSpawn: {fileID: 1462344453520696, guid: 4c14aa70b7c203840b312dedee7ba5c1,
-    type: 2}
-  spawnPerSecond: 5
 --- !u!114 &114091137509761606
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -861,9 +858,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed9ff6048d3d39441a553a6d42d6c0e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityToSpawn: {fileID: 1462344453520696, guid: 4c14aa70b7c203840b312dedee7ba5c1,
-    type: 2}
-  spawnPerSecond: 5
 --- !u!114 &114124686526085016
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -875,9 +869,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed9ff6048d3d39441a553a6d42d6c0e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityToSpawn: {fileID: 1462344453520696, guid: 4c14aa70b7c203840b312dedee7ba5c1,
-    type: 2}
-  spawnPerSecond: 5
 --- !u!114 &114933245253666254
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -889,9 +880,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed9ff6048d3d39441a553a6d42d6c0e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityToSpawn: {fileID: 1462344453520696, guid: 4c14aa70b7c203840b312dedee7ba5c1,
-    type: 2}
-  spawnPerSecond: 5
 --- !u!212 &212029551430117036
 SpriteRenderer:
   m_ObjectHideFlags: 1

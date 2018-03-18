@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Wall
   - PlayerProjectiles
+  - Enemy
   layers:
   - Default
   - TransparentFX
