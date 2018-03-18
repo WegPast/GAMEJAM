@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : NetworkBehaviour
 {
 
     private int difficultyLvl = 0;
