@@ -210,7 +210,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4711765449084452}
-  - component: {fileID: 114430666424768374}
   m_Layer: 0
   m_Name: SpawnersZone
   m_TagString: Untagged
@@ -870,20 +869,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed9ff6048d3d39441a553a6d42d6c0e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114430666424768374
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1560526886223952}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da9bba2438174894c9ed3d53afa4926f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemy: {fileID: 1462344453520696, guid: 4c14aa70b7c203840b312dedee7ba5c1, type: 2}
-  enemyPerDifficultyPoint: 3
-  waveNumber: 0
 --- !u!114 &114933245253666254
 MonoBehaviour:
   m_ObjectHideFlags: 1
