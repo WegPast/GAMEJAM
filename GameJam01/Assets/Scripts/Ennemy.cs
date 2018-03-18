@@ -13,7 +13,7 @@ public class Ennemy : MonoBehaviour
 
     // Use this for initialization
     void Start() {
-        movementSpeed = 0.05F;
+        //movementSpeed = 0.05F;
     }
 
     // Update is called once per frame
