@@ -20,7 +20,6 @@ public class CameraControl : MonoBehaviour
             Vector3 playerPos = player.gameObject.transform.position;
             transform.position = new Vector3(playerPos.x, playerPos.y, transform.position.z);
         } else {
-
             transform.position = new Vector3(0f, 0f, transform.position.z);
         }
     }

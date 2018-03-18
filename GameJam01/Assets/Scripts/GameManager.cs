@@ -6,13 +6,13 @@ public class GameManager : MonoBehaviour
 {
 
     private int difficultyLvl = 0;
+    private LevelManager levelManager;
 
     public int maxDifficultyLvl = 3;
 
-
     // Use this for initialization
     void Start() {
-
+        levelManager = GetComponent<LevelManager>();
     }
 
     // Update is called once per frame
@@ -39,4 +39,9 @@ public class GameManager : MonoBehaviour
             difficultyLvl--;
         }
     }
+
+    public void GameLost() {
+        levelManager.ChangeScene("02 Lost");
+    }
+
 }

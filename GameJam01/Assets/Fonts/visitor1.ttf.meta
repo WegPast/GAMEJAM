@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 80918fbdd940245459a8c3ab05190503
+timeCreated: 1521334879
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Visitor TT1 BRK
+  fontNames:
+  - Visitor TT1 BRK
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 3
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

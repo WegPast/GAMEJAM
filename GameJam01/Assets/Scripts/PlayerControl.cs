@@ -28,6 +28,7 @@ public class PlayerControl : MonoBehaviour
         if (!gunRight) {
             Debug.LogError("No Right Gun attached, ma couille!!!");
         }
+
     }
 
     void Update() {
