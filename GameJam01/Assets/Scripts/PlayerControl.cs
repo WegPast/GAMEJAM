@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class PlayerControl : MonoBehaviour
+public class PlayerControl : NetworkBehaviour
 {
 
     [Header("Player properties")]
@@ -39,7 +39,10 @@ public class PlayerControl : MonoBehaviour
         LookAtMouse();
         Move();
         if (Input.GetKeyDown(KeyCode.Mouse0)) {
-            Fire();
+            if (isLocalPlayer)
+            {
+                CmdFire();
+            }
         }
     }
 
@@ -58,12 +61,16 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
-    public void Fire() {
+    [Command]
+    public void CmdFire() {
         GameObject bullet1 = Instantiate(projectile, gunLeft.transform.position, Quaternion.identity) as GameObject;
         bullet1.GetComponent<Projectiles>().Fire(body.transform.rotation);
 
         GameObject bullet2 = Instantiate(projectile, gunRight.transform.position, Quaternion.identity) as GameObject;
         bullet2.GetComponent<Projectiles>().Fire(body.transform.rotation);
+
+        NetworkServer.Spawn(bullet1);
+        NetworkServer.Spawn(bullet2);
     }
 
     void LookAtMouse() {

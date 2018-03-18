@@ -23,6 +23,8 @@ GameObject:
   - component: {fileID: 61834759163594924}
   - component: {fileID: 50445777182320548}
   - component: {fileID: 114339415727265694}
+  - component: {fileID: 114333035263596040}
+  - component: {fileID: 114504638318490736}
   m_Layer: 9
   m_Name: Bullet
   m_TagString: PlayerProjectiles
@@ -88,6 +90,38 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.09329763, y: 0.2101295}
   m_EdgeRadius: 0
+--- !u!114 &114333035263596040
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1022714013714692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 17
+    i1: 79
+    i2: 72
+    i3: 7
+    i4: 61
+    i5: 96
+    i6: 123
+    i7: 132
+    i8: 154
+    i9: 139
+    i10: 205
+    i11: 14
+    i12: 134
+    i13: 153
+    i14: 163
+    i15: 138
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114339415727265694
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -100,6 +134,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 35.1
+--- !u!114 &114504638318490736
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1022714013714692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 2
+  m_SendInterval: 0
+  m_SyncRotationAxis: 3
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!212 &212512698907243362
 SpriteRenderer:
   m_ObjectHideFlags: 1
