@@ -14,7 +14,6 @@ public class NetworkSync : NetworkBehaviour
     // Use this for initialization
     void Start()
     {
-        transform.position = new Vector3(0F, 0F, -5F);
         if (isLocalPlayer)
         {
             GameObject.Find("Main Camera").GetComponent<CameraControl>().player = this.gameObject;
