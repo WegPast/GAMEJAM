@@ -48,7 +48,9 @@ public class GameManager : MonoBehaviour
 
     public void GameLost() {
         isGameStarted = false;
-        netManger.StopHost();
+        if (netManger && netManger.IsClientConnected()) {
+            netManger.StopHost();
+        }
         levelManager.ChangeScene("02 Lost");
     }
 
