@@ -14,21 +14,24 @@ public class PlayerControl : MonoBehaviour
     public GameObject gunLeft, gunRight;
 
     private GameObject body;
+    private GameManager gameManager;
 
     //Synchronized variables
 
 
     // Use this for initialization
     void Start() {
+
         transform.position = new Vector3(0F, 0F, -5F);
         body = transform.Find("Body").gameObject;
+        gameManager = GameObject.FindObjectOfType<GameManager>();
+        gameManager.isGameStarted = true;
         if (!gunLeft) {
             Debug.LogError("No Left Gun attached, ma couille!!!");
         }
         if (!gunRight) {
             Debug.LogError("No Right Gun attached, ma couille!!!");
         }
-
     }
 
     void Update() {
@@ -72,7 +75,11 @@ public class PlayerControl : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.GetComponent<Ennemy>()) {
-            Destroy(gameObject);
+            Die();
         }
+    }
+
+    public void Die() {
+        Destroy(gameObject);
     }
 }
