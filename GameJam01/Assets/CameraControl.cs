@@ -9,9 +9,6 @@ public class CameraControl : MonoBehaviour
 
     // Use this for initialization
     void Start() {
-        if (!player) {
-            Debug.LogError("No player attached to main camera !");
-        }
     }
 
     // Update is called once per frame

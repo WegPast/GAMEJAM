@@ -22,6 +22,8 @@ GameObject:
   - component: {fileID: 114145987278620932}
   - component: {fileID: 50379839431850010}
   - component: {fileID: 60783878349263194}
+  - component: {fileID: 114038877207721594}
+  - component: {fileID: 114632479246380208}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -107,7 +109,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1624662534799166}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -185,6 +187,38 @@ PolygonCollider2D:
       - {x: 0.45473626, y: 0.16238096}
       - {x: 0.3542523, y: 0.24453074}
       - {x: 0.2520787, y: 0.12507564}
+--- !u!114 &114038877207721594
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1368041092822446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 41
+    i1: 90
+    i2: 30
+    i3: 49
+    i4: 107
+    i5: 149
+    i6: 94
+    i7: 68
+    i8: 91
+    i9: 46
+    i10: 190
+    i11: 55
+    i12: 26
+    i13: 133
+    i14: 33
+    i15: 178
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114145987278620932
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -200,6 +234,17 @@ MonoBehaviour:
   projectile: {fileID: 1022714013714692, guid: 114f48073d607b849a8bcd0e8699a38a, type: 2}
   gunLeft: {fileID: 1790468912096288}
   gunRight: {fileID: 1442003403887870}
+--- !u!114 &114632479246380208
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1368041092822446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e89c4bf00ea3d44784cd23d09f90331, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212553783707585586
 SpriteRenderer:
   m_ObjectHideFlags: 1

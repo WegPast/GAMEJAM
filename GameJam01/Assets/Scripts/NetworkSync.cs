@@ -9,12 +9,17 @@ public class NetworkSync : NetworkBehaviour
     //Synchronized variables
     [SyncVar] Vector2 synchronizedPosition;
     [SyncVar] Quaternion synchronizedRotation;
-
+    
 
     // Use this for initialization
     void Start()
     {
         transform.position = new Vector3(0F, 0F, -5F);
+        if (isLocalPlayer)
+        {
+            GameObject.Find("Main Camera").GetComponent<CameraControl>().player = this.gameObject;
+            GameObject.Find("Main Camera").transform.position = new Vector3(0f, 0f, -20f);
+        }
     }
 
     void Update()

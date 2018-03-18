@@ -20,14 +20,15 @@ public class PlayerControl : MonoBehaviour
 
     // Use this for initialization
     void Start() {
-        transform.position = new Vector3(0F, 0F, -5F);
-        body = transform.Find("Body").gameObject;
-        if (!gunLeft) {
-            Debug.LogError("No Left Gun attached, ma couille!!!");
-        }
-        if (!gunRight) {
-            Debug.LogError("No Right Gun attached, ma couille!!!");
-        }
+
+            transform.position = new Vector3(0F, 0F, -5F);
+            body = transform.Find("Body").gameObject;
+            if (!gunLeft) {
+                Debug.LogError("No Left Gun attached, ma couille!!!");
+            }
+            if (!gunRight) {
+                Debug.LogError("No Right Gun attached, ma couille!!!");
+            }
     }
 
     void Update() {
