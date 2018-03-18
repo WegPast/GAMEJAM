@@ -6,6 +6,7 @@ public class Ennemy : MonoBehaviour
 {
 
     private PlayerControl currentTarget;
+    private GameManager gameManager;
     private float contactDist = 0F;
 
     [Header("Enemy characteristic")]
@@ -14,6 +15,7 @@ public class Ennemy : MonoBehaviour
     // Use this for initialization
     void Start() {
         //movementSpeed = 0.05F;
+        gameManager = GameObject.FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
@@ -24,6 +26,11 @@ public class Ennemy : MonoBehaviour
                 Vector2 axe = currentTarget.transform.position - gameObject.transform.position;
                 axe.Normalize();
                 gameObject.transform.Translate(axe * movementSpeed * Time.deltaTime);
+
+                Vector3 difference = currentTarget.transform.position - transform.position;
+                difference.Normalize();
+                float rotation = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
+                gameObject.transform.Find("enemy_sprite").transform.rotation = Quaternion.Euler(0f, 0f, rotation);
             }
         } else {
             PlayerControl[] potentialTarget = GameObject.FindObjectsOfType<PlayerControl>();
@@ -36,8 +43,15 @@ public class Ennemy : MonoBehaviour
 
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.gameObject.GetComponent<Projectiles>() || collision.gameObject.GetComponent<PlayerControl>()) {
+        if (collision.gameObject.GetComponent<Projectiles>()){
+            if (collision.gameObject.GetComponent<Projectiles>().isFromMyPlayer) {
+                GameManager.nbEnnemiesKilled++;
+            }
             Destroy(gameObject);
+        }
+        if (collision.gameObject.GetComponent<PlayerControl>()) {
+            Destroy(gameObject);
+
         }
     }
 }

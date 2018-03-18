@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,15 +11,21 @@ public class GameManager : MonoBehaviour
     private int difficultyLvl = 0;
     private LevelManager levelManager;
     private NetworkManager netManager;
+    private GameObject myPlayer;
 
     public int maxDifficultyLvl = 3;
     public bool isGameStarted = false;
     public Text textAddress;
+    public static int nbEnnemiesKilled;
+
 
     // Use this for initialization
     void Start() {
         levelManager = GetComponent<LevelManager>();
         netManager = GameObject.FindObjectOfType<NetworkManager>();
+        if(SceneManager.GetActiveScene().name == "02 Lost") {
+            GameObject.Find("ScoreText").GetComponent<Text>().text = "You killed "+GameManager.nbEnnemiesKilled.ToString() + " ennemies !";
+        }
     }
 
     // Update is called once per frame

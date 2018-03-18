@@ -6,6 +6,8 @@ public class Projectiles : MonoBehaviour
 {
 
     private Rigidbody2D body;
+
+    public bool isFromMyPlayer = false;
     public float speed = 300f;
 
     // Use this for initialization

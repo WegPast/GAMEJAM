@@ -26,12 +26,16 @@ public class PlayerControl : NetworkBehaviour
         body = transform.Find("Body").gameObject;
         gameManager = GameObject.FindObjectOfType<GameManager>();
         gameManager.isGameStarted = true;
+        GameManager.nbEnnemiesKilled = 0;
+
         if (!gunLeft) {
             Debug.LogError("No Left Gun attached, ma couille!!!");
         }
         if (!gunRight) {
             Debug.LogError("No Right Gun attached, ma couille!!!");
         }
+
+
     }
 
     void Update() {
@@ -65,9 +69,15 @@ public class PlayerControl : NetworkBehaviour
     public void CmdFire() {
         GameObject bullet1 = Instantiate(projectile, gunLeft.transform.position, Quaternion.identity) as GameObject;
         bullet1.GetComponent<Projectiles>().Fire(body.transform.rotation);
+        if (isLocalPlayer) {
+            bullet1.GetComponent<Projectiles>().isFromMyPlayer = true;
+        }
 
         GameObject bullet2 = Instantiate(projectile, gunRight.transform.position, Quaternion.identity) as GameObject;
         bullet2.GetComponent<Projectiles>().Fire(body.transform.rotation);
+        if (isLocalPlayer) {
+            bullet2.GetComponent<Projectiles>().isFromMyPlayer = true;
+        }
 
         NetworkServer.Spawn(bullet1);
         NetworkServer.Spawn(bullet2);
