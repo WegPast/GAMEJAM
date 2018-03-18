@@ -26,7 +26,7 @@ public class PlayerControl : NetworkBehaviour
         body = transform.Find("Body").gameObject;
         gameManager = GameObject.FindObjectOfType<GameManager>();
         gameManager.isGameStarted = true;
-        GameManager.nbEnnemiesKilled = 0;
+
 
         if (!gunLeft) {
             Debug.LogError("No Left Gun attached, ma couille!!!");
@@ -34,12 +34,11 @@ public class PlayerControl : NetworkBehaviour
         if (!gunRight) {
             Debug.LogError("No Right Gun attached, ma couille!!!");
         }
-
-
+        gunLeft.transform.position = new Vector3(gunLeft.transform.position.x, gunLeft.transform.position.y, -5f);
+        gunRight.transform.position = new Vector3(gunRight.transform.position.x, gunRight.transform.position.y, -5f);
     }
 
     void Update() {
-        transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         LookAtMouse();
         Move();
         if (Input.GetKeyDown(KeyCode.Mouse0)) {
@@ -63,21 +62,16 @@ public class PlayerControl : NetworkBehaviour
         if (Input.GetKey(KeyCode.Q)) {
             transform.Translate(Vector2.left * speed * Time.deltaTime);
         }
+        transform.position = new Vector3(transform.position.x, transform.position.y, -5F);
     }
 
     [Command]
     public void CmdFire() {
         GameObject bullet1 = Instantiate(projectile, gunLeft.transform.position, Quaternion.identity) as GameObject;
         bullet1.GetComponent<Projectiles>().Fire(body.transform.rotation);
-        if (isLocalPlayer) {
-            bullet1.GetComponent<Projectiles>().isFromMyPlayer = true;
-        }
 
         GameObject bullet2 = Instantiate(projectile, gunRight.transform.position, Quaternion.identity) as GameObject;
         bullet2.GetComponent<Projectiles>().Fire(body.transform.rotation);
-        if (isLocalPlayer) {
-            bullet2.GetComponent<Projectiles>().isFromMyPlayer = true;
-        }
 
         NetworkServer.Spawn(bullet1);
         NetworkServer.Spawn(bullet2);

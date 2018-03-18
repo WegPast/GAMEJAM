@@ -25,7 +25,7 @@ public class NetworkSync : NetworkBehaviour
     {
         if (!isLocalPlayer)
         {
-            transform.position = Vector2.Lerp(transform.position, synchronizedPosition, Time.deltaTime * 10);
+            transform.position = Vector3.Lerp(transform.position, synchronizedPosition, Time.deltaTime * 10);
             transform.Find("Body").rotation = synchronizedRotation;
         }
         else
@@ -48,7 +48,7 @@ public class NetworkSync : NetworkBehaviour
 
     //Command
     [Command]
-    void CmdSendMyPositionToServer(Vector2 position)
+    void CmdSendMyPositionToServer(Vector3 position)
     {
         synchronizedPosition = position;
     }
