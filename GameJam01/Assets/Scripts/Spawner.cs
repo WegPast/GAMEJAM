@@ -18,6 +18,7 @@ public class Spawner : NetworkBehaviour
 	void Spawn(GameObject toSpawn) {
 		GameObject spawnedEntity = Instantiate(toSpawn, gameObject.transform.position, Quaternion.identity);
         spawnedEntity.transform.parent = transform;
+        NetworkServer.Spawn(spawnedEntity);
     }
 
 }

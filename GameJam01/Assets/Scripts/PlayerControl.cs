@@ -39,7 +39,6 @@ public class PlayerControl : NetworkBehaviour
     }
 
     void Update() {
-        transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         LookAtMouse();
         Move();
         if (Input.GetKeyDown(KeyCode.Mouse0)) {
@@ -63,6 +62,7 @@ public class PlayerControl : NetworkBehaviour
         if (Input.GetKey(KeyCode.Q)) {
             transform.Translate(Vector2.left * speed * Time.deltaTime);
         }
+        transform.position = new Vector3(transform.position.x, transform.position.y, -5f);
     }
 
     [Command]

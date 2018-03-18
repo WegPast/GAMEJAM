@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class Projectiles : MonoBehaviour
+public class Projectiles : NetworkBehaviour
 {
 
     private Rigidbody2D body;
@@ -12,6 +13,7 @@ public class Projectiles : MonoBehaviour
 
     // Use this for initialization
     void Awake() {
+        transform.position = new Vector3(transform.position.x, transform.position.y, -5f);
         body = GetComponent<Rigidbody2D>();
     }
 
