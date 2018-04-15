@@ -10,6 +10,7 @@ public class Projectiles : NetworkBehaviour
 
     public bool isFromMyPlayer = false;
     public float speed = 300f;
+    public int damage = 10;
 
     // Use this for initialization
     void Awake() {

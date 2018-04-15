@@ -16,11 +16,18 @@ public class PlayerControl : NetworkBehaviour
     private GameObject body;
     private GameManager gameManager;
 
+    private Weapon leftWeapon, rightWeapon;
+    private float nextFire;
+
     //Synchronized variables
 
 
     // Use this for initialization
     void Start() {
+
+
+        leftWeapon = gunLeft.GetComponentInChildren<Weapon>();
+        rightWeapon = gunRight.GetComponentInChildren<Weapon>();
 
         transform.position = new Vector3(0F, 0F, -5F);
         body = transform.Find("Body").gameObject;
@@ -42,8 +49,7 @@ public class PlayerControl : NetworkBehaviour
         LookAtMouse();
         Move();
         if (Input.GetKeyDown(KeyCode.Mouse0)) {
-            if (isLocalPlayer)
-            {
+            if (isLocalPlayer) {
                 CmdFire();
             }
         }
@@ -81,6 +87,12 @@ public class PlayerControl : NetworkBehaviour
 
         NetworkServer.Spawn(bullet1);
         NetworkServer.Spawn(bullet2);
+
+        if (Input.GetButton("Fire1") && Time.time > nextFire) {
+            nextFire = Time.time + leftWeapon.fireRate;
+            leftWeapon.FireProjectile(body.transform.rotation);
+            rightWeapon.FireProjectile(body.transform.rotation);
+        }
     }
 
     void LookAtMouse() {
