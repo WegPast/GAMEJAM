@@ -26,8 +26,8 @@ public class PlayerControl : NetworkBehaviour
     void Start() {
 
 
-        leftWeapon = gunLeft.GetComponentInChildren<Weapon>();
-        rightWeapon = gunRight.GetComponentInChildren<Weapon>();
+        leftWeapon = gunLeft.GetComponent<GunController>().GetAttachedWeapon().GetComponent<Weapon>();
+        rightWeapon = gunRight.GetComponent<GunController>().GetAttachedWeapon().GetComponent<Weapon>();
 
         transform.position = new Vector3(0F, 0F, -5F);
         body = transform.Find("Body").gameObject;
@@ -48,11 +48,11 @@ public class PlayerControl : NetworkBehaviour
     void Update() {
         LookAtMouse();
         Move();
-        if (Input.GetKeyDown(KeyCode.Mouse0)) {
+        //if (Input.GetKeyDown(KeyCode.Mouse0)) {
             if (isLocalPlayer) {
                 CmdFire();
             }
-        }
+        //}
     }
 
     void Move() {
@@ -73,25 +73,25 @@ public class PlayerControl : NetworkBehaviour
 
     [Command]
     public void CmdFire() {
-        GameObject bullet1 = Instantiate(projectile, gunLeft.transform.position, Quaternion.identity) as GameObject;
-        bullet1.GetComponent<Projectiles>().Fire(body.transform.rotation);
-        if (isLocalPlayer) {
-            bullet1.GetComponent<Projectiles>().isFromMyPlayer = true;
-        }
+        //GameObject bullet1 = Instantiate(projectile, gunLeft.transform.position, Quaternion.identity) as GameObject;
+        //bullet1.GetComponent<Projectiles>().Fire(body.transform.rotation);
+        //if (isLocalPlayer) {
+        //    bullet1.GetComponent<Projectiles>().isFromMyPlayer = true;
+        //}
 
-        GameObject bullet2 = Instantiate(projectile, gunRight.transform.position, Quaternion.identity) as GameObject;
-        bullet2.GetComponent<Projectiles>().Fire(body.transform.rotation);
-        if (isLocalPlayer) {
-            bullet2.GetComponent<Projectiles>().isFromMyPlayer = true;
-        }
+        //GameObject bullet2 = Instantiate(projectile, gunRight.transform.position, Quaternion.identity) as GameObject;
+        //bullet2.GetComponent<Projectiles>().Fire(body.transform.rotation);
+        //if (isLocalPlayer) {
+        //    bullet2.GetComponent<Projectiles>().isFromMyPlayer = true;
+        //}
 
-        NetworkServer.Spawn(bullet1);
-        NetworkServer.Spawn(bullet2);
+        //NetworkServer.Spawn(bullet1);
+        //NetworkServer.Spawn(bullet2);
 
         if (Input.GetButton("Fire1") && Time.time > nextFire) {
             nextFire = Time.time + leftWeapon.fireRate;
-            leftWeapon.FireProjectile(body.transform.rotation);
-            rightWeapon.FireProjectile(body.transform.rotation);
+            leftWeapon.FireProjectile(gunLeft);
+            rightWeapon.FireProjectile(gunRight);
         }
     }
 

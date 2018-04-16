@@ -20,9 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4750404037062928}
   - component: {fileID: 212512698907243362}
+  - component: {fileID: 114339415727265694}
   - component: {fileID: 61834759163594924}
   - component: {fileID: 50445777182320548}
-  - component: {fileID: 114339415727265694}
   - component: {fileID: 114333035263596040}
   - component: {fileID: 114504638318490736}
   m_Layer: 9
@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isFromMyPlayer: 0
-  speed: 35.1
+  speed: 13.71
   damage: 10
 --- !u!114 &114504638318490736
 MonoBehaviour:
