@@ -7,6 +7,9 @@ public class Weapon : NetworkBehaviour
 {
 
     public Projectiles projectileType; // Contains damage, speed etc...
+
+    [Header("Weapon's properties")]
+    [Range(0.05f, 2f)]
     public float fireRate;
 
     private GameObject fireSpot;
@@ -23,8 +26,8 @@ public class Weapon : NetworkBehaviour
 
     public void FireProjectile(GameObject gun) {
         fireSpot = transform.GetChild(transform.childCount - 1).gameObject;
-        Debug.Log(fireSpot);
-        GameObject projectile = Instantiate(projectileType.gameObject, gun.transform.position, Quaternion.identity) as GameObject;
+
+        GameObject projectile = Instantiate(projectileType.gameObject, fireSpot.transform.position, Quaternion.identity) as GameObject;
         projectile.GetComponent<Projectiles>().Fire(gun.transform.rotation);
 
         if (isLocalPlayer) {
