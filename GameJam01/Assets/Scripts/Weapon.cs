@@ -26,6 +26,7 @@ public class Weapon : NetworkBehaviour
 
     public void FireProjectile(GameObject gun) {
         fireSpot = transform.GetChild(transform.childCount - 1).gameObject;
+        fireSpot.transform.parent = GameObject.Find(gun.name).transform;
 
         GameObject projectile = Instantiate(projectileType.gameObject, fireSpot.transform.position, Quaternion.identity) as GameObject;
         projectile.GetComponent<Projectiles>().Fire(gun.transform.rotation);

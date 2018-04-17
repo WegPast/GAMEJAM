@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isFromMyPlayer: 0
-  speed: 40
+  speed: 15.92
   damage: 10
 --- !u!114 &114504638318490736
 MonoBehaviour:

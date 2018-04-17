@@ -19,6 +19,10 @@ public class GunController : MonoBehaviour
     private void InstantiateWeapon() {
         instantiatedWepaon = Instantiate(attachedWeapon, transform.position, Quaternion.identity);
         instantiatedWepaon.transform.parent = transform;
+
+        // By default instantiated object take same parent transforme properties. 
+        // GunRight has a scale x of -1. So here we reset weapon scale.
+        instantiatedWepaon.transform.localScale = new Vector3(1f, 1f, 1F);
     }
 
     public void ChangeWeapon(GameObject newWeapon) {
