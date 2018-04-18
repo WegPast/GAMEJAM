@@ -35,7 +35,7 @@ public class GameManager : NetworkBehaviour
         if (CountPlayer() <= 0 && isGameStarted) {
             GameLost();
         }
-        if (waveCounter) {
+        if (waveCounter != null) {
             waveCounter.GetComponent<Text>().text = "Wave #"+GameObject.FindObjectOfType<WaveHandler>().waveNumber.ToString();
         }
     }

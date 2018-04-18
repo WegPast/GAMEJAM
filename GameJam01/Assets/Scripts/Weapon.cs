@@ -12,9 +12,20 @@ public class Weapon : NetworkBehaviour
     [Range(0.05f, 2f)]
     public float fireRate;
 
-    private GameObject fireSpot;
+    private Vector3 fireSpot;
+    private GameObject parentGameObject;
 
+    //public GameObject GetFireSpot() {
+    //    return fireSpot;
+    //}
 
+    public void SetFireSpot(Vector3 fSpot) {
+        fireSpot = fSpot;
+    }
+
+    private void Awake() {
+        
+    }
     // Use this for initialization
     void Start() {
     }
@@ -25,10 +36,11 @@ public class Weapon : NetworkBehaviour
     }
 
     public void FireProjectile(GameObject gun) {
-        fireSpot = transform.GetChild(transform.childCount - 1).gameObject;
-        fireSpot.transform.parent = GameObject.Find(gun.name).transform;
-
-        GameObject projectile = Instantiate(projectileType.gameObject, fireSpot.transform.position, Quaternion.identity) as GameObject;
+        //fireSpot = transform.GetChild(transform.childCount - 1).gameObject;
+        //fireSpot.transform.parent = gun.transform;
+        Vector3 projectilePos = gun.transform.position;
+        Debug.Log(gun.transform.position);
+        GameObject projectile = Instantiate(projectileType.gameObject, projectilePos , Quaternion.identity) as GameObject;
         projectile.GetComponent<Projectiles>().Fire(gun.transform.rotation);
 
         if (isLocalPlayer) {

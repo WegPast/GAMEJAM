@@ -25,7 +25,8 @@ public class PlayerControl : NetworkBehaviour
     // Use this for initialization
     void Start() {
 
-
+        gunLeft = GameObject.Find("GunLeft").gameObject;
+        gunRight = GameObject.Find("GunRight").gameObject;
         leftWeapon = gunLeft.GetComponent<GunController>().GetAttachedWeapon().GetComponent<Weapon>();
         rightWeapon = gunRight.GetComponent<GunController>().GetAttachedWeapon().GetComponent<Weapon>();
 
@@ -37,9 +38,15 @@ public class PlayerControl : NetworkBehaviour
 
         if (!gunLeft) {
             Debug.LogError("No Left Gun attached, ma couille!!!");
+        } else {
+            Debug.LogError("gunLeft : "+ gunLeft.gameObject.GetInstanceID());
+
         }
         if (!gunRight) {
             Debug.LogError("No Right Gun attached, ma couille!!!");
+        } else {
+            Debug.LogError("gunRight : " + gunRight.gameObject.GetInstanceID());
+
         }
 
 
