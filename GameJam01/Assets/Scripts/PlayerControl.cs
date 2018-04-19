@@ -11,7 +11,8 @@ public class PlayerControl : NetworkBehaviour
 
     [Header("Player guns")]
     public GameObject projectile;
-    public GameObject gunLeft, gunRight;
+
+    private GameObject gunLeft, gunRight;
 
     private GameObject body;
     private GameManager gameManager;
@@ -25,29 +26,25 @@ public class PlayerControl : NetworkBehaviour
     // Use this for initialization
     void Start() {
 
-        gunLeft = GameObject.Find("GunLeft").gameObject;
-        gunRight = GameObject.Find("GunRight").gameObject;
+        body = transform.Find("Body").gameObject;
+        gunLeft = body.transform.Find("GunLeft").gameObject;
+        gunRight = body.transform.Find("GunRight").gameObject;
+
         leftWeapon = gunLeft.GetComponent<GunController>().GetAttachedWeapon().GetComponent<Weapon>();
         rightWeapon = gunRight.GetComponent<GunController>().GetAttachedWeapon().GetComponent<Weapon>();
 
         transform.position = new Vector3(0F, 0F, -5F);
         body = transform.Find("Body").gameObject;
-        gameManager = GameObject.FindObjectOfType<GameManager>();
+        gameManager = FindObjectOfType<GameManager>();
         gameManager.isGameStarted = true;
         GameManager.nbEnnemiesKilled = 0;
 
         if (!gunLeft) {
             Debug.LogError("No Left Gun attached, ma couille!!!");
-        } else {
-            Debug.LogError("gunLeft : "+ gunLeft.gameObject.GetInstanceID());
-
         }
         if (!gunRight) {
             Debug.LogError("No Right Gun attached, ma couille!!!");
-        } else {
-            Debug.LogError("gunRight : " + gunRight.gameObject.GetInstanceID());
-
-        }
+        } 
 
 
     }
