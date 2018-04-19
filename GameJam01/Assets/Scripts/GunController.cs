@@ -11,9 +11,6 @@ public class GunController : MonoBehaviour
     private GameObject instantiatedWeapon;
 
     private void Start() {
-        if (HasWeaponAttached()) {
-            InstantiateWeapon();
-        }
     }
 
     private void InstantiateWeapon() {
@@ -27,7 +24,7 @@ public class GunController : MonoBehaviour
 
         // By default instantiated object take same parent transforme properties. 
         // GunRight has a scale x of -1. So here we reset weapon scale.
-        instantiatedWeapon.transform.localScale = new Vector3(1f, 1f, 1F);
+        instantiatedWeapon.transform.localScale = Vector3.one;
     }
 
     public void ChangeWeapon(GameObject newWeapon) {
@@ -41,11 +38,10 @@ public class GunController : MonoBehaviour
     }
 
     public GameObject GetAttachedWeapon() {
-        if (HasWeaponAttached()) {
-            return attachedWeapon;
-        } else {
-            return null;
+        if (this.instantiatedWeapon == null) {
+            this.InstantiateWeapon();
         }
+        return this.instantiatedWeapon;
     }
 
     public bool HasWeaponAttached() {
