@@ -12,9 +12,9 @@ public class PlayerControl : NetworkBehaviour
     [Header("Player guns")]
     public GameObject projectile;
 
-    private GameObject gunLeft, gunRight;
+    public GameObject gunLeft, gunRight;
 
-    private GameObject body;
+    public GameObject body;
     private GameManager gameManager;
 
     private Weapon leftWeapon, rightWeapon;
@@ -26,15 +26,15 @@ public class PlayerControl : NetworkBehaviour
     // Use this for initialization
     void Start() {
 
-        body = transform.Find("Body").gameObject;
-        gunLeft = body.transform.Find("GunLeft").gameObject;
-        gunRight = body.transform.Find("GunRight").gameObject;
+        //body = transform.Find("Body").gameObject;
+        //gunLeft = body.transform.Find("GunLeft").gameObject;
+        //gunRight = body.transform.Find("GunRight").gameObject;
 
         leftWeapon = gunLeft.GetComponent<GunController>().GetAttachedWeapon().GetComponent<Weapon>();
         rightWeapon = gunRight.GetComponent<GunController>().GetAttachedWeapon().GetComponent<Weapon>();
 
         transform.position = new Vector3(0F, 0F, -5F);
-        body = transform.Find("Body").gameObject;
+        //body = transform.Find("Body").gameObject;
         gameManager = FindObjectOfType<GameManager>();
         gameManager.isGameStarted = true;
         GameManager.nbEnnemiesKilled = 0;

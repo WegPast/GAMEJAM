@@ -12,7 +12,7 @@ public class Weapon : NetworkBehaviour
     [Range(0.05f, 2f)]
     public float fireRate;
 
-    private GameObject fireSpot;
+    public GameObject fireSpot;
     private GameObject parentGameObject;
 
     //public GameObject GetFireSpot() {
@@ -36,20 +36,19 @@ public class Weapon : NetworkBehaviour
     }
 
     public void FireProjectile(GameObject gun) {
-        
 
 
-        fireSpot = gameObject.transform.GetChild(transform.childCount - 1).gameObject;
-        fireSpot.transform.parent = gun.transform;
+        //fireSpot = gameObject.transform.GetChild(transform.childCount - 1).gameObject;
+        //fireSpot.transform.parent = gun.transform;
 
-        Debug.Log("weapon ID : " + GetInstanceID());
-        Debug.Log("gameObject.weapon ID : " + gameObject.GetInstanceID());
+        //Debug.Log("weapon ID : " + GetInstanceID());
+        //Debug.Log("gameObject.weapon ID : " + gameObject.GetInstanceID());
         Debug.Log("firespot ID : " + fireSpot.gameObject.GetInstanceID());
 
-        Vector3 projectilePos = gun.transform.position;
+        Vector3 projectilePos = fireSpot.transform.position;
 
         GameObject projectile = Instantiate(projectileType.gameObject, projectilePos , Quaternion.identity) as GameObject;
-        projectile.GetComponent<Projectiles>().Fire(gun.transform.rotation);
+        projectile.GetComponent<Projectiles>().Fire(fireSpot.transform.rotation);
 
         if (isLocalPlayer) {
             projectile.GetComponent<Projectiles>().isFromMyPlayer = true;

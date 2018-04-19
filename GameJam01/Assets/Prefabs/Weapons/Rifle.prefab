@@ -114,6 +114,7 @@ MonoBehaviour:
   projectileType: {fileID: 114339415727265694, guid: 114f48073d607b849a8bcd0e8699a38a,
     type: 2}
   fireRate: 0.99
+  fireSpot: {fileID: 1457463025503110}
 --- !u!114 &114315224822168442
 MonoBehaviour:
   m_ObjectHideFlags: 1
