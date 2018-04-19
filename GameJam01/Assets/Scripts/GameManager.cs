@@ -8,35 +8,64 @@ using UnityEngine.SceneManagement;
 public class GameManager : NetworkBehaviour
 {
 
+    private enum GameStatus { startMenu, gameStarted, gameLost };
+    private GameStatus currentGameState;
+
     private int difficultyLvl = 0;
     private LevelManager levelManager;
     private NetworkManager netManager;
     private GameObject myPlayer;
     private GameObject waveCounter;
+    private WaveHandler waveHandler;
+
+
+    private GameObject waveManager;
 
     public int maxDifficultyLvl = 3;
     public bool isGameStarted = false;
     public Text textAddress;
     public static int nbEnnemiesKilled;
 
+    void OnEnable() {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
 
     // Use this for initialization
     void Start() {
         levelManager = GetComponent<LevelManager>();
-        netManager = GameObject.FindObjectOfType<NetworkManager>();
-        if(SceneManager.GetActiveScene().name == "02 Lost") {
-            GameObject.Find("ScoreText").GetComponent<Text>().text = "You killed "+GameManager.nbEnnemiesKilled.ToString() + " ennemies !";
+        netManager = FindObjectOfType<NetworkManager>();
+        DontDestroyOnLoad(gameObject);
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+        if (SceneManager.GetActiveScene().name == "00 StartMenu") {
+            SetCurrentGameState(GameStatus.startMenu);
         }
-        waveCounter = GameObject.Find("WaveCounter");
+
+        if (SceneManager.GetActiveScene().name == "02 Lost") {
+            SetCurrentGameState(GameStatus.gameLost);
+            GameObject.Find("ScoreText").GetComponent<Text>().text = "You killed " + nbEnnemiesKilled.ToString() + " ennemies !";
+        }
+
+        if (SceneManager.GetActiveScene().name == "01 Game") {
+            SetCurrentGameState(GameStatus.gameStarted);
+            waveCounter = GameObject.Find("WaveCounter");
+        }
     }
 
     // Update is called once per frame
     void Update() {
+
+
         if (CountPlayer() <= 0 && isGameStarted) {
             GameLost();
         }
-        if (waveCounter != null) {
-            waveCounter.GetComponent<Text>().text = "Wave #"+GameObject.FindObjectOfType<WaveHandler>().waveNumber.ToString();
+        if (GetCurrentGameState() == GameStatus.gameStarted) {
+            if (!waveManager) {
+                waveManager = GameObject.Find("WavesManager");
+            } else {
+                waveCounter.GetComponent<Text>().text = "Wave #" + waveManager.GetComponent<WaveHandler>().waveNumber.ToString();
+            }
         }
     }
 
@@ -71,7 +100,7 @@ public class GameManager : NetworkBehaviour
     public List<GameObject> GetPlayers() {
         List<GameObject> allPlayers = new List<GameObject>();
 
-        PlayerControl[] allPlayerControl = GameObject.FindObjectsOfType<PlayerControl>();
+        PlayerControl[] allPlayerControl = FindObjectsOfType<PlayerControl>();
         foreach (var item in allPlayerControl) {
             allPlayers.Add(item.gameObject);
         }
@@ -94,5 +123,19 @@ public class GameManager : NetworkBehaviour
             netManager.networkAddress = ip;
             netManager.StartClient();
         }
+    }
+
+    private void SetCurrentGameState(GameStatus status) {
+        currentGameState = status;
+    }
+
+
+    private GameStatus GetCurrentGameState() {
+        return currentGameState;
+    }
+
+
+    void OnDisable() {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }

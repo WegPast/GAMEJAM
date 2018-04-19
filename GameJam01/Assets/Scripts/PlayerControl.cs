@@ -26,10 +26,6 @@ public class PlayerControl : NetworkBehaviour
     // Use this for initialization
     void Start() {
 
-        //body = transform.Find("Body").gameObject;
-        //gunLeft = body.transform.Find("GunLeft").gameObject;
-        //gunRight = body.transform.Find("GunRight").gameObject;
-
         leftWeapon = gunLeft.GetComponent<GunController>().GetAttachedWeapon().GetComponent<Weapon>();
         rightWeapon = gunRight.GetComponent<GunController>().GetAttachedWeapon().GetComponent<Weapon>();
 

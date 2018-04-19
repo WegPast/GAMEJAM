@@ -821,9 +821,9 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114580243516521140, guid: 45de83b25f9e70342a61d077b33bdb85,
         type: 2}
-      propertyPath: textAddress
+      propertyPath: waveManager
       value: 
-      objectReference: {fileID: 1520917159}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 45de83b25f9e70342a61d077b33bdb85, type: 2}
   m_IsPrefabParent: 0

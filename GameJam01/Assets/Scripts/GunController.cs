@@ -17,11 +17,6 @@ public class GunController : MonoBehaviour
         instantiatedWeapon = Instantiate(attachedWeapon, transform.position, Quaternion.identity);
         instantiatedWeapon.transform.parent = transform;
 
-        //GameObject fireSpot = instantiatedWeapon.transform.Find("FireSpot").gameObject;
-        //fireSpot.transform.parent = instantiatedWeapon.transform;
-        //instantiatedWeapon.GetComponent<Weapon>().SetFireSpot(fireSpot.transform.position);
-        //Debug.Log(fireSpot.transform.position);
-
         // By default instantiated object take same parent transforme properties. 
         // GunRight has a scale x of -1. So here we reset weapon scale.
         instantiatedWeapon.transform.localScale = Vector3.one;
