@@ -9,7 +9,7 @@ public class Weapon : NetworkBehaviour
     public Projectiles projectileType; // Contains damage, speed etc...
 
     [Header("Weapon's properties")]
-    [Range(0.05f, 2f)]
+    [Range(0.05f, 30f)]
     public float fireRate;
 
     public GameObject fireSpot;
@@ -17,7 +17,6 @@ public class Weapon : NetworkBehaviour
     private GameObject parentGameObject;
 
     public void FireProjectile(GameObject gun) {
-
 
         Vector3 projectilePos = fireSpot.transform.position;
 

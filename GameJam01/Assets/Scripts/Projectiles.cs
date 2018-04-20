@@ -9,18 +9,20 @@ public class Projectiles : NetworkBehaviour
     private Rigidbody2D body;
 
     public bool isFromMyPlayer = false;
-    public float speed = 300f;
+    public float speed = 30f;
     public int damage = 10;
 
     // Use this for initialization
     void Awake() {
         transform.position = new Vector3(transform.position.x, transform.position.y, -5f);
-        body = GetComponent<Rigidbody2D>();
+    }
+
+    private void FixedUpdate() {
+        transform.Translate(new Vector3(0f, speed / 100, 0f));
     }
 
     public void Fire(Quaternion projectilRotation) {
         transform.rotation = projectilRotation;
-        body.velocity = (projectilRotation * Vector2.up) * speed;
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {

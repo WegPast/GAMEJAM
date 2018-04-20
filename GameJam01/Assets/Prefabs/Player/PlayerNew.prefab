@@ -279,7 +279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d970dce738895d4ca4c2096059fd8f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attachedWeapon: {fileID: 1272079754440602, guid: 729cc6897ccc8c1448ee5b6b16bc1b32,
+  attachedWeapon: {fileID: 1309701356354346, guid: 9bc381293aa1b164a90a7286a6a10231,
     type: 2}
 --- !u!114 &114783086369159286
 MonoBehaviour:

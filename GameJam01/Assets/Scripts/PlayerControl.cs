@@ -19,6 +19,7 @@ public class PlayerControl : NetworkBehaviour
 
     private Weapon leftWeapon, rightWeapon;
     private float deltaTimeFire;
+    private float deltaTimeFire2;
 
     //Synchronized variables
 
@@ -90,10 +91,15 @@ public class PlayerControl : NetworkBehaviour
 
         if (Input.GetButton("Fire1") && this.deltaTimeFire >= 1 / leftWeapon.fireRate) {
             leftWeapon.FireProjectile(gunLeft);
-            rightWeapon.FireProjectile(gunRight);
             this.deltaTimeFire = 0;
         }
+
+        if (Input.GetButton("Fire1") && this.deltaTimeFire2 >= 1 / rightWeapon.fireRate) {
+            rightWeapon.FireProjectile(gunRight);
+            this.deltaTimeFire2 = 0;
+        }
         this.deltaTimeFire += Time.deltaTime;
+        this.deltaTimeFire2 += Time.deltaTime;
     }
 
     void LookAtMouse() {
