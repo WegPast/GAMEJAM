@@ -50,9 +50,9 @@ public class PlayerControl : NetworkBehaviour
         LookAtMouse();
         Move();
         //if (Input.GetKeyDown(KeyCode.Mouse0)) {
-            if (isLocalPlayer) {
+            //if (isLocalPlayer) {
                 CmdFire();
-            }
+            //}
         //}
     }
 
@@ -74,32 +74,20 @@ public class PlayerControl : NetworkBehaviour
 
     [Command]
     public void CmdFire() {
-        //GameObject bullet1 = Instantiate(projectile, gunLeft.transform.position, Quaternion.identity) as GameObject;
-        //bullet1.GetComponent<Projectiles>().Fire(body.transform.rotation);
-        //if (isLocalPlayer) {
-        //    bullet1.GetComponent<Projectiles>().isFromMyPlayer = true;
-        //}
 
-        //GameObject bullet2 = Instantiate(projectile, gunRight.transform.position, Quaternion.identity) as GameObject;
-        //bullet2.GetComponent<Projectiles>().Fire(body.transform.rotation);
-        //if (isLocalPlayer) {
-        //    bullet2.GetComponent<Projectiles>().isFromMyPlayer = true;
-        //}
+        if (isLocalPlayer) {
+            if (Input.GetButton("Fire1") && this.deltaTimeFire >= 1 / leftWeapon.fireRate) {
+                leftWeapon.FireProjectile(gunLeft);
+                this.deltaTimeFire = 0;
+            }
 
-        //NetworkServer.Spawn(bullet1);
-        //NetworkServer.Spawn(bullet2);
-
-        if (Input.GetButton("Fire1") && this.deltaTimeFire >= 1 / leftWeapon.fireRate) {
-            leftWeapon.FireProjectile(gunLeft);
-            this.deltaTimeFire = 0;
+            if (Input.GetButton("Fire1") && this.deltaTimeFire2 >= 1 / rightWeapon.fireRate) {
+                rightWeapon.FireProjectile(gunRight);
+                this.deltaTimeFire2 = 0;
+            }
+            this.deltaTimeFire += Time.deltaTime;
+            this.deltaTimeFire2 += Time.deltaTime;
         }
-
-        if (Input.GetButton("Fire1") && this.deltaTimeFire2 >= 1 / rightWeapon.fireRate) {
-            rightWeapon.FireProjectile(gunRight);
-            this.deltaTimeFire2 = 0;
-        }
-        this.deltaTimeFire += Time.deltaTime;
-        this.deltaTimeFire2 += Time.deltaTime;
     }
 
     void LookAtMouse() {
