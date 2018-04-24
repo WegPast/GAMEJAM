@@ -6,31 +6,28 @@ using UnityEngine;
 public class Weapon : NetworkBehaviour
 {
 
-    public Projectiles projectileType; // Contains damage, speed etc...
+  public Projectiles projectileType; // Contains damage, speed etc...
 
-    [Header("Weapon's properties")]
-    [Range(0.05f, 30f)]
-    public float fireRate;
+  [Header("Weapon's properties")]
+  [Range(0.05f, 30f)]
+  public float fireRate;
 
-    public GameObject fireSpot;
+  public GameObject fireSpot;
 
-    private GameObject parentGameObject;
-    private Animator animator;
+  private GameObject parentGameObject;
+  private Animator animator;
 
-    public void Start() {
-        animator = GetComponent<Animator>();
-    }
+  public void Start() {
+    animator = GetComponent<Animator>();
+  }
 
-    public void FireProjectile(GameObject gun) {
+  public void FireProjectile(GameObject gun) {
+    Vector3 projectilePos = fireSpot.transform.position;
 
-        //if (isLocalPlayer) {
-        Vector3 projectilePos = fireSpot.transform.position;
-
-        GameObject projectile = Instantiate(projectileType.gameObject, projectilePos, Quaternion.identity) as GameObject;
-        projectile.GetComponent<Projectiles>().Fire(fireSpot.transform.rotation);
-        projectile.GetComponent<Projectiles>().isFromMyPlayer = true;
-        animator.SetTrigger("fire");
-        NetworkServer.Spawn(projectile);
-        //}
-    }
+    GameObject projectile = Instantiate(projectileType.gameObject, projectilePos, Quaternion.identity) as GameObject;
+    projectile.GetComponent<Projectiles>().Fire(fireSpot.transform.rotation);
+    projectile.GetComponent<Projectiles>().isFromMyPlayer = true;
+    animator.SetTrigger("fire");
+    NetworkServer.Spawn(projectile);
+  }
 }

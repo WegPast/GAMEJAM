@@ -258,7 +258,7 @@ Prefab:
         type: 2}
       propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 863779833}
+      objectReference: {fileID: 0}
     - target: {fileID: 114064729635512856, guid: 439ed26ab4744c341b771062c8513bfa,
         type: 2}
       propertyPath: m_ReferencePixelsPerUnit
@@ -563,11 +563,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 711839552}
---- !u!20 &863779833 stripped
-Camera:
-  m_PrefabParentObject: {fileID: 20728323816693080, guid: 0c8cb406a5cd7a745a5154f6debb2282,
-    type: 2}
-  m_PrefabInternal: {fileID: 1988227403}
 --- !u!1 &906281567
 GameObject:
   m_ObjectHideFlags: 0
