@@ -17,7 +17,7 @@ public class PlayerControl : NetworkBehaviour
   public GameObject body;
   private GameManager gameManager;
 
-  private Weapon leftWeapon, rightWeapon;
+  //private Weapon leftWeapon, rightWeapon;
   private float deltaTimeFire;
   private float deltaTimeFire2;
 
@@ -31,8 +31,8 @@ public class PlayerControl : NetworkBehaviour
       GameObject.Find("Main Camera").GetComponent<CameraControl>().player = this.gameObject;
       GameObject.Find("Main Camera").transform.position = new Vector3(0f, 0f, -20f);
     }
-      leftWeapon = this.gunLeft.GetComponent<GunController>().GetAttachedWeapon().GetComponent<Weapon>();
-      rightWeapon = this.gunRight.GetComponent<GunController>().GetAttachedWeapon().GetComponent<Weapon>();
+      //leftWeapon = this.gunLeft.GetComponent<GunController>().GetAttachedWeapon().GetComponent<Weapon>();
+      //rightWeapon = this.gunRight.GetComponent<GunController>().GetAttachedWeapon().GetComponent<Weapon>();
 
       transform.position = new Vector3(0F, 0F, -5F);
       gameManager = FindObjectOfType<GameManager>();
@@ -75,18 +75,20 @@ public class PlayerControl : NetworkBehaviour
   [Command]
   public void CmdFire() {
 
-    if (Input.GetButton("Fire1") && deltaTimeFire >= 1 / this.leftWeapon.fireRate) {
-      this.leftWeapon.FireProjectile(this.gunLeft);
-      deltaTimeFire = 0;
-    }
+    this.gunLeft.GetComponent<GunController>().FireGun();
+    this.gunRight.GetComponent<GunController>().FireGun();
+    //if (Input.GetButton("Fire1") && deltaTimeFire >= 1 / this.leftWeapon.fireRate) {
+    //  this.leftWeapon.FireProjectile(this.gunLeft);
+    //  deltaTimeFire = 0;
+    //}
 
-    if (Input.GetButton("Fire1") && deltaTimeFire2 >= 1 / this.rightWeapon.fireRate) {
-      this.rightWeapon.FireProjectile(this.gunRight);
-      deltaTimeFire2 = 0;
-    }
+    //if (Input.GetButton("Fire1") && deltaTimeFire2 >= 1 / this.rightWeapon.fireRate) {
+    //  this.rightWeapon.FireProjectile(this.gunRight);
+    //  deltaTimeFire2 = 0;
+    //}
 
-    deltaTimeFire += Time.deltaTime;
-    deltaTimeFire2 += Time.deltaTime;
+    //deltaTimeFire += Time.deltaTime;
+    //deltaTimeFire2 += Time.deltaTime;
 
   }
 

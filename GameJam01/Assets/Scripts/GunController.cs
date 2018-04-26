@@ -9,8 +9,11 @@ public class GunController : MonoBehaviour
     public GameObject attachedWeapon;
 
     private GameObject instantiatedWeapon;
+  private float deltaTimeFire;
+  private float deltaTimeFire2;
 
-    private void Start() {
+  private void Start() {
+    InstantiateWeapon();
     }
 
     private void InstantiateWeapon() {
@@ -54,5 +57,15 @@ public class GunController : MonoBehaviour
             return false;
         }
     }
+
+  public void FireGun() {
+    if (Input.GetButton("Fire1") && deltaTimeFire >= 1 / instantiatedWeapon.GetComponent<Weapon>().fireRate) {
+      instantiatedWeapon.GetComponent<Weapon>().FireProjectile(gameObject);
+      deltaTimeFire = 0;
+    }
+
+    deltaTimeFire += Time.deltaTime;
+    deltaTimeFire2 += Time.deltaTime;
+  }
 
 }
