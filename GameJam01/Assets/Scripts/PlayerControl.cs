@@ -26,10 +26,11 @@ public class PlayerControl : NetworkBehaviour
 
   // Use this for initialization
   void Start() {
+
     if (isLocalPlayer) {
       GameObject.Find("Main Camera").GetComponent<CameraControl>().player = this.gameObject;
       GameObject.Find("Main Camera").transform.position = new Vector3(0f, 0f, -20f);
-
+    }
       leftWeapon = this.gunLeft.GetComponent<GunController>().GetAttachedWeapon().GetComponent<Weapon>();
       rightWeapon = this.gunRight.GetComponent<GunController>().GetAttachedWeapon().GetComponent<Weapon>();
 
@@ -44,15 +45,14 @@ public class PlayerControl : NetworkBehaviour
       if (!gunRight) {
         Debug.LogError("No Right Gun attached, ma couille!!!");
       }
-    }
 
   }
 
   void Update() {
     if (isLocalPlayer) {
+      CmdFire();
       LookAtMouse();
       Move();
-      CmdFire();
     }
   }
 
@@ -75,17 +75,19 @@ public class PlayerControl : NetworkBehaviour
   [Command]
   public void CmdFire() {
 
-    if (Input.GetButton("Fire1") && this.deltaTimeFire >= 1 / leftWeapon.fireRate) {
-      leftWeapon.FireProjectile(gunLeft);
-      this.deltaTimeFire = 0;
+    if (Input.GetButton("Fire1") && deltaTimeFire >= 1 / this.leftWeapon.fireRate) {
+      this.leftWeapon.FireProjectile(this.gunLeft);
+      deltaTimeFire = 0;
     }
 
-    if (Input.GetButton("Fire1") && this.deltaTimeFire2 >= 1 / rightWeapon.fireRate) {
-      rightWeapon.FireProjectile(gunRight);
-      this.deltaTimeFire2 = 0;
+    if (Input.GetButton("Fire1") && deltaTimeFire2 >= 1 / this.rightWeapon.fireRate) {
+      this.rightWeapon.FireProjectile(this.gunRight);
+      deltaTimeFire2 = 0;
     }
-    this.deltaTimeFire += Time.deltaTime;
-    this.deltaTimeFire2 += Time.deltaTime;
+
+    deltaTimeFire += Time.deltaTime;
+    deltaTimeFire2 += Time.deltaTime;
+
   }
 
   void LookAtMouse() {
