@@ -72,7 +72,7 @@ public class PlayerControl : NetworkBehaviour
     transform.position = new Vector3(transform.position.x, transform.position.y, -5f);
   }
 
-  [Command]
+  //[Command]
   public void CmdFire() {
 
     this.gunLeft.GetComponent<GunController>().FireGun();

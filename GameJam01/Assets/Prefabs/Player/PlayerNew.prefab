@@ -317,7 +317,7 @@ MonoBehaviour:
   m_Target: {fileID: 4652245022834868}
   m_ChildIndex: 0
   m_SendInterval: 0.033333335
-  m_SyncRotationAxis: 7
+  m_SyncRotationAxis: 3
   m_RotationSyncCompression: 0
   m_MovementThreshold: 0.001
   m_InterpolateRotation: 0.5
