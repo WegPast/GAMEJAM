@@ -39,9 +39,9 @@ public class Ennemy : NetworkBehaviour
     void Update()
     {
         // Gestion de la mort et du drop
-        handleDeath();
+        HandleDeath();
         // Gestion du ciblage et amorce du deplacement vers un joueur pour l'attaquer
-        handleTargetingPlayer();
+        HandleTargetingPlayer();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -50,7 +50,7 @@ public class Ennemy : NetworkBehaviour
         if (player)
         {
             // Ici on compare la vie du joueur à celle du mon instance d'ennemy
-            handleCollisionDamages(player.GetComponent<LifeManager>());
+            HandleCollisionDamages(player.GetComponent<LifeManager>());
         }
 
         Projectiles projectiles = collision.gameObject.GetComponent<Projectiles>();
@@ -60,14 +60,14 @@ public class Ennemy : NetworkBehaviour
         }
     }
 
-    private void handleCollisionDamages(LifeManager playerLifeManager)
+    private void HandleCollisionDamages(LifeManager playerLifeManager)
     {
         int dammageToPlayer = this.lifeManager.lifeValue;
         this.lifeManager.Hit(playerLifeManager.lifeValue);
         playerLifeManager.Hit(dammageToPlayer);
     }
 
-    private void handleTargetingPlayer()
+    private void HandleTargetingPlayer()
     {
         // Si je n'ai pas de cible
         if (this.currentTarget != null)
@@ -95,7 +95,7 @@ public class Ennemy : NetworkBehaviour
         }
     }
 
-    private void handleDeath()
+    private void HandleDeath()
     {
         // Si j'ai un préfab, qu'il y a des chance de drop et que l'ennemy n'a plus de vie.
         if (this.lifeManager && this.lifeManager.lifeValue == 0.0f)
