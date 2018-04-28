@@ -11,13 +11,14 @@ public class GunController : MonoBehaviour
 
   private GameObject instantiatedWeapon;
   private float deltaTimeFire;
-  private float deltaTimeFire2;
 
-  private void Start() {
+  private void Start()
+  {
     InstantiateWeapon();
   }
 
-  private void InstantiateWeapon() {
+  private void InstantiateWeapon()
+  {
     instantiatedWeapon = Instantiate(attachedWeapon, transform.position, transform.parent.rotation);
     instantiatedWeapon.transform.parent = transform;
 
@@ -26,65 +27,82 @@ public class GunController : MonoBehaviour
     instantiatedWeapon.transform.localScale = Vector3.one;
   }
 
-  public void ChangeWeapon(GameObject newWeapon) {
+  public void ChangeWeapon(GameObject newWeapon)
+  {
 
     attachedWeapon = newWeapon;
-    if (IsWeaponInstatiated()) {
+    if (IsWeaponInstatiated())
+    {
       Destroy(instantiatedWeapon);
     }
     InstantiateWeapon();
 
   }
 
-  public GameObject GetAttachedWeapon() {
-    if (this.instantiatedWeapon == null) {
+  public GameObject GetAttachedWeapon()
+  {
+    if (this.instantiatedWeapon == null)
+    {
       this.InstantiateWeapon();
     }
     return this.instantiatedWeapon;
   }
 
-  public bool HasWeaponAttached() {
-    if (attachedWeapon != null) {
+  public bool HasWeaponAttached()
+  {
+    if (attachedWeapon != null)
+    {
       return true;
-    } else {
+    }
+    else
+    {
       return false;
     }
   }
 
-  public bool IsWeaponInstatiated() {
-    if (instantiatedWeapon != null) {
+  public bool IsWeaponInstatiated()
+  {
+    if (instantiatedWeapon != null)
+    {
       return true;
-    } else {
+    }
+    else
+    {
       return false;
     }
   }
-  public GameObject FireGun(bool isFiredFromLocalPlayer) {
+  public GameObject FireGun(bool isFiredFromLocalPlayer)
+  {
     GameObject projectile = null;
-    if (deltaTimeFire >= 1 / instantiatedWeapon.GetComponent<Weapon>().fireRate) {
+    if (deltaTimeFire >= 1 / instantiatedWeapon.GetComponent<Weapon>().fireRate)
+    {
       projectile = instantiatedWeapon.GetComponent<Weapon>().FireProjectile(gameObject, isFiredFromLocalPlayer);
     }
-
-
 
     return projectile;
   }
 
-    public void UpdateDeltaFiringTime()
+  public void UpdateDeltaFiringTime()
+  {
+    if (deltaTimeFire >= 1 / instantiatedWeapon.GetComponent<Weapon>().fireRate)
     {
-        if (deltaTimeFire >= 1 / instantiatedWeapon.GetComponent<Weapon>().fireRate)
-        {
-            deltaTimeFire = 0;
-        }
-        deltaTimeFire += Time.deltaTime;
-        deltaTimeFire2 += Time.deltaTime;
+      deltaTimeFire = 0;
     }
-    //Animation
-    public void AnimationFiring()
+    deltaTimeFire += Time.deltaTime;
+  }
+
+  public void ResetDeltatTime()
+  {
+    deltaTimeFire = 0;
+  }
+
+  //Animation
+  public void AnimationFiring()
+  {
+    if (deltaTimeFire >= 1 / instantiatedWeapon.GetComponent<Weapon>().fireRate)
     {
-        if (deltaTimeFire >= 1 / instantiatedWeapon.GetComponent<Weapon>().fireRate)
-        {
-            instantiatedWeapon.GetComponent<Weapon>().AnimationFiring();
-        }
+      instantiatedWeapon.GetComponent<Weapon>().AnimationFiring();
     }
+  }
 
 }

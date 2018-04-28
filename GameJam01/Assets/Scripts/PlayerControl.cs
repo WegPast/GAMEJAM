@@ -49,12 +49,12 @@ public class PlayerControl : NetworkBehaviour
       LookAtMouse();
       Move();
     }
+      
+        //Childs Animations
+    if (isFiring) {  this.gunLeft.GetComponent<GunController>().AnimationFiring(); this.gunLeft.GetComponent<GunController>().UpdateDeltaFiringTime(); } else{ this.gunLeft.GetComponent<GunController>().ResetDeltatTime();  }
+    if (isFiring) { this.gunRight.GetComponent<GunController>().AnimationFiring(); this.gunRight.GetComponent<GunController>().UpdateDeltaFiringTime(); } else { this.gunRight.GetComponent<GunController>().ResetDeltatTime(); }
 
-    //Childs Animations
-    if (isFiring) { this.gunLeft.GetComponent<GunController>().AnimationFiring(); this.gunLeft.GetComponent<GunController>().UpdateDeltaFiringTime(); }
-    if (isFiring) { this.gunRight.GetComponent<GunController>().AnimationFiring(); this.gunRight.GetComponent<GunController>().UpdateDeltaFiringTime(); }
-
-    }
+  }
 
   void Move() {
     if (Input.GetKey(KeyCode.Z)) {
@@ -103,6 +103,7 @@ public class PlayerControl : NetworkBehaviour
     [Client]
     void SendFiringState(bool firingState)
     {
+        if (firingState != isFiring) { this.gunLeft.GetComponent<GunController>().ResetDeltatTime(); this.gunRight.GetComponent<GunController>().ResetDeltatTime(); }
         CmdFiringState(firingState);
         if(firingState) { CmdFire(); }
     }
