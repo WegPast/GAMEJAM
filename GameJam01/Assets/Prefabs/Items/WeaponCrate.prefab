@@ -11,6 +11,22 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1573635461337952}
   m_IsPrefabParent: 1
+--- !u!1 &1153439170528282
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4091472327357736}
+  - component: {fileID: 212327452927702350}
+  m_Layer: 0
+  m_Name: Icon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1573635461337952
 GameObject:
   m_ObjectHideFlags: 0
@@ -21,8 +37,8 @@ GameObject:
   - component: {fileID: 4407583767114076}
   - component: {fileID: 114384374406946406}
   - component: {fileID: 114541686334104856}
-  - component: {fileID: 58135087191658554}
   - component: {fileID: 114963588285949728}
+  - component: {fileID: 61292692226437472}
   m_Layer: 0
   m_Name: WeaponCrate
   m_TagString: Untagged
@@ -46,6 +62,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4091472327357736
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1153439170528282}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.078, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4407583767114076}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4094629311020628
 Transform:
   m_ObjectHideFlags: 1
@@ -70,11 +99,12 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4094629311020628}
+  - {fileID: 4091472327357736}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &58135087191658554
-CircleCollider2D:
+--- !u!61 &61292692226437472
+BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -85,9 +115,19 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0015647411, y: -0.015648365}
+  m_Offset: {x: 0.0014641881, y: -0.0409984}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 0.15416956
+  m_Size: {x: 0.6919373, y: 0.83600676}
+  m_EdgeRadius: 0
 --- !u!114 &114384374406946406
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -153,9 +193,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   secondesBeforeDespawn: 5
-  commonChance: 70
-  rareChance: 25
-  legendaryChance: 5
+  rifleSprite: {fileID: 21300002, guid: 53e6896b8155e4e4fb22346dda563a82, type: 3}
+  multiGunSprite: {fileID: 21300000, guid: 53e6896b8155e4e4fb22346dda563a82, type: 3}
   commonWeapons:
   - {fileID: 1272079754440602, guid: 729cc6897ccc8c1448ee5b6b16bc1b32, type: 2}
   - {fileID: 1309701356354346, guid: 9bc381293aa1b164a90a7286a6a10231, type: 2}
@@ -165,6 +204,53 @@ MonoBehaviour:
   legendaryWeapons:
   - {fileID: 1272079754440602, guid: 729cc6897ccc8c1448ee5b6b16bc1b32, type: 2}
   - {fileID: 1309701356354346, guid: 9bc381293aa1b164a90a7286a6a10231, type: 2}
+  commonChance: 70
+  rareChance: 25
+  legendaryChance: 5
+--- !u!212 &212327452927702350
+SpriteRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1153439170528282}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 5
+  m_Sprite: {fileID: 21300000, guid: 53e6896b8155e4e4fb22346dda563a82, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.46875, y: 0.46875}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!212 &212356819152802922
 SpriteRenderer:
   m_ObjectHideFlags: 1

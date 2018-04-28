@@ -13,31 +13,53 @@ public class Crate : NetworkBehaviour
   ]
   public int secondesBeforeDespawn;
 
-  public int commonChance = 70, rareChance = 25, legendaryChance = 5;
+  [Header("Sprites for each weapon type")]
+  public Sprite rifleSprite;
+  public Sprite multiGunSprite;
 
+  [Header("Prefabs for each rarity of loot")]
   public GameObject[] commonWeapons;
   public GameObject[] rareWeapons;
   public GameObject[] legendaryWeapons;
 
+  [Header("Chance for each rarity")]
+  public int commonChance = 70;
+  public int rareChance = 25;
+  public int legendaryChance = 5;
+
+
   private GameObject weaponInStock;
+  private GameObject weaponTypeIcon;
 
   // Use this for initialization
   void Start() {
     // Au start on determine ce qui sera le type de bonus.
     Destroy(this.gameObject, secondesBeforeDespawn);
     weaponInStock = GetRandomWeapon();
+    weaponTypeIcon = transform.Find("Icon").gameObject;
+    SetIcon();
+
   }
 
-  // Update is called once per frame
-  void Update() {
-
+  public void SetIcon() {
+    switch (weaponInStock.name) {
+      case "Rifle":
+        weaponTypeIcon.GetComponent<SpriteRenderer>().sprite = rifleSprite;
+        break;
+      case "MultiGun":
+        weaponTypeIcon.GetComponent<SpriteRenderer>().sprite = multiGunSprite;
+        break;
+      default:
+        weaponTypeIcon.GetComponent<SpriteRenderer>().sprite = rifleSprite;
+        break;
+    }
   }
 
   private void OnTriggerEnter2D(Collider2D collision) {
     // On détruit la caisse quand le joueur passe dessus.
     if (collision.gameObject.GetComponent<PlayerControl>()) {
-            PlayerControl playerControl = collision.gameObject.GetComponent<PlayerControl>();
-            playerControl.ChangeGunWeapon(weaponInStock);
+      PlayerControl playerControl = collision.gameObject.GetComponent<PlayerControl>();
+      playerControl.ChangeGunWeapon(weaponInStock);
       Destroy(gameObject);
     }
   }
