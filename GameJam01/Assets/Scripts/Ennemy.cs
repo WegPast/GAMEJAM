@@ -14,34 +14,45 @@ public class Ennemy : NetworkBehaviour
     [Header("Enemy characteristic")]
     public float movementSpeed = 1F;
 
-    [Header("Prefab")]
+    [
+        Header("Prefab"),
+        Tooltip("GameObject à faire spawn à la mort!")
+    ]
     public GameObject prefab;
 
     private PlayerControl currentTarget;
-    private GameManager gameManager;
     private LifeManager lifeManager;
     private float contactDist = 0F;
 
     // Use this for initialization
     void Start() {
-        //movementSpeed = 0.05F;
-        gameManager = GameObject.FindObjectOfType<GameManager>();
+        // récupération du component LifeManager permettant de gérer la vie de mon ennemmi
         lifeManager = this.GetComponent<LifeManager>();
     }
 
     // Update is called once per frame
-    void Update() {
-        // Ne sert que si on a un prefab avec une valorisation sinon useless.
-        if (prefab != null && lifeManager.lifeValue == 0.0f) {
-            Debug.Log("Aaaargh je meuuuuuuuuuuuuuuuuur!");
-            // Si je meur je laisse potentiellement une caisse à l'endroit de ma mort.
-            // Ici on créé notre caisse seulement si random%100 > chance drop
-            if (dropChance == 100 || Random.Range(0, 101) <= dropChance) {
-                Debug.Log("youhou on va spawn une caisse");
-                Instantiate(prefab, new Vector3(), Quaternion.identity);
-            }
-        }
+    void Update()
+    {
+        // Gestion de la mort et du drop
+        handleDeath();
+        // Gestion du ciblage et amorce du deplacement vers un joueur pour l'attaquer
+        handleTargetingPlayer();
+    }
 
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if (collision.gameObject.GetComponent<Projectiles>()) {
+            if (collision.gameObject.GetComponent<Projectiles>().isFromMyPlayer) {
+                GameManager.nbEnnemiesKilled++;
+            }
+            Destroy(gameObject);
+        }
+        if (collision.gameObject.GetComponent<PlayerControl>()) {
+            Destroy(gameObject);
+        }
+    }
+
+    private void handleTargetingPlayer()
+    {
         if (currentTarget != null)
         {
             if (Vector2.Distance(transform.position, currentTarget.transform.position) >= contactDist)
@@ -68,15 +79,17 @@ public class Ennemy : NetworkBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.gameObject.GetComponent<Projectiles>()) {
-            if (collision.gameObject.GetComponent<Projectiles>().isFromMyPlayer) {
-                GameManager.nbEnnemiesKilled++;
+    private void handleDeath()
+    {
+        // Si j'ai un préfab, qu'il y a des chance de drop et que l'ennemy n'a plus de vie.
+        if (prefab != null && dropChance != 0 && lifeManager.lifeValue == 0.0f)
+        {
+            Debug.Log("Aaaargh je meuuuuuuuuuuuuuuuuur!");
+            if (dropChance == 100 || Random.Range(0, 101) <= dropChance)
+            {
+                Debug.Log("youhou on va spawn une caisse");
+                Instantiate(prefab, new Vector3(), Quaternion.identity);
             }
-            Destroy(gameObject);
-        }
-        if (collision.gameObject.GetComponent<PlayerControl>()) {
-            Destroy(gameObject);
         }
     }
 }
