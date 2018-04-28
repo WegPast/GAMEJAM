@@ -10,7 +10,7 @@ public class Ennemy : NetworkBehaviour
         RangeAttribute(0, 100)
     ]
     public int dropChance;
-    
+
     [Header("Enemy characteristic")]
     public float movementSpeed = 1F;
 
@@ -25,7 +25,8 @@ public class Ennemy : NetworkBehaviour
     private float contactDist = 0F;
 
     // Use this for initialization
-    void Start() {
+    void Start()
+    {
         // récupération du component LifeManager permettant de gérer la vie de mon ennemmi
         lifeManager = this.GetComponent<LifeManager>();
     }
@@ -40,16 +41,19 @@ public class Ennemy : NetworkBehaviour
         handleTargetingPlayer();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.gameObject.GetComponent<Projectiles>()) {
-            if (collision.gameObject.GetComponent<Projectiles>().isFromMyPlayer) {
-                GameManager.nbEnnemiesKilled++;
-            }
-            Destroy(gameObject);
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        PlayerControl player = collision.gameObject.GetComponent<PlayerControl>();
+        if (player)
+        {
+            // Ici on compare la vie du joueur à celle du mon instance d'ennemy
+            handleCollisionDamages(player.GetComponent<LifeManager>()); 3
         }
-        if (collision.gameObject.GetComponent<PlayerControl>()) {
-            Destroy(gameObject);
-        }
+    }
+
+    private void handleCollisionDamages(LifeManager playerLifeManager)
+    {
+
     }
 
     private void handleTargetingPlayer()
@@ -83,14 +87,18 @@ public class Ennemy : NetworkBehaviour
     private void handleDeath()
     {
         // Si j'ai un préfab, qu'il y a des chance de drop et que l'ennemy n'a plus de vie.
-        if (this.prefab != null && this.dropChance != 0 && this.lifeManager.lifeValue == 0.0f)
+        if (this.lifeManager.lifeValue == 0.0f)
         {
-            Debug.Log("Aaaargh je meuuuuuuuuuuuuuuuuur!");
-            if (this.dropChance == 100 || Random.Range(0, 101) <= this.dropChance)
+            if (this.prefab != null && this.dropChance != 0)
             {
-                Debug.Log("youhou on va spawn une caisse");
-                Instantiate(this.prefab, this.gameObject.transform.position, Quaternion.identity);
+                Debug.Log("Aaaargh je meuuuuuuuuuuuuuuuuur!");
+                if (this.dropChance == 100 || Random.Range(0, 101) <= this.dropChance)
+                {
+                    Debug.Log("youhou on va spawn une caisse");
+                    Instantiate(this.prefab, this.gameObject.transform.position, Quaternion.identity);
+                }
             }
+            Destroy(this.gameObject);
         }
     }
 }

@@ -203,7 +203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d61fe2fe683317e4794e44c7abff765e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropChance: 0
+  dropChance: 100
   movementSpeed: 4
   prefab: {fileID: 1086096817963820, guid: fc8d8deafdd22f04f826e084e5ff9369, type: 2}
 --- !u!212 &212129332515954732
