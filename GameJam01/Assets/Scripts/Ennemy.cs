@@ -19,19 +19,20 @@ public class Ennemy : NetworkBehaviour
 
     private PlayerControl currentTarget;
     private GameManager gameManager;
-    private int lifeManager;
+    private LifeManager lifeManager;
     private float contactDist = 0F;
 
     // Use this for initialization
     void Start() {
         //movementSpeed = 0.05F;
         gameManager = GameObject.FindObjectOfType<GameManager>();
-        lifeManager = this.GetComponent<int>();
+        lifeManager = this.GetComponent<LifeManager>();
     }
 
     // Update is called once per frame
     void Update() {
-        if (true) {
+        // Ne sert que si on a un prefab avec une valorisation sinon useless.
+        if (prefab != null && lifeManager.lifeValue == 0.0f) {
             Debug.Log("Aaaargh je meuuuuuuuuuuuuuuuuur!");
             // Si je meur je laisse potentiellement une caisse à l'endroit de ma mort.
             // Ici on créé notre caisse seulement si random%100 > chance drop
