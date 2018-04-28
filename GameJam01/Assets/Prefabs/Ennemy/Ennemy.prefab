@@ -170,9 +170,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d3f59414dd5dd34eb237bf02d87f446, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onHitTrigger: BEING_HIT
+  animator: {fileID: 95248178977344088}
   lifePercent: 0
-  lifeValue: 1
-  lifeMax: 1
+  lifeValue: 20
+  lifeMax: 20
   isImmortal: 0
 --- !u!114 &114216086475791658
 MonoBehaviour:

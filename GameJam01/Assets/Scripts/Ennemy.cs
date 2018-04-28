@@ -93,10 +93,8 @@ public class Ennemy : NetworkBehaviour
         {
             if (this.prefab != null && this.dropChance != 0)
             {
-                Debug.Log("Aaaargh je meuuuuuuuuuuuuuuuuur!");
                 if (this.dropChance == 100 || Random.Range(0, 101) <= this.dropChance)
                 {
-                    Debug.Log("youhou on va spawn une caisse");
                     Instantiate(this.prefab, this.gameObject.transform.position, Quaternion.identity);
                 }
             }
