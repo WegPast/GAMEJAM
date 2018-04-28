@@ -8,11 +8,11 @@ using UnityEngine.SceneManagement;
 public class GameManager : NetworkBehaviour
 {
   public int maxDifficultyLvl = 3;
-  public bool isGameStarted = false;
   public Text textAddress;
-  public static int nbEnnemiesKilled;
 
 
+  private static int nbEnnemiesKilled;
+  private bool isGameStarted = false;
   private GameObject waveManager;
   private enum GameStatus { startMenu, gameStarted, gameLost };
   private GameStatus currentGameState;
@@ -39,15 +39,12 @@ public class GameManager : NetworkBehaviour
 
   void OnSceneLoaded(Scene scene, LoadSceneMode mode)
   {
-    if (SceneManager.GetActiveScene().name == "00 StartMenu")
-    {
-      CurrentGameState = GameStatus.startMenu;
-    }
+    if (SceneManager.GetActiveScene().name == "00 StartMenu")  CurrentGameState = GameStatus.startMenu;
 
     if (SceneManager.GetActiveScene().name == "02 Lost")
     {
       CurrentGameState = GameStatus.gameLost;
-      GameObject.Find("ScoreText").GetComponent<Text>().text = "You killed " + nbEnnemiesKilled.ToString() + " ennemies !";
+      GameObject.Find("ScoreText").GetComponent<Text>().text = "You killed " + NbEnnemiesKilled.ToString() + " ennemies !";
     }
 
     if (SceneManager.GetActiveScene().name == "01 Game")
@@ -60,7 +57,7 @@ public class GameManager : NetworkBehaviour
   // Update is called once per frame
   void Update()
   {
-    if (GetPlayers().Count <= 0 && isGameStarted)
+    if (GetPlayers().Count <= 0 && IsGameStarted)
     {
       GameLost();
     }
@@ -84,7 +81,7 @@ public class GameManager : NetworkBehaviour
 
   public void GameLost()
   {
-    isGameStarted = false;
+    IsGameStarted = false;
     if (netManager && netManager.IsClientConnected())
     {
       netManager.StopHost();
@@ -139,4 +136,6 @@ public class GameManager : NetworkBehaviour
 
   public int DifficultyLvl { get; set; }
   private GameStatus CurrentGameState { get; set; }
+  public bool IsGameStarted { get; set; }
+  public static int NbEnnemiesKilled {get; set;}
 }

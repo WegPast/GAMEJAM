@@ -33,8 +33,8 @@ public class PlayerControl : NetworkBehaviour
 
     transform.position = new Vector3(0F, 0F, -5F);
     gameManager = FindObjectOfType<GameManager>();
-    gameManager.isGameStarted = true;
-    GameManager.nbEnnemiesKilled = 0;
+    gameManager.IsGameStarted = true;
+    GameManager.NbEnnemiesKilled = 0;
 
     if (!gunLeft)
     {
@@ -51,17 +51,30 @@ public class PlayerControl : NetworkBehaviour
   {
     if (isLocalPlayer)
     {
-      if (Input.GetButton("Fire1")) { SendFiringState(true); } else { SendFiringState(false); }
+      if (Input.GetButton("Fire1")) { SendFiringState(true); }
+      else { SendFiringState(false); }
       LookAtMouse();
       Move();
     }
-
     //Childs Animations
-    if (isFiring) { this.gunLeft.GetComponent<GunController>().AnimationFiring(); this.gunLeft.GetComponent<GunController>().UpdateDeltaFiringTime(); } else { this.gunLeft.GetComponent<GunController>().ResetDeltatTime(); }
-    if (isFiring) { this.gunRight.GetComponent<GunController>().AnimationFiring(); this.gunRight.GetComponent<GunController>().UpdateDeltaFiringTime(); } else { this.gunRight.GetComponent<GunController>().ResetDeltatTime(); }
-
+    HandleGunsAnimation();
   }
 
+  private void HandleGunsAnimation()
+  {
+    if (isFiring)
+    {
+      this.gunLeft.GetComponent<GunController>().AnimationFiring();
+      this.gunLeft.GetComponent<GunController>().UpdateDeltaFiringTime();
+      this.gunRight.GetComponent<GunController>().AnimationFiring();
+      this.gunRight.GetComponent<GunController>().UpdateDeltaFiringTime();
+    }
+    else
+    {
+      this.gunLeft.GetComponent<GunController>().ResetDeltatTime();
+      this.gunRight.GetComponent<GunController>().ResetDeltatTime();
+    }
+  }
 
   void Move()
   {
@@ -94,10 +107,8 @@ public class PlayerControl : NetworkBehaviour
 
   private void OnCollisionEnter2D(Collision2D collision)
   {
-    if (collision.gameObject.GetComponent<Ennemy>())
-    {
-      Die();
-    }
+    // Handle Death
+    if (collision.gameObject.GetComponent<Ennemy>()) Destroy(gameObject);
   }
 
   public void ChangeGunWeapon(GameObject newWeapon)
@@ -106,17 +117,12 @@ public class PlayerControl : NetworkBehaviour
     this.gunLeft.GetComponent<GunController>().ChangeWeapon(newWeapon);
   }
 
-  public void Die()
-  {
-    Destroy(gameObject);
-  }
-
   //Client
   [Client]
   void SendFiringState(bool firingState)
   {
     CmdFiringState(firingState);
-    if (firingState) { CmdFire(); }
+    if (firingState) CmdFire(); 
   }
 
   //Command
@@ -132,9 +138,9 @@ public class PlayerControl : NetworkBehaviour
     GameObject projectile;
 
     projectile = this.gunLeft.GetComponent<GunController>().FireGun(isLocalPlayer);
-    if (projectile != null) { NetworkServer.Spawn(projectile); }
+    if (projectile) NetworkServer.Spawn(projectile); 
 
     projectile = this.gunRight.GetComponent<GunController>().FireGun(isLocalPlayer);
-    if (projectile != null) { NetworkServer.Spawn(projectile); }
+    if (projectile) NetworkServer.Spawn(projectile); 
   }
 }
