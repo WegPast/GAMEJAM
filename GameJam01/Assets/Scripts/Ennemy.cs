@@ -31,6 +31,7 @@ public class Ennemy : NetworkBehaviour
     }
 
     // Update is called once per frame
+    // Scripting de l'ennemy
     void Update()
     {
         // Gestion de la mort et du drop
@@ -53,19 +54,20 @@ public class Ennemy : NetworkBehaviour
 
     private void handleTargetingPlayer()
     {
-        if (currentTarget != null)
+        // Si je n'ai pas de cible
+        if (this.currentTarget != null)
         {
             if (Vector2.Distance(transform.position, currentTarget.transform.position) >= contactDist)
             {
                 // Init mouvement guide line
-                Vector2 axe = currentTarget.transform.position - gameObject.transform.position;
+                Vector2 axe = this.currentTarget.transform.position - this.gameObject.transform.position;
                 axe.Normalize();
-                gameObject.transform.Translate(axe * movementSpeed * Time.deltaTime);
+                this.gameObject.transform.Translate(axe * movementSpeed * Time.deltaTime);
 
-                Vector3 difference = currentTarget.transform.position - transform.position;
+                Vector3 difference = this.currentTarget.transform.position - this.transform.position;
                 difference.Normalize();
                 float rotation = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
-                gameObject.transform.Find("enemy_sprite").transform.rotation = Quaternion.Euler(0f, 0f, rotation);
+                this.gameObject.transform.Find("enemy_sprite").transform.rotation = Quaternion.Euler(0f, 0f, rotation);
             }
         }
         else
@@ -73,8 +75,7 @@ public class Ennemy : NetworkBehaviour
             PlayerControl[] potentialTarget = GameObject.FindObjectsOfType<PlayerControl>();
             if (potentialTarget != null && potentialTarget.Length > 0)
             {
-                int luckyBastard = Random.Range(1, potentialTarget.Length + 1);
-                currentTarget = potentialTarget[luckyBastard - 1];
+                this.currentTarget = potentialTarget[Random.Range(1, potentialTarget.Length + 1) - 1];
             }
         }
     }
@@ -82,13 +83,13 @@ public class Ennemy : NetworkBehaviour
     private void handleDeath()
     {
         // Si j'ai un préfab, qu'il y a des chance de drop et que l'ennemy n'a plus de vie.
-        if (prefab != null && dropChance != 0 && lifeManager.lifeValue == 0.0f)
+        if (this.prefab != null && this.dropChance != 0 && this.lifeManager.lifeValue == 0.0f)
         {
             Debug.Log("Aaaargh je meuuuuuuuuuuuuuuuuur!");
-            if (dropChance == 100 || Random.Range(0, 101) <= dropChance)
+            if (this.dropChance == 100 || Random.Range(0, 101) <= this.dropChance)
             {
                 Debug.Log("youhou on va spawn une caisse");
-                Instantiate(prefab, new Vector3(), Quaternion.identity);
+                Instantiate(this.prefab, this.gameObject.transform.position, Quaternion.identity);
             }
         }
     }
