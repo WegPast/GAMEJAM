@@ -11,7 +11,6 @@ public class GunController : MonoBehaviour
 
   private GameObject instantiatedWeapon;
   private float deltaTimeFire;
-  private float deltaTimeFire2;
 
   private void Start()
   {
@@ -80,8 +79,6 @@ public class GunController : MonoBehaviour
       projectile = instantiatedWeapon.GetComponent<Weapon>().FireProjectile(gameObject, isFiredFromLocalPlayer);
     }
 
-
-
     return projectile;
   }
 
@@ -92,8 +89,13 @@ public class GunController : MonoBehaviour
       deltaTimeFire = 0;
     }
     deltaTimeFire += Time.deltaTime;
-    deltaTimeFire2 += Time.deltaTime;
   }
+
+  public void ResetDeltatTime()
+  {
+    deltaTimeFire = 0;
+  }
+
   //Animation
   public void AnimationFiring()
   {
