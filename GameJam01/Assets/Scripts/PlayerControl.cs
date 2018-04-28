@@ -75,8 +75,9 @@ public class PlayerControl : NetworkBehaviour
   //[Command]
   public void CmdFire() {
 
-    this.gunLeft.GetComponent<GunController>().FireGun();
-    this.gunRight.GetComponent<GunController>().FireGun();
+
+    this.gunLeft.GetComponent<GunController>().FireGun(isLocalPlayer);
+    this.gunRight.GetComponent<GunController>().FireGun(isLocalPlayer);
     //if (Input.GetButton("Fire1") && deltaTimeFire >= 1 / this.leftWeapon.fireRate) {
     //  this.leftWeapon.FireProjectile(this.gunLeft);
     //  deltaTimeFire = 0;

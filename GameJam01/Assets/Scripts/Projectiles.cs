@@ -8,8 +8,8 @@ public class Projectiles : NetworkBehaviour
 
     private Rigidbody2D body;
 
-    public bool isFromMyPlayer = false;
-    public float speed = 30f;
+  public bool isFromMyPlayer = false;
+  public float speed = 30f;
     public int damage = 10;
 
     // Use this for initialization
