@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 58707911043894784}
   - component: {fileID: 114216086475791658}
   - component: {fileID: 114272955250002346}
+  - component: {fileID: 114030403868983642}
   m_Layer: 0
   m_Name: Ennemy
   m_TagString: Enemy
@@ -139,6 +140,21 @@ CircleCollider2D:
   m_Offset: {x: 0.015475988, y: -0.029404253}
   serializedVersion: 2
   m_Radius: 0.38356766
+--- !u!114 &114030403868983642
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1462344453520696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d3f59414dd5dd34eb237bf02d87f446, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifePercent: 0
+  lifeValue: 1
+  lifeMax: 1
+  isImmortal: 0
 --- !u!114 &114216086475791658
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -182,7 +198,7 @@ MonoBehaviour:
   m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TransformSyncMode: 2
+  m_TransformSyncMode: 1
   m_SendInterval: 1
   m_SyncRotationAxis: 3
   m_RotationSyncCompression: 0
@@ -203,7 +219,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d61fe2fe683317e4794e44c7abff765e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropChance: 100
   movementSpeed: 4
+  prefab: {fileID: 1086096817963820, guid: fc8d8deafdd22f04f826e084e5ff9369, type: 2}
 --- !u!212 &212129332515954732
 SpriteRenderer:
   m_ObjectHideFlags: 1

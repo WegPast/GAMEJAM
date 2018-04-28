@@ -5,99 +5,102 @@ using UnityEngine.Networking;
 
 public class Ennemy : NetworkBehaviour
 {
-
-    //Synchronized variables
-    [SyncVar] Vector2 synchronizedPosition;
-    [SyncVar] Quaternion synchronizedRotation;
-
-    private PlayerControl currentTarget;
-    private GameManager gameManager;
-    private float contactDist = 0F;
+    [
+        Header("Drop chance of bonus"),
+        RangeAttribute(0, 100)
+    ]
+    public int dropChance;
 
     [Header("Enemy characteristic")]
     public float movementSpeed = 1F;
 
+    [
+        Header("Prefab"),
+        Tooltip("GameObject à faire spawn à la mort!")
+    ]
+    public GameObject prefab;
+
+    private PlayerControl currentTarget;
+    private LifeManager lifeManager;
+    private float contactDist = 0F;
+
     // Use this for initialization
-    void Start() {
-        //movementSpeed = 0.05F;
-        gameManager = GameObject.FindObjectOfType<GameManager>();
+    void Start()
+    {
+        // récupération du component LifeManager permettant de gérer la vie de mon ennemmi
+        lifeManager = this.GetComponent<LifeManager>();
     }
 
     // Update is called once per frame
-    void Update() {
-        if (!isServer)
+    // Scripting de l'ennemy
+    void Update()
+    {
+        // Gestion de la mort et du drop
+        handleDeath();
+        // Gestion du ciblage et amorce du deplacement vers un joueur pour l'attaquer
+        handleTargetingPlayer();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        PlayerControl player = collision.gameObject.GetComponent<PlayerControl>();
+        if (player)
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y, -5f);
-            transform.position = Vector3.Lerp(transform.position, synchronizedPosition, Time.deltaTime * 10);
-            transform.Find("enemy_sprite").rotation = synchronizedRotation;
+            // Ici on compare la vie du joueur à celle du mon instance d'ennemy
+            handleCollisionDamages(player.GetComponent<LifeManager>());
+        }
+    }
+
+    private void handleCollisionDamages(LifeManager playerLifeManager)
+    {
+        int dammageToPlayer = this.lifeManager.lifeValue;
+        this.lifeManager.Hit(playerLifeManager.lifeValue);
+        playerLifeManager.Hit(dammageToPlayer);
+    }
+
+    private void handleTargetingPlayer()
+    {
+        // Si je n'ai pas de cible
+        if (this.currentTarget != null)
+        {
+            if (Vector2.Distance(transform.position, currentTarget.transform.position) >= contactDist)
+            {
+                // Init mouvement guide line
+                Vector2 axe = this.currentTarget.transform.position - this.gameObject.transform.position;
+                axe.Normalize();
+                this.gameObject.transform.Translate(axe * movementSpeed * Time.deltaTime);
+
+                Vector3 difference = this.currentTarget.transform.position - this.transform.position;
+                difference.Normalize();
+                float rotation = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
+                this.gameObject.transform.Find("enemy_sprite").transform.rotation = Quaternion.Euler(0f, 0f, rotation);
+            }
         }
         else
         {
-            if (currentTarget != null)
+            PlayerControl[] potentialTarget = GameObject.FindObjectsOfType<PlayerControl>();
+            if (potentialTarget != null && potentialTarget.Length > 0)
             {
-                if (Vector2.Distance(transform.position, currentTarget.transform.position) >= contactDist)
-                {
-                    // Init mouvement guide line
-                    Vector2 axe = currentTarget.transform.position - gameObject.transform.position;
-                    axe.Normalize();
-                    gameObject.transform.Translate(axe * movementSpeed * Time.deltaTime);
+                this.currentTarget = potentialTarget[Random.Range(1, potentialTarget.Length + 1) - 1];
+            }
+        }
+    }
 
-                    Vector3 difference = currentTarget.transform.position - transform.position;
-                    difference.Normalize();
-                    float rotation = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
-                    gameObject.transform.Find("enemy_sprite").transform.rotation = Quaternion.Euler(0f, 0f, rotation);
+    private void handleDeath()
+    {
+        // Si j'ai un préfab, qu'il y a des chance de drop et que l'ennemy n'a plus de vie.
+        if (this.lifeManager && this.lifeManager.lifeValue == 0.0f)
+        {
+            if (this.prefab != null && this.dropChance != 0)
+            {
+                Debug.Log("Aaaargh je meuuuuuuuuuuuuuuuuur!");
+                if (this.dropChance == 100 || Random.Range(0, 101) <= this.dropChance)
+                {
+                    Debug.Log("youhou on va spawn une caisse");
+                    Instantiate(this.prefab, this.gameObject.transform.position, Quaternion.identity);
                 }
             }
-            else
-            {
-                PlayerControl[] potentialTarget = GameObject.FindObjectsOfType<PlayerControl>();
-                if (potentialTarget != null && potentialTarget.Length > 0)
-                {
-                    int luckyBastard = Random.Range(1, potentialTarget.Length + 1);
-                    currentTarget = potentialTarget[luckyBastard - 1];
-                }
-            }
-            //Network synchronisation
-            SendPosition();
+            Destroy(this.gameObject);
         }
-        
-    }
-
-
-    private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.gameObject.GetComponent<Projectiles>()){
-            if (collision.gameObject.GetComponent<Projectiles>().isFromMyPlayer) {
-                GameManager.nbEnnemiesKilled++;
-            }
-            Destroy(gameObject);
-        }
-        if (collision.gameObject.GetComponent<PlayerControl>()) {
-            Destroy(gameObject);
-
-        }
-    }
-
-        //Network function
-
-    //Client
-    [Client]
-    void SendPosition()
-    {
-        CmdSendMyPositionToServer(transform.position);
-        CmdSendMyRotationToServer(transform.Find("enemy_sprite").rotation);
-    }
-
-
-    //Command
-    [Command]
-    void CmdSendMyPositionToServer(Vector3 position)
-    {
-        synchronizedPosition = position;
-    }
-
-    [Command]
-    void CmdSendMyRotationToServer(Quaternion rotation)
-    {
-        synchronizedRotation = rotation;
     }
 }
