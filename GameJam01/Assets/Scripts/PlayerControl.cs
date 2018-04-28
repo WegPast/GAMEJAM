@@ -30,7 +30,7 @@ public class PlayerControl : NetworkBehaviour
     if (isLocalPlayer) {
       GameObject.Find("Main Camera").GetComponent<CameraControl>().player = this.gameObject;
       GameObject.Find("Main Camera").transform.position = new Vector3(0f, 0f, -20f);
-    }
+     }
       //leftWeapon = this.gunLeft.GetComponent<GunController>().GetAttachedWeapon().GetComponent<Weapon>();
       //rightWeapon = this.gunRight.GetComponent<GunController>().GetAttachedWeapon().GetComponent<Weapon>();
 
@@ -50,7 +50,7 @@ public class PlayerControl : NetworkBehaviour
 
   void Update() {
     if (isLocalPlayer) {
-      CmdFire();
+      if (Input.GetButton("Fire1")) { CmdFire(); }
       LookAtMouse();
       Move();
     }
@@ -72,26 +72,29 @@ public class PlayerControl : NetworkBehaviour
     transform.position = new Vector3(transform.position.x, transform.position.y, -5f);
   }
 
-  //[Command]
+  [Command]
   public void CmdFire() {
 
+        print("A player is firing");
+        GameObject projectile;
+        projectile = this.gunLeft.GetComponent<GunController>().FireGun(isLocalPlayer);
+        if (projectile != null) { NetworkServer.Spawn(projectile); }
+        projectile = this.gunRight.GetComponent<GunController>().FireGun(isLocalPlayer);
+        if (projectile != null) { NetworkServer.Spawn(projectile); }
+        //if (Input.GetButton("Fire1") && deltaTimeFire >= 1 / this.leftWeapon.fireRate) {
+        //  this.leftWeapon.FireProjectile(this.gunLeft);
+        //  deltaTimeFire = 0;
+        //}
 
-    this.gunLeft.GetComponent<GunController>().FireGun(isLocalPlayer);
-    this.gunRight.GetComponent<GunController>().FireGun(isLocalPlayer);
-    //if (Input.GetButton("Fire1") && deltaTimeFire >= 1 / this.leftWeapon.fireRate) {
-    //  this.leftWeapon.FireProjectile(this.gunLeft);
-    //  deltaTimeFire = 0;
-    //}
+        //if (Input.GetButton("Fire1") && deltaTimeFire2 >= 1 / this.rightWeapon.fireRate) {
+        //  this.rightWeapon.FireProjectile(this.gunRight);
+        //  deltaTimeFire2 = 0;
+        //}
 
-    //if (Input.GetButton("Fire1") && deltaTimeFire2 >= 1 / this.rightWeapon.fireRate) {
-    //  this.rightWeapon.FireProjectile(this.gunRight);
-    //  deltaTimeFire2 = 0;
-    //}
+        //deltaTimeFire += Time.deltaTime;
+        //deltaTimeFire2 += Time.deltaTime;
 
-    //deltaTimeFire += Time.deltaTime;
-    //deltaTimeFire2 += Time.deltaTime;
-
-  }
+    }
 
   void LookAtMouse() {
     Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;

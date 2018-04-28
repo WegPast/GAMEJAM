@@ -2,13 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class GunController : MonoBehaviour
 {
 
-    public GameObject attachedWeapon;
+  public GameObject attachedWeapon;
 
-    private GameObject instantiatedWeapon;
+  private GameObject instantiatedWeapon;
   private float deltaTimeFire;
   private float deltaTimeFire2;
 
@@ -58,14 +59,17 @@ public class GunController : MonoBehaviour
         }
     }
 
-  public void FireGun(bool isFiredFromLocalPlayer) {
-    if (Input.GetButton("Fire1") && deltaTimeFire >= 1 / instantiatedWeapon.GetComponent<Weapon>().fireRate) {
-      instantiatedWeapon.GetComponent<Weapon>().FireProjectile(gameObject, isFiredFromLocalPlayer);
-      deltaTimeFire = 0;
-    }
-
+  public GameObject FireGun(bool isFiredFromLocalPlayer) {
+        GameObject projectile = null;
+    if (deltaTimeFire >= 1 / instantiatedWeapon.GetComponent<Weapon>().fireRate) {
+            projectile = instantiatedWeapon.GetComponent<Weapon>().FireProjectile(gameObject, isFiredFromLocalPlayer);
+            deltaTimeFire = 0;
+        }
+    
     deltaTimeFire += Time.deltaTime;
     deltaTimeFire2 += Time.deltaTime;
+
+        return projectile;
   }
 
 }

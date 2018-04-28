@@ -22,9 +22,10 @@ public class LifeManager : NetworkBehaviour
 	}
 
     //Hit and heal functions
-    void Hit(int damage)
+    public void Hit(int damage)
     {
-        this.lifeValue -= damage;
+
+        this.lifeValue = (damage>this.lifeValue)?0: this.lifeValue-damage;
         this.lifePercent = (this.lifeValue / this.lifeMax) * 100;
     }
     void Heal(int value)
