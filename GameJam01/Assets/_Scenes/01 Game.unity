@@ -197,12 +197,12 @@ Prefab:
     - target: {fileID: 114850689446846358, guid: fdf208dbcc4372142a2a8fea36ff4bac,
         type: 2}
       propertyPath: waveNumber
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 114850689446846358, guid: fdf208dbcc4372142a2a8fea36ff4bac,
         type: 2}
       propertyPath: enemyPerDifficultyPoint
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fdf208dbcc4372142a2a8fea36ff4bac, type: 2}
