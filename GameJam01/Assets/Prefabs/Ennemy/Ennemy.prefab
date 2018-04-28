@@ -170,8 +170,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d3f59414dd5dd34eb237bf02d87f446, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onHitTrigger: BEING_HIT
-  animator: {fileID: 95248178977344088}
   lifePercent: 0
   lifeValue: 20
   lifeMax: 20
@@ -261,7 +259,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dropChance: 100
   movementSpeed: 4
-  prefab: {fileID: 1086096817963820, guid: fc8d8deafdd22f04f826e084e5ff9369, type: 2}
+  prefab: {fileID: 1573635461337952, guid: fc8d8deafdd22f04f826e084e5ff9369, type: 2}
 --- !u!212 &212129332515954732
 SpriteRenderer:
   m_ObjectHideFlags: 1
