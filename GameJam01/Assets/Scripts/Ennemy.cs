@@ -5,6 +5,8 @@ using UnityEngine.Networking;
 
 public class Ennemy : NetworkBehaviour
 {
+    private Animator animator;
+
     [
         Header("Drop chance of bonus"),
         Range(0, 100)
@@ -27,6 +29,7 @@ public class Ennemy : NetworkBehaviour
     // Use this for initialization
     void Start()
     {
+        animator = GetComponent<Animator>();
         // récupération du component LifeManager permettant de gérer la vie de mon ennemmi
         lifeManager = this.GetComponent<LifeManager>();
     }
@@ -48,6 +51,12 @@ public class Ennemy : NetworkBehaviour
         {
             // Ici on compare la vie du joueur à celle du mon instance d'ennemy
             handleCollisionDamages(player.GetComponent<LifeManager>());
+        }
+
+        Projectiles projectiles = collision.gameObject.GetComponent<Projectiles>();
+        if (projectiles && this.animator)
+        {
+            animator.SetTrigger("BEING_HIT");
         }
     }
 
