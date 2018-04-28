@@ -63,13 +63,29 @@ public class GunController : MonoBehaviour
     GameObject projectile = null;
     if (deltaTimeFire >= 1 / instantiatedWeapon.GetComponent<Weapon>().fireRate) {
       projectile = instantiatedWeapon.GetComponent<Weapon>().FireProjectile(gameObject, isFiredFromLocalPlayer);
-      deltaTimeFire = 0;
     }
 
-    deltaTimeFire += Time.deltaTime;
-    deltaTimeFire2 += Time.deltaTime;
+
 
     return projectile;
   }
+
+    public void UpdateDeltaFiringTime()
+    {
+        if (deltaTimeFire >= 1 / instantiatedWeapon.GetComponent<Weapon>().fireRate)
+        {
+            deltaTimeFire = 0;
+        }
+        deltaTimeFire += Time.deltaTime;
+        deltaTimeFire2 += Time.deltaTime;
+    }
+    //Animation
+    public void AnimationFiring()
+    {
+        if (deltaTimeFire >= 1 / instantiatedWeapon.GetComponent<Weapon>().fireRate)
+        {
+            instantiatedWeapon.GetComponent<Weapon>().AnimationFiring();
+        }
+    }
 
 }

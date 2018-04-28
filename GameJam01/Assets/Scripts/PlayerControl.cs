@@ -6,20 +6,21 @@ using UnityEngine.Networking;
 public class PlayerControl : NetworkBehaviour
 {
 
-  [Header("Player properties")]
-  public float speed = 1.0f;
+    [Header("Player properties")]
+    public float speed = 1.0f;
 
-  [Header("Player guns")]
-  public GameObject projectile;
+    [Header("Player guns")]
+    public GameObject projectile;
 
-  public GameObject gunLeft, gunRight;
+    public GameObject gunLeft, gunRight;
 
-  public GameObject body;
-  private GameManager gameManager;
+    public GameObject body;
+    private GameManager gameManager;
 
-  private float deltaTimeFire;
-  private float deltaTimeFire2;
+    private float deltaTimeFire;
+    private float deltaTimeFire2;
 
+    [SyncVar] bool isFiring;  
   // Use this for initialization
   void Start() {
 
@@ -44,13 +45,16 @@ public class PlayerControl : NetworkBehaviour
 
   void Update() {
     if (isLocalPlayer) {
-      if (Input.GetButton("Fire1")) { CmdFire(); }
+      if (Input.GetButton("Fire1")) { SendFiringState(true); } else { SendFiringState(false); }
       LookAtMouse();
       Move();
     }
 
-    
-  }
+    //Childs Animations
+    if (isFiring) { this.gunLeft.GetComponent<GunController>().AnimationFiring(); this.gunLeft.GetComponent<GunController>().UpdateDeltaFiringTime(); }
+    if (isFiring) { this.gunRight.GetComponent<GunController>().AnimationFiring(); this.gunRight.GetComponent<GunController>().UpdateDeltaFiringTime(); }
+
+    }
 
   void Move() {
     if (Input.GetKey(KeyCode.Z)) {
@@ -68,38 +72,56 @@ public class PlayerControl : NetworkBehaviour
     transform.position = new Vector3(transform.position.x, transform.position.y, -5f);
   }
 
-  [Command]
-  public void CmdFire() {
-
-    GameObject projectile;
-
-    projectile = this.gunLeft.GetComponent<GunController>().FireGun(isLocalPlayer);
-    if (projectile != null) { NetworkServer.Spawn(projectile); }
-
-    projectile = this.gunRight.GetComponent<GunController>().FireGun(isLocalPlayer);
-    if (projectile != null) { NetworkServer.Spawn(projectile); }
-
-  }
-
-  void LookAtMouse() {
-    Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-    difference.Normalize();
-    float rotation = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
-    body.transform.rotation = Quaternion.Euler(0f, 0f, rotation - 90);
-  }
-
-  private void OnCollisionEnter2D(Collision2D collision) {
-    if (collision.gameObject.GetComponent<Ennemy>()) {
-      Die();
+    void LookAtMouse()
+    {
+        Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        difference.Normalize();
+        float rotation = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
+        body.transform.rotation = Quaternion.Euler(0f, 0f, rotation - 90);
     }
-  }
 
-  public void ChangeGunWeapon(GameObject newWeapon) {
-    this.gunRight.GetComponent<GunController>().ChangeWeapon(newWeapon);
-    this.gunLeft.GetComponent<GunController>().ChangeWeapon(newWeapon);
-  }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.GetComponent<Ennemy>())
+        {
+            Die();
+        }
+    }
 
-  public void Die() {
-    Destroy(gameObject);
-  }
+    public void ChangeGunWeapon(GameObject newWeapon)
+    {
+        this.gunRight.GetComponent<GunController>().ChangeWeapon(newWeapon);
+        this.gunLeft.GetComponent<GunController>().ChangeWeapon(newWeapon);
+    }
+
+    public void Die()
+    {
+        Destroy(gameObject);
+    }
+
+    //Client
+    [Client]
+    void SendFiringState(bool firingState)
+    {
+        CmdFiringState(firingState);
+        if(firingState) { CmdFire(); }
+    }
+
+    //Command
+    [Command]
+    void CmdFiringState(bool firingState)
+    {
+        isFiring = firingState;
+    }
+
+    [Command]
+    public void CmdFire() {
+            GameObject projectile;
+    
+            projectile = this.gunLeft.GetComponent<GunController>().FireGun(isLocalPlayer);
+            if (projectile != null) { NetworkServer.Spawn(projectile); }
+
+            projectile = this.gunRight.GetComponent<GunController>().FireGun(isLocalPlayer);
+            if (projectile != null) { NetworkServer.Spawn(projectile); }
+    }
 }

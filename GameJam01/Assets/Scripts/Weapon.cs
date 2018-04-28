@@ -30,8 +30,12 @@ public class Weapon : NetworkBehaviour
       projectile.GetComponent<Projectiles>().isFromMyPlayer = true;
     }
 
-    animator.SetTrigger("fire");
-
     return projectile;
   }
+
+    //Animation
+    public void AnimationFiring()
+    {
+        animator.SetTrigger("fire");
+    }
 }
