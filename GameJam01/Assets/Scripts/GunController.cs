@@ -31,7 +31,7 @@ public class GunController : MonoBehaviour
   {
 
     attachedWeapon = newWeapon;
-    if (IsWeaponInstatiated())
+    if (instantiatedWeapon)
     {
       Destroy(instantiatedWeapon);
     }
@@ -48,29 +48,6 @@ public class GunController : MonoBehaviour
     return this.instantiatedWeapon;
   }
 
-  public bool HasWeaponAttached()
-  {
-    if (attachedWeapon != null)
-    {
-      return true;
-    }
-    else
-    {
-      return false;
-    }
-  }
-
-  public bool IsWeaponInstatiated()
-  {
-    if (instantiatedWeapon != null)
-    {
-      return true;
-    }
-    else
-    {
-      return false;
-    }
-  }
   public GameObject FireGun(bool isFiredFromLocalPlayer)
   {
     GameObject projectile = null;
