@@ -25,6 +25,8 @@ GameObject:
   - component: {fileID: 114216086475791658}
   - component: {fileID: 114272955250002346}
   - component: {fileID: 114030403868983642}
+  - component: {fileID: 95248178977344088}
+  - component: {fileID: 114807213679721874}
   m_Layer: 0
   m_Name: Ennemy
   m_TagString: Enemy
@@ -140,6 +142,23 @@ CircleCollider2D:
   m_Offset: {x: 0.015475988, y: -0.029404253}
   serializedVersion: 2
   m_Radius: 0.38356766
+--- !u!95 &95248178977344088
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1462344453520696}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114030403868983642
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -208,6 +227,25 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
+--- !u!114 &114807213679721874
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1462344453520696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1590678366, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Animator: {fileID: 0}
+  m_ParameterSendBits: 0
+  param0: 
+  param1: 
+  param2: 
+  param3: 
+  param4: 
+  param5: 
 --- !u!114 &114909285843629888
 MonoBehaviour:
   m_ObjectHideFlags: 1
