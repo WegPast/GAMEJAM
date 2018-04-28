@@ -2,62 +2,86 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class GunController : MonoBehaviour
 {
 
-    public GameObject attachedWeapon;
+  public GameObject attachedWeapon;
 
-    private GameObject instantiatedWeapon;
+  private GameObject instantiatedWeapon;
+  private float deltaTimeFire;
+  private float deltaTimeFireMax;
 
-    private void Start() {
+  private void Start()
+  {
+    InstantiateWeapon();
+    deltaTimeFireMax = 100;
+    deltaTimeFire = deltaTimeFireMax;
+  }
+
+  private void InstantiateWeapon()
+  {
+    instantiatedWeapon = Instantiate(attachedWeapon, transform.position, transform.parent.rotation);
+    instantiatedWeapon.transform.parent = transform;
+
+    // By default instantiated object take same parent transforme properties. 
+    // GunRight has a scale x of -1. So here we reset weapon scale.
+    instantiatedWeapon.transform.localScale = Vector3.one;
+  }
+
+  public void ChangeWeapon(GameObject newWeapon)
+  {
+
+    attachedWeapon = newWeapon;
+    if (instantiatedWeapon)
+    {
+      Destroy(instantiatedWeapon);
+    }
+    InstantiateWeapon();
+
+  }
+
+  public GameObject GetAttachedWeapon()
+  {
+    if (this.instantiatedWeapon == null)
+    {
+      this.InstantiateWeapon();
+    }
+    return this.instantiatedWeapon;
+  }
+
+  public GameObject FireGun(bool isFiredFromLocalPlayer)
+  {
+    GameObject projectile = null;
+    if (deltaTimeFire >= 1 / instantiatedWeapon.GetComponent<Weapon>().fireRate)
+    {
+      projectile = instantiatedWeapon.GetComponent<Weapon>().FireProjectile(gameObject, isFiredFromLocalPlayer);
     }
 
-    private void InstantiateWeapon() {
-        instantiatedWeapon = Instantiate(attachedWeapon, transform.position, Quaternion.identity);
-        instantiatedWeapon.transform.parent = transform;
+    return projectile;
+  }
 
-        //GameObject fireSpot = instantiatedWeapon.transform.Find("FireSpot").gameObject;
-        //fireSpot.transform.parent = instantiatedWeapon.transform;
-        //instantiatedWeapon.GetComponent<Weapon>().SetFireSpot(fireSpot.transform.position);
-        //Debug.Log(fireSpot.transform.position);
-
-        // By default instantiated object take same parent transforme properties. 
-        // GunRight has a scale x of -1. So here we reset weapon scale.
-        instantiatedWeapon.transform.localScale = Vector3.one;
+  public void UpdateDeltaFiringTime(bool isFiring)
+  {
+    if (isFiring && deltaTimeFire >= 1 / instantiatedWeapon.GetComponent<Weapon>().fireRate)
+    {
+      deltaTimeFire = 0;
     }
-
-    public void ChangeWeapon(GameObject newWeapon) {
-
-        attachedWeapon = newWeapon;
-        if (IsWeaponInstatiated()) {
-            Destroy(instantiatedWeapon);
-        }
-        InstantiateWeapon();
-        
+    if(deltaTimeFire< deltaTimeFireMax)
+    {
+      deltaTimeFire += Time.deltaTime;
     }
+    
+  }
 
-    public GameObject GetAttachedWeapon() {
-        if (this.instantiatedWeapon == null) {
-            this.InstantiateWeapon();
-        }
-        return this.instantiatedWeapon;
+  //Animation
+  public void AnimationFiring()
+  {
+    if (deltaTimeFire >= 1 / instantiatedWeapon.GetComponent<Weapon>().fireRate)
+    {
+      instantiatedWeapon.GetComponent<Weapon>().AnimationFiring();
     }
-
-    public bool HasWeaponAttached() {
-        if (attachedWeapon != null) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public bool IsWeaponInstatiated() {
-        if (instantiatedWeapon != null) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+  }
 
 }

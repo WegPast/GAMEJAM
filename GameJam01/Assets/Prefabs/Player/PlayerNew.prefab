@@ -86,7 +86,8 @@ GameObject:
   - component: {fileID: 50771025256309060}
   - component: {fileID: 60149165570386946}
   - component: {fileID: 114982827299978248}
-  - component: {fileID: 114783086369159286}
+  - component: {fileID: 114139439681664066}
+  - component: {fileID: 114415460238685390}
   m_Layer: 9
   m_Name: PlayerNew
   m_TagString: Player
@@ -252,6 +253,27 @@ PolygonCollider2D:
       - {x: 0.38881215, y: 0.61846757}
       - {x: 0.24949472, y: 0.6404451}
       - {x: 0.1093386, y: 0.49411094}
+--- !u!114 &114139439681664066
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1189774019121046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 2
+  m_SendInterval: 0.033333335
+  m_SyncRotationAxis: 0
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!114 &114215830207829380
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -279,9 +301,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d970dce738895d4ca4c2096059fd8f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attachedWeapon: {fileID: 1272079754440602, guid: 729cc6897ccc8c1448ee5b6b16bc1b32,
+  attachedWeapon: {fileID: 1309701356354346, guid: 9bc381293aa1b164a90a7286a6a10231,
     type: 2}
---- !u!114 &114783086369159286
+--- !u!114 &114415460238685390
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -289,9 +311,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1189774019121046}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e89c4bf00ea3d44784cd23d09f90331, type: 3}
+  m_Script: {fileID: -1267208747, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Target: {fileID: 4652245022834868}
+  m_ChildIndex: 0
+  m_SendInterval: 0.033333335
+  m_SyncRotationAxis: 3
+  m_RotationSyncCompression: 0
+  m_MovementThreshold: 0.001
+  m_InterpolateRotation: 0.5
+  m_InterpolateMovement: 0.5
 --- !u!114 &114880354738204960
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -336,7 +366,7 @@ MonoBehaviour:
     i14: 106
     i15: 143
   m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
+  m_LocalPlayerAuthority: 1
 --- !u!212 &212284523496126200
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -370,7 +400,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 24dde3ebdfb6d344bb92667a333f0e12, type: 3}
   m_Color: {r: 1, g: 0.2647059, b: 0.2647059, a: 1}
   m_FlipX: 0
@@ -414,7 +444,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: 13c1bdd434332664e9de66a32a232024, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

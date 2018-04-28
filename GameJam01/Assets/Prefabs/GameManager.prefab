@@ -64,3 +64,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDifficultyLvl: 3
+  isGameStarted: 0
+  textAddress: {fileID: 0}
