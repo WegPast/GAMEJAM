@@ -58,9 +58,9 @@ public class GunController : MonoBehaviour
         }
     }
 
-  public void FireGun() {
+  public void FireGun(bool isFiredFromLocalPlayer) {
     if (Input.GetButton("Fire1") && deltaTimeFire >= 1 / instantiatedWeapon.GetComponent<Weapon>().fireRate) {
-      instantiatedWeapon.GetComponent<Weapon>().FireProjectile(gameObject);
+      instantiatedWeapon.GetComponent<Weapon>().FireProjectile(gameObject, isFiredFromLocalPlayer);
       deltaTimeFire = 0;
     }
 

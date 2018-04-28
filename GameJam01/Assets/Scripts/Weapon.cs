@@ -21,13 +21,16 @@ public class Weapon : NetworkBehaviour
     animator = GetComponent<Animator>();
   }
 
-  public void FireProjectile(GameObject gun) {
+  public void FireProjectile(GameObject gun, bool isFiredFromLocalPlayer) {
     Vector3 projectilePos = fireSpot.transform.position;
 
     GameObject projectile = Instantiate(projectileType.gameObject, projectilePos, Quaternion.identity) as GameObject;
     projectile.GetComponent<Projectiles>().Fire(fireSpot.transform.rotation);
-    projectile.GetComponent<Projectiles>().isFromMyPlayer = true;
+    if (isFiredFromLocalPlayer) {
+      projectile.GetComponent<Projectiles>().isFromMyPlayer = true;
+    }
     animator.SetTrigger("fire");
+
     NetworkServer.Spawn(projectile);
   }
 }
