@@ -7,24 +7,21 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : NetworkBehaviour
 {
+  public int maxDifficultyLvl = 3;
+  public bool isGameStarted = false;
+  public Text textAddress;
+  public static int nbEnnemiesKilled;
 
+
+  private GameObject waveManager;
   private enum GameStatus { startMenu, gameStarted, gameLost };
   private GameStatus currentGameState;
-
   private int difficultyLvl = 0;
   private LevelManager levelManager;
   private NetworkManager netManager;
   private GameObject myPlayer;
   private GameObject waveCounter;
   private WaveHandler waveHandler;
-
-
-  private GameObject waveManager;
-
-  public int maxDifficultyLvl = 3;
-  public bool isGameStarted = false;
-  public Text textAddress;
-  public static int nbEnnemiesKilled;
 
   void OnEnable()
   {
@@ -36,9 +33,7 @@ public class GameManager : NetworkBehaviour
   {
     levelManager = GetComponent<LevelManager>();
     netManager = FindObjectOfType<NetworkManager>();
-
     textAddress.text = PlayerPrefs.GetString("ConnectionIP", "localhost");
-
     DontDestroyOnLoad(gameObject);
   }
 
@@ -46,18 +41,18 @@ public class GameManager : NetworkBehaviour
   {
     if (SceneManager.GetActiveScene().name == "00 StartMenu")
     {
-      SetCurrentGameState(GameStatus.startMenu);
+      CurrentGameState = GameStatus.startMenu;
     }
 
     if (SceneManager.GetActiveScene().name == "02 Lost")
     {
-      SetCurrentGameState(GameStatus.gameLost);
+      CurrentGameState = GameStatus.gameLost;
       GameObject.Find("ScoreText").GetComponent<Text>().text = "You killed " + nbEnnemiesKilled.ToString() + " ennemies !";
     }
 
     if (SceneManager.GetActiveScene().name == "01 Game")
     {
-      SetCurrentGameState(GameStatus.gameStarted);
+      CurrentGameState = GameStatus.gameStarted;
       waveCounter = GameObject.Find("WaveCounter");
     }
   }
@@ -65,13 +60,11 @@ public class GameManager : NetworkBehaviour
   // Update is called once per frame
   void Update()
   {
-
-
-    if (CountPlayer() <= 0 && isGameStarted)
+    if (GetPlayers().Count <= 0 && isGameStarted)
     {
       GameLost();
     }
-    if (GetCurrentGameState() == GameStatus.gameStarted)
+    if (CurrentGameState == GameStatus.gameStarted)
     {
       if (!waveManager)
       {
@@ -84,30 +77,9 @@ public class GameManager : NetworkBehaviour
     }
   }
 
-  public int GetDifficultyLvl()
-  {
-    return difficultyLvl;
-  }
-
-  public void SetDifficultyLvl(int diffLvl)
-  {
-    difficultyLvl = diffLvl;
-  }
-
   public void IncreaseDifficultyLvl()
   {
-    if ((difficultyLvl + 1) <= maxDifficultyLvl)
-    {
-      difficultyLvl++;
-    }
-  }
-
-  public void DecreaseDifficultyLvl()
-  {
-    if ((difficultyLvl - 1) >= 0)
-    {
-      difficultyLvl--;
-    }
+    if ((DifficultyLvl + 1) <= maxDifficultyLvl) DifficultyLvl++;
   }
 
   public void GameLost()
@@ -123,18 +95,12 @@ public class GameManager : NetworkBehaviour
   public List<GameObject> GetPlayers()
   {
     List<GameObject> allPlayers = new List<GameObject>();
-
     PlayerControl[] allPlayerControl = FindObjectsOfType<PlayerControl>();
     foreach (var item in allPlayerControl)
     {
       allPlayers.Add(item.gameObject);
     }
     return allPlayers;
-  }
-
-  public int CountPlayer()
-  {
-    return GetPlayers().Count;
   }
 
   public void StartHost()
@@ -166,20 +132,11 @@ public class GameManager : NetworkBehaviour
     }
   }
 
-  private void SetCurrentGameState(GameStatus status)
-  {
-    currentGameState = status;
-  }
-
-
-  private GameStatus GetCurrentGameState()
-  {
-    return currentGameState;
-  }
-
-
   void OnDisable()
   {
     SceneManager.sceneLoaded -= OnSceneLoaded;
   }
+
+  public int DifficultyLvl { get; set; }
+  private GameStatus CurrentGameState { get; set; }
 }

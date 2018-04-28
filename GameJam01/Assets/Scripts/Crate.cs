@@ -12,57 +12,73 @@ public class Crate : NetworkBehaviour
       Range(0, 10)
   ]
   public int secondesBeforeDespawn;
-
   public int commonChance = 70, rareChance = 25, legendaryChance = 5;
-
   public GameObject[] commonWeapons;
   public GameObject[] rareWeapons;
   public GameObject[] legendaryWeapons;
-
+  
   private GameObject weaponInStock;
 
   // Use this for initialization
-  void Start() {
+  void Start()
+  {
     // Au start on determine ce qui sera le type de bonus.
     Destroy(this.gameObject, secondesBeforeDespawn);
     weaponInStock = GetRandomWeapon();
   }
 
   // Update is called once per frame
-  void Update() {
-
+  void Update()
+  {
   }
 
-  private void OnTriggerEnter2D(Collider2D collision) {
+  private void OnTriggerEnter2D(Collider2D collision)
+  {
     // On détruit la caisse quand le joueur passe dessus.
-    if (collision.gameObject.GetComponent<PlayerControl>()) {
-            PlayerControl playerControl = collision.gameObject.GetComponent<PlayerControl>();
-            playerControl.ChangeGunWeapon(weaponInStock);
+    if (collision.gameObject.GetComponent<PlayerControl>())
+    {
+      PlayerControl playerControl = collision.gameObject.GetComponent<PlayerControl>();
+      playerControl.ChangeGunWeapon(weaponInStock);
       Destroy(gameObject);
     }
   }
 
-  private GameObject GetRandomWeapon() {
+  private GameObject GetRandomWeapon()
+  {
     int rarity = Random.Range(0, 100);
-    if (rarity > 0 && rarity <= commonChance) { // COMMON
+    if (rarity > 0 && rarity <= commonChance)
+    { // COMMON
       int weaponIndex = Random.Range(0, commonWeapons.Length);
-      if (commonWeapons[weaponIndex] != null) {
+      if (commonWeapons[weaponIndex] != null)
+      {
         return commonWeapons[weaponIndex];
-      } else {
+      }
+      else
+      {
         throw new System.Exception("No weapon in this commonWeapons slot");
       }
-    } else if (rarity > commonChance && rarity <= rareChance) { // RARE
+    }
+    else if (rarity > commonChance && rarity <= rareChance)
+    { // RARE
       int weaponIndex = Random.Range(0, rareWeapons.Length);
-      if (rareWeapons[weaponIndex] != null) {
+      if (rareWeapons[weaponIndex] != null)
+      {
         return rareWeapons[weaponIndex];
-      } else {
+      }
+      else
+      {
         throw new System.Exception("No weapon in this rareWeapons slot");
       }
-    } else { // LEGENDARY !
+    }
+    else
+    { // LEGENDARY !
       int weaponIndex = Random.Range(0, legendaryWeapons.Length);
-      if (legendaryWeapons[weaponIndex] != null) {
+      if (legendaryWeapons[weaponIndex] != null)
+      {
         return legendaryWeapons[weaponIndex];
-      } else {
+      }
+      else
+      {
         throw new System.Exception("No weapon in this legendaryWeapons slot");
       }
     }
