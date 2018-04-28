@@ -19,10 +19,13 @@ public class Crate : NetworkBehaviour
   public GameObject[] rareWeapons;
   public GameObject[] legendaryWeapons;
 
+  private GameObject weaponInStock;
+
   // Use this for initialization
   void Start() {
     // Au start on determine ce qui sera le type de bonus.
     Destroy(this.gameObject, secondesBeforeDespawn);
+    weaponInStock = GetRandomWeapon();
   }
 
   // Update is called once per frame
@@ -33,8 +36,7 @@ public class Crate : NetworkBehaviour
   private void OnTriggerEnter2D(Collider2D collision) {
     // On détruit la caisse quand le joueur passe dessus.
     if (collision.gameObject.GetComponent<PlayerControl>()) {
-      collision.gameObject.GetComponent<PlayerControl>().ChangeGunWeapon(GetRandomWeapon());
-
+      collision.gameObject.GetComponent<PlayerControl>().ChangeGunWeapon(weaponInStock);
       Destroy(gameObject);
     }
   }
