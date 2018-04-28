@@ -11,10 +11,13 @@ public class GunController : MonoBehaviour
 
   private GameObject instantiatedWeapon;
   private float deltaTimeFire;
+  private float deltaTimeFireMax;
 
   private void Start()
   {
     InstantiateWeapon();
+    deltaTimeFireMax = 100;
+    deltaTimeFire = deltaTimeFireMax;
   }
 
   private void InstantiateWeapon()
@@ -59,18 +62,17 @@ public class GunController : MonoBehaviour
     return projectile;
   }
 
-  public void UpdateDeltaFiringTime()
+  public void UpdateDeltaFiringTime(bool isFiring)
   {
-    if (deltaTimeFire >= 1 / instantiatedWeapon.GetComponent<Weapon>().fireRate)
+    if (isFiring && deltaTimeFire >= 1 / instantiatedWeapon.GetComponent<Weapon>().fireRate)
     {
       deltaTimeFire = 0;
     }
-    deltaTimeFire += Time.deltaTime;
-  }
-
-  public void ResetDeltatTime()
-  {
-    deltaTimeFire = 0;
+    if(deltaTimeFire< deltaTimeFireMax)
+    {
+      deltaTimeFire += Time.deltaTime;
+    }
+    
   }
 
   //Animation

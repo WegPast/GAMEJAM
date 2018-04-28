@@ -65,15 +65,10 @@ public class PlayerControl : NetworkBehaviour
     if (isFiring)
     {
       this.gunLeft.GetComponent<GunController>().AnimationFiring();
-      this.gunLeft.GetComponent<GunController>().UpdateDeltaFiringTime();
       this.gunRight.GetComponent<GunController>().AnimationFiring();
-      this.gunRight.GetComponent<GunController>().UpdateDeltaFiringTime();
     }
-    else
-    {
-      this.gunLeft.GetComponent<GunController>().ResetDeltatTime();
-      this.gunRight.GetComponent<GunController>().ResetDeltatTime();
-    }
+    this.gunLeft.GetComponent<GunController>().UpdateDeltaFiringTime(isFiring);
+    this.gunRight.GetComponent<GunController>().UpdateDeltaFiringTime(isFiring);
   }
 
   void Move()
