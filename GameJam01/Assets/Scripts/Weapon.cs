@@ -28,10 +28,10 @@ public class Weapon : NetworkBehaviour
     projectile.GetComponent<Projectiles>().Fire(fireSpot.transform.rotation);
     if (isFiredFromLocalPlayer) {
       projectile.GetComponent<Projectiles>().isFromMyPlayer = true;
-        }
-        
+    }
+
     animator.SetTrigger("fire");
 
-        return projectile;
+    return projectile;
   }
 }
