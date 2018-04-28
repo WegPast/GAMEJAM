@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114778787389079312}
   - component: {fileID: 114403178595315914}
   - component: {fileID: 58543376440325072}
+  - component: {fileID: 114482420538084292}
   m_Layer: 0
   m_Name: WeaponCrate
   m_TagString: Untagged
@@ -112,7 +113,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.0015647411, y: -0.015648365}
@@ -150,6 +151,17 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
+--- !u!114 &114482420538084292
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1086096817963820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a805db5345e2c1b41b9baf9aecb000ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114778787389079312
 MonoBehaviour:
   m_ObjectHideFlags: 1

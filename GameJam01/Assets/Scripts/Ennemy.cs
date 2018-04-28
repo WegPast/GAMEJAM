@@ -47,13 +47,15 @@ public class Ennemy : NetworkBehaviour
         if (player)
         {
             // Ici on compare la vie du joueur à celle du mon instance d'ennemy
-            handleCollisionDamages(player.GetComponent<LifeManager>()); 3
+            handleCollisionDamages(player.GetComponent<LifeManager>());
         }
     }
 
     private void handleCollisionDamages(LifeManager playerLifeManager)
     {
-
+        int dammageToPlayer = this.lifeManager.lifeValue;
+        this.lifeManager.Hit(playerLifeManager.lifeValue);
+        playerLifeManager.Hit(dammageToPlayer);
     }
 
     private void handleTargetingPlayer()
@@ -87,7 +89,7 @@ public class Ennemy : NetworkBehaviour
     private void handleDeath()
     {
         // Si j'ai un préfab, qu'il y a des chance de drop et que l'ennemy n'a plus de vie.
-        if (this.lifeManager.lifeValue == 0.0f)
+        if (this.lifeManager && this.lifeManager.lifeValue == 0.0f)
         {
             if (this.prefab != null && this.dropChance != 0)
             {

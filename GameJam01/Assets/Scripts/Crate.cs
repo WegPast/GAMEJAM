@@ -18,6 +18,7 @@ public class Crate : NetworkBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision) {
 		// On détruit la caisse quand le joueur passe dessus.
+		Debug.Log("ça touche");
         if (collision.gameObject.GetComponent<PlayerControl>()) {
             Destroy(gameObject);
         }

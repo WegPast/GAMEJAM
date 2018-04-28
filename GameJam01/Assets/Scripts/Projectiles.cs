@@ -30,7 +30,8 @@ public class Projectiles : NetworkBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Si le gameObject avec lequel le projectile entre en collision a un component LifeManager alor on applique les dégats.
+        // Si le gameObject avec lequel le projectile entre en collision 
+        // avec un gameObject ayant un component LifeManager alor on applique les dégats.
         LifeManager lifeManager = collision.gameObject.GetComponent<LifeManager>();
         if (lifeManager) {
             lifeManager.Hit(this.damage);
