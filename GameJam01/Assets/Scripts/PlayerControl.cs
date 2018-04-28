@@ -48,6 +48,8 @@ public class PlayerControl : NetworkBehaviour
       LookAtMouse();
       Move();
     }
+
+    
   }
 
   void Move() {
@@ -90,6 +92,11 @@ public class PlayerControl : NetworkBehaviour
     if (collision.gameObject.GetComponent<Ennemy>()) {
       Die();
     }
+  }
+
+  public void ChangeGunWeapon(GameObject newWeapon) {
+    this.gunRight.GetComponent<GunController>().ChangeWeapon(newWeapon);
+    this.gunLeft.GetComponent<GunController>().ChangeWeapon(newWeapon);
   }
 
   public void Die() {

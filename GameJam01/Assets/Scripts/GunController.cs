@@ -18,7 +18,7 @@ public class GunController : MonoBehaviour
   }
 
   private void InstantiateWeapon() {
-    instantiatedWeapon = Instantiate(attachedWeapon, transform.position, Quaternion.identity);
+    instantiatedWeapon = Instantiate(attachedWeapon, transform.position, transform.parent.rotation);
     instantiatedWeapon.transform.parent = transform;
 
     // By default instantiated object take same parent transforme properties. 

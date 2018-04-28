@@ -7,7 +7,7 @@ public class Ennemy : NetworkBehaviour
 {
     [
         Header("Drop chance of bonus"),
-        RangeAttribute(0, 100)
+        Range(0, 100)
     ]
     public int dropChance;
 

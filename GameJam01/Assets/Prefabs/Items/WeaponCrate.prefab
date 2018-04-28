@@ -151,6 +151,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   secondesBeforeDespawn: 5
+  commonChance: 70
+  rareChance: 25
+  legendaryChance: 5
+  commonWeapons:
+  - {fileID: 1272079754440602, guid: 729cc6897ccc8c1448ee5b6b16bc1b32, type: 2}
+  - {fileID: 1309701356354346, guid: 9bc381293aa1b164a90a7286a6a10231, type: 2}
+  rareWeapons:
+  - {fileID: 1272079754440602, guid: 729cc6897ccc8c1448ee5b6b16bc1b32, type: 2}
+  - {fileID: 1309701356354346, guid: 9bc381293aa1b164a90a7286a6a10231, type: 2}
+  legendaryWeapons:
+  - {fileID: 1272079754440602, guid: 729cc6897ccc8c1448ee5b6b16bc1b32, type: 2}
+  - {fileID: 1309701356354346, guid: 9bc381293aa1b164a90a7286a6a10231, type: 2}
 --- !u!114 &114778787389079312
 MonoBehaviour:
   m_ObjectHideFlags: 1
