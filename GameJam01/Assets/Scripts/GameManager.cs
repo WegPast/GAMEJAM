@@ -44,7 +44,9 @@ public class GameManager : NetworkBehaviour
     if (SceneManager.GetActiveScene().name == "02 Lost")
     {
       CurrentGameState = GameStatus.gameLost;
-      GameObject.Find("ScoreText").GetComponent<Text>().text = "You killed " + NbEnnemiesKilled.ToString() + " ennemies !";
+      Destroy(GameObject.Find("Main Camera"));
+      string textScore = "You killed " + NbEnnemiesKilled.ToString() + " ennemies !";
+      GameObject.Find("ScoreText").GetComponent<Text>().text = textScore;
     }
 
     if (SceneManager.GetActiveScene().name == "01 Game")
