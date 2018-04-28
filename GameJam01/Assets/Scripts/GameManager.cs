@@ -26,127 +26,160 @@ public class GameManager : NetworkBehaviour
   public Text textAddress;
   public static int nbEnnemiesKilled;
 
-  void OnEnable() {
+  void OnEnable()
+  {
     SceneManager.sceneLoaded += OnSceneLoaded;
   }
 
   // Use this for initialization
-  void Start() {
+  void Start()
+  {
     levelManager = GetComponent<LevelManager>();
     netManager = FindObjectOfType<NetworkManager>();
 
-    textAddress.text = PlayerPrefs.GetString("ConnectionIP","localhost");
-  
+    textAddress.text = PlayerPrefs.GetString("ConnectionIP", "localhost");
+
     DontDestroyOnLoad(gameObject);
   }
 
-  void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
-    if (SceneManager.GetActiveScene().name == "00 StartMenu") {
+  void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+  {
+    if (SceneManager.GetActiveScene().name == "00 StartMenu")
+    {
       SetCurrentGameState(GameStatus.startMenu);
     }
 
-    if (SceneManager.GetActiveScene().name == "02 Lost") {
+    if (SceneManager.GetActiveScene().name == "02 Lost")
+    {
       SetCurrentGameState(GameStatus.gameLost);
       GameObject.Find("ScoreText").GetComponent<Text>().text = "You killed " + nbEnnemiesKilled.ToString() + " ennemies !";
     }
 
-    if (SceneManager.GetActiveScene().name == "01 Game") {
+    if (SceneManager.GetActiveScene().name == "01 Game")
+    {
       SetCurrentGameState(GameStatus.gameStarted);
       waveCounter = GameObject.Find("WaveCounter");
     }
   }
 
   // Update is called once per frame
-  void Update() {
+  void Update()
+  {
 
 
-    if (CountPlayer() <= 0 && isGameStarted) {
+    if (CountPlayer() <= 0 && isGameStarted)
+    {
       GameLost();
     }
-    if (GetCurrentGameState() == GameStatus.gameStarted) {
-      if (!waveManager) {
+    if (GetCurrentGameState() == GameStatus.gameStarted)
+    {
+      if (!waveManager)
+      {
         waveManager = GameObject.Find("WavesManager");
-      } else {
+      }
+      else
+      {
         waveCounter.GetComponent<Text>().text = "Wave #" + waveManager.GetComponent<WaveHandler>().waveNumber.ToString();
       }
     }
   }
 
-  public int GetDifficultyLvl() {
+  public int GetDifficultyLvl()
+  {
     return difficultyLvl;
   }
 
-  public void SetDifficultyLvl(int diffLvl) {
+  public void SetDifficultyLvl(int diffLvl)
+  {
     difficultyLvl = diffLvl;
   }
 
-  public void IncreaseDifficultyLvl() {
-    if ((difficultyLvl + 1) <= maxDifficultyLvl) {
+  public void IncreaseDifficultyLvl()
+  {
+    if ((difficultyLvl + 1) <= maxDifficultyLvl)
+    {
       difficultyLvl++;
     }
   }
 
-  public void DecreaseDifficultyLvl() {
-    if ((difficultyLvl - 1) >= 0) {
+  public void DecreaseDifficultyLvl()
+  {
+    if ((difficultyLvl - 1) >= 0)
+    {
       difficultyLvl--;
     }
   }
 
-  public void GameLost() {
+  public void GameLost()
+  {
     isGameStarted = false;
-    if (netManager && netManager.IsClientConnected()) {
+    if (netManager && netManager.IsClientConnected())
+    {
       netManager.StopHost();
     }
     levelManager.ChangeScene("02 Lost");
   }
 
-  public List<GameObject> GetPlayers() {
+  public List<GameObject> GetPlayers()
+  {
     List<GameObject> allPlayers = new List<GameObject>();
 
     PlayerControl[] allPlayerControl = FindObjectsOfType<PlayerControl>();
-    foreach (var item in allPlayerControl) {
+    foreach (var item in allPlayerControl)
+    {
       allPlayers.Add(item.gameObject);
     }
     return allPlayers;
   }
 
-  public int CountPlayer() {
+  public int CountPlayer()
+  {
     return GetPlayers().Count;
   }
 
-  public void StartHost() {
-    if (netManager) {
+  public void StartHost()
+  {
+    if (netManager)
+    {
       netManager.StartHost();
     }
   }
 
-  public void ConnectTo() {
+  public void ConnectTo()
+  {
 
     string ip;
-    if (PlayerPrefs.GetString("ConnectionIP") == "") {
+    if (PlayerPrefs.GetString("ConnectionIP") == "")
+    {
       PlayerPrefs.SetString("ConnectionIP", textAddress.text);
       ip = textAddress.text;
-    } else {
+    }
+    else
+    {
       ip = PlayerPrefs.GetString("ConnectionIP");
     }
 
-    if (netManager) {
+    if (netManager)
+    {
       netManager.networkAddress = ip;
       netManager.StartClient();
     }
   }
 
-  private void SetCurrentGameState(GameStatus status) {
+  private void SetCurrentGameState(GameStatus status)
+  {
     currentGameState = status;
   }
 
 
-  private GameStatus GetCurrentGameState() {
+  private GameStatus GetCurrentGameState()
+  {
     return currentGameState;
   }
 
 
-  void OnDisable() {
+  void OnDisable()
+  {
     SceneManager.sceneLoaded -= OnSceneLoaded;
   }
 }

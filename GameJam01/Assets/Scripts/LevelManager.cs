@@ -4,9 +4,11 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class LevelManager : NetworkBehaviour {
+public class LevelManager : NetworkBehaviour
+{
 
-    public void ChangeScene(string sceneName) {
-        SceneManager.LoadScene(sceneName);
-    }
+  public void ChangeScene(string sceneName)
+  {
+    SceneManager.LoadScene(sceneName);
+  }
 }
