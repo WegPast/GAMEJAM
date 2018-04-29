@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 960bdeaa7e3d61d459dcdb55533c8a90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  iconSprite: {fileID: 21300000, guid: 53e6896b8155e4e4fb22346dda563a82, type: 3}
   isFromMyPlayer: 0
   speed: 29.26
   damage: 2

@@ -37,22 +37,13 @@ public class Crate : NetworkBehaviour
     Destroy(this.gameObject, secondesBeforeDespawn);
     weaponInStock = GetRandomWeapon();
     weaponTypeIcon = transform.Find("Icon").gameObject;
-    SetIcon();
+    SetWeaponIcon();
 
   }
 
-  public void SetIcon() {
-    switch (weaponInStock.name) {
-      case "Rifle":
-        weaponTypeIcon.GetComponent<SpriteRenderer>().sprite = rifleSprite;
-        break;
-      case "MultiGun":
-        weaponTypeIcon.GetComponent<SpriteRenderer>().sprite = multiGunSprite;
-        break;
-      default:
-        weaponTypeIcon.GetComponent<SpriteRenderer>().sprite = rifleSprite;
-        break;
-    }
+  public void SetWeaponIcon() {
+    Sprite projectileSprite = weaponInStock.GetComponent<Weapon>().projectileType.GetComponent<Projectiles>().iconSprite;
+    weaponTypeIcon.GetComponent<SpriteRenderer>().sprite = projectileSprite;
   }
 
   private void OnTriggerEnter2D(Collider2D collision) {

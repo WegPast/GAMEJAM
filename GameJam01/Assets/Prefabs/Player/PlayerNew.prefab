@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 114982827299978248}
   - component: {fileID: 114139439681664066}
   - component: {fileID: 114415460238685390}
+  - component: {fileID: 114854243634472612}
   m_Layer: 9
   m_Name: PlayerNew
   m_TagString: Player
@@ -322,6 +323,19 @@ MonoBehaviour:
   m_MovementThreshold: 0.001
   m_InterpolateRotation: 0.5
   m_InterpolateMovement: 0.5
+--- !u!114 &114854243634472612
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1189774019121046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b713a8800080294180f08afbd66d157, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gunLeftInfo: {fileID: 0}
+  gunRightInfo: {fileID: 0}
 --- !u!114 &114880354738204960
 MonoBehaviour:
   m_ObjectHideFlags: 1
