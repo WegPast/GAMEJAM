@@ -39,9 +39,9 @@ public class GameManager : NetworkBehaviour
 
   void OnSceneLoaded(Scene scene, LoadSceneMode mode)
   {
-    if (SceneManager.GetActiveScene().name == "00 StartMenu")  CurrentGameState = GameStatus.startMenu;
+    if (SceneManager.GetActiveScene().name == "00A StartMenu")  CurrentGameState = GameStatus.startMenu;
 
-    if (SceneManager.GetActiveScene().name == "02 Lost")
+    if (SceneManager.GetActiveScene().name == "02A Lost")
     {
       CurrentGameState = GameStatus.gameLost;
       Destroy(GameObject.Find("Main Camera"));
@@ -49,7 +49,7 @@ public class GameManager : NetworkBehaviour
       GameObject.Find("ScoreText").GetComponent<Text>().text = textScore;
     }
 
-    if (SceneManager.GetActiveScene().name == "01 Game")
+    if (SceneManager.GetActiveScene().name == "01B Game")
     {
       CurrentGameState = GameStatus.gameStarted;
       waveCounter = GameObject.Find("WaveCounter");
@@ -88,7 +88,7 @@ public class GameManager : NetworkBehaviour
     {
       netManager.StopHost();
     }
-    levelManager.ChangeScene("02 Lost");
+    levelManager.ChangeScene("02A Lost");
   }
 
   public List<GameObject> GetPlayers()
