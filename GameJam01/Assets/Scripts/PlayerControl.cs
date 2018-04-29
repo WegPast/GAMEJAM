@@ -14,24 +14,39 @@ public class PlayerControl : NetworkBehaviour
 
   public GameObject gunLeft, gunRight;
 
+  public Weapon WeaponLeft {
+    get {
+      return gunLeft.GetComponent<GunController>().GetAttachedWeapon().GetComponent<Weapon>();
+    }
+  }
+
+  public Weapon WeaponRight {
+    get {
+      return gunRight.GetComponent<GunController>().GetAttachedWeapon().GetComponent<Weapon>();
+    }
+  }
+
   public GameObject body;
   private GameManager gameManager;
 
   private float deltaTimeFire;
   private float deltaTimeFire2;
+  private LifeManager lifeManager;
 
   [SyncVar] bool isFiring;
+
+
   // Use this for initialization
   void Start()
   {
-
     if (isLocalPlayer)
     {
       GameObject.Find("Main Camera").GetComponent<CameraControl>().player = this.gameObject;
       GameObject.Find("Main Camera").transform.position = new Vector3(0f, 0f, -20f);
+
     }
 
-    transform.position = new Vector3(0F, 0F, -5F);
+      transform.position = new Vector3(0F, 0F, -5F);
     gameManager = FindObjectOfType<GameManager>();
     gameManager.IsGameStarted = true;
     GameManager.NbEnnemiesKilled = 0;
@@ -44,6 +59,8 @@ public class PlayerControl : NetworkBehaviour
     {
       Debug.LogError("No Right Gun attached, ma couille!!!");
     }
+
+    lifeManager = GetComponent<LifeManager>();
 
   }
 
@@ -58,6 +75,7 @@ public class PlayerControl : NetworkBehaviour
     }
     //Childs Animations
     HandleGunsAnimation();
+    CheckPlayerLife();
   }
 
   private void HandleGunsAnimation()
@@ -102,8 +120,8 @@ public class PlayerControl : NetworkBehaviour
 
   private void OnCollisionEnter2D(Collision2D collision)
   {
-    // Handle Death
-    //if (collision.gameObject.GetComponent<Ennemy>()) Destroy(gameObject);
+    // Handle collision
+
   }
 
   public void ChangeGunWeapon(GameObject newWeapon)
@@ -138,4 +156,12 @@ public class PlayerControl : NetworkBehaviour
     projectile = this.gunRight.GetComponent<GunController>().FireGun(isLocalPlayer);
     if (projectile) NetworkServer.Spawn(projectile); 
   }
+
+
+  public void CheckPlayerLife() {
+    if(lifeManager.lifeValue <= 0f) {
+      Destroy(gameObject);
+    }
+  }
+
 }

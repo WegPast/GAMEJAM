@@ -83,6 +83,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4602064716062206}
   - component: {fileID: 114215830207829380}
+  - component: {fileID: 114854243634472612}
+  - component: {fileID: 114149764264241384}
   - component: {fileID: 50771025256309060}
   - component: {fileID: 60149165570386946}
   - component: {fileID: 114982827299978248}
@@ -274,6 +276,21 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
+--- !u!114 &114149764264241384
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1189774019121046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d3f59414dd5dd34eb237bf02d87f446, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeValue: 200
+  lifeMax: 200
+  lifePercent: 0
+  isImmortal: 0
 --- !u!114 &114215830207829380
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -322,6 +339,19 @@ MonoBehaviour:
   m_MovementThreshold: 0.001
   m_InterpolateRotation: 0.5
   m_InterpolateMovement: 0.5
+--- !u!114 &114854243634472612
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1189774019121046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b713a8800080294180f08afbd66d157, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gunLeftInfo: {fileID: 0}
+  gunRightInfo: {fileID: 0}
 --- !u!114 &114880354738204960
 MonoBehaviour:
   m_ObjectHideFlags: 1

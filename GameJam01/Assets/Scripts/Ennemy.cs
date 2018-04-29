@@ -44,12 +44,6 @@ public class Ennemy : NetworkBehaviour
 
   private void OnTriggerEnter2D(Collider2D collision)
   {
-    PlayerControl player = collision.gameObject.GetComponent<PlayerControl>();
-    if (player)
-    {
-      // Ici on compare la vie du joueur à celle du mon instance d'ennemy
-      HandleCollisionDamages(player.GetComponent<LifeManager>());
-    }
 
     Projectiles projectiles = collision.gameObject.GetComponent<Projectiles>();
     if (projectiles && this.animator)
@@ -58,7 +52,16 @@ public class Ennemy : NetworkBehaviour
     }
   }
 
-  private void HandleCollisionDamages(LifeManager playerLifeManager)
+  private void OnCollisionEnter2D(Collision2D collision) {
+    PlayerControl player = collision.gameObject.GetComponent<PlayerControl>();
+    if (player) {
+      // Ici on compare la vie du joueur à celle du mon instance d'ennemy
+      HandleCollisionDamages(player.GetComponent<LifeManager>());
+    }
+  }
+
+
+    private void HandleCollisionDamages(LifeManager playerLifeManager)
   {
     int dammageToPlayer = this.lifeManager.lifeValue;
     this.lifeManager.Hit(playerLifeManager.lifeValue);
