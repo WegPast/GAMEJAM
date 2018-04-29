@@ -171,8 +171,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifePercent: 0
-  lifeValue: 20
-  lifeMax: 20
+  lifeValue: 5
+  lifeMax: 5
   isImmortal: 0
 --- !u!114 &114216086475791658
 MonoBehaviour:

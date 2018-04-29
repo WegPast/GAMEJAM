@@ -12,16 +12,14 @@ public class GameManager : NetworkBehaviour
 
 
   private static int nbEnnemiesKilled;
-  private bool isGameStarted = false;
   private GameObject waveManager;
   private enum GameStatus { startMenu, gameStarted, gameLost };
   private GameStatus currentGameState;
-  private int difficultyLvl = 0;
   private LevelManager levelManager;
   private NetworkManager netManager;
   private GameObject myPlayer;
   private GameObject waveCounter;
-  private WaveHandler waveHandler;
+  private StageManager waveHandler;
 
   void OnEnable()
   {
@@ -52,7 +50,7 @@ public class GameManager : NetworkBehaviour
     if (SceneManager.GetActiveScene().name == "01B Game")
     {
       CurrentGameState = GameStatus.gameStarted;
-      waveCounter = GameObject.Find("WaveCounter");
+      waveCounter = GameObject.Find("StageManager");
     }
   }
 
@@ -67,11 +65,11 @@ public class GameManager : NetworkBehaviour
     {
       if (!waveManager)
       {
-        waveManager = GameObject.Find("WavesManager");
+        waveManager = GameObject.Find("StageManager");
       }
       else
       {
-        waveCounter.GetComponent<Text>().text = "Wave #" + waveManager.GetComponent<WaveHandler>().waveNumber.ToString();
+       // waveCounter.GetComponent<Text>().text = "Wave #" + waveManager.GetComponent<StageManager>().waveIndex.ToString();
       }
     }
   }

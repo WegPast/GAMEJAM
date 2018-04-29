@@ -57,18 +57,23 @@ public class PlayerControl : NetworkBehaviour
       Move();
     }
     //Childs Animations
-    HandleGunsAnimation();
-  }
-
-  private void HandleGunsAnimation()
+    if (isFiring) {  this.gunLeft.GetComponent<GunController>().AnimationFiring();  }
+    if (isFiring) { this.gunRight.GetComponent<GunController>().AnimationFiring(); }
+    this.gunLeft.GetComponent<GunController>().UpdateDeltaFiringTime(isFiring);
+    this.gunRight.GetComponent<GunController>().UpdateDeltaFiringTime(isFiring);
   {
     if (isFiring)
     {
       this.gunLeft.GetComponent<GunController>().AnimationFiring();
+      this.gunLeft.GetComponent<GunController>().UpdateDeltaFiringTime();
       this.gunRight.GetComponent<GunController>().AnimationFiring();
+      this.gunRight.GetComponent<GunController>().UpdateDeltaFiringTime();
     }
-    this.gunLeft.GetComponent<GunController>().UpdateDeltaFiringTime(isFiring);
-    this.gunRight.GetComponent<GunController>().UpdateDeltaFiringTime(isFiring);
+    else
+    {
+      this.gunLeft.GetComponent<GunController>().ResetDeltatTime();
+      this.gunRight.GetComponent<GunController>().ResetDeltatTime();
+    }
   }
 
   void Move()
@@ -103,7 +108,7 @@ public class PlayerControl : NetworkBehaviour
   private void OnCollisionEnter2D(Collision2D collision)
   {
     // Handle Death
-    //if (collision.gameObject.GetComponent<Ennemy>()) Destroy(gameObject);
+    if (collision.gameObject.GetComponent<Ennemy>()) Destroy(gameObject);
   }
 
   public void ChangeGunWeapon(GameObject newWeapon)

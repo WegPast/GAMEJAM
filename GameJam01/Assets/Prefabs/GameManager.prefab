@@ -49,7 +49,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1336648295123536}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89c05144ac7e25f4bbb06dfe53b2d5b9, type: 3}
+  m_Script: {fileID: 11500000, guid: 44651236335214f4c9fa984b25a48398, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114580243516521140
@@ -64,5 +64,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDifficultyLvl: 3
-  isGameStarted: 0
   textAddress: {fileID: 0}

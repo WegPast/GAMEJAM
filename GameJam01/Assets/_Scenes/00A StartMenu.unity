@@ -228,7 +228,7 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 439ed26ab4744c341b771062c8513bfa, type: 2}
   m_IsPrefabParent: 0
---- !u!1001 &1466597161
+--- !u!1001 &373233474
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -285,7 +285,7 @@ MonoBehaviour:
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114580243516521140, guid: 45de83b25f9e70342a61d077b33bdb85,
     type: 2}
-  m_PrefabInternal: {fileID: 1466597161}
+  m_PrefabInternal: {fileID: 373233474}
   m_Script: {fileID: 11500000, guid: b3ffe07488427f54c88c8aefecbea1ec, type: 3}
 --- !u!1001 &1797679552
 Prefab:
@@ -365,6 +365,16 @@ Prefab:
       value: 
       objectReference: {fileID: 1272079754440602, guid: 729cc6897ccc8c1448ee5b6b16bc1b32,
         type: 2}
+    - target: {fileID: 114112550295335438, guid: 6b44db5a98c434a45a9c2ba6fd943a88,
+        type: 2}
+      propertyPath: m_OfflineScene
+      value: 00A StartMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 114112550295335438, guid: 6b44db5a98c434a45a9c2ba6fd943a88,
+        type: 2}
+      propertyPath: m_OnlineScene
+      value: 01B Game
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6b44db5a98c434a45a9c2ba6fd943a88, type: 2}
   m_IsPrefabParent: 0
