@@ -31,6 +31,7 @@ public class PlayerControl : NetworkBehaviour
 
   private float deltaTimeFire;
   private float deltaTimeFire2;
+  private LifeManager lifeManager;
 
   [SyncVar] bool isFiring;
 
@@ -59,6 +60,8 @@ public class PlayerControl : NetworkBehaviour
       Debug.LogError("No Right Gun attached, ma couille!!!");
     }
 
+    lifeManager = GetComponent<LifeManager>();
+
   }
 
   void Update()
@@ -72,6 +75,7 @@ public class PlayerControl : NetworkBehaviour
     }
     //Childs Animations
     HandleGunsAnimation();
+    CheckPlayerLife();
   }
 
   private void HandleGunsAnimation()
@@ -116,8 +120,8 @@ public class PlayerControl : NetworkBehaviour
 
   private void OnCollisionEnter2D(Collision2D collision)
   {
-    // Handle Death
-    if (collision.gameObject.GetComponent<Ennemy>()) Destroy(gameObject);
+    // Handle collision
+
   }
 
   public void ChangeGunWeapon(GameObject newWeapon)
@@ -154,7 +158,10 @@ public class PlayerControl : NetworkBehaviour
   }
 
 
-
-  // ========= UTILITY ==========
+  public void CheckPlayerLife() {
+    if(lifeManager.lifeValue <= 0f) {
+      Destroy(gameObject);
+    }
+  }
 
 }

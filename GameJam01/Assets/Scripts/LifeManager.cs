@@ -6,14 +6,20 @@ using UnityEngine.Networking;
 
 public class LifeManager : NetworkBehaviour
 {
-  public float lifePercent = 0.0f;
+  [Header("Life Values")]
   public int lifeValue = 1;
   public int lifeMax = 1;
+
+  [HideInInspector()]
+  public float lifePercent = 1.0f;
+
+  [Header("Properties"),Tooltip("Is the gameobject will be destroy upon death or just in a 'death' state")]
   public bool isImmortal;
 
   // Use this for initialization
   void Start()
   {
+    InitializeLife(lifeMax, isImmortal);
   }
 
   // Update is called once per frame
@@ -22,11 +28,9 @@ public class LifeManager : NetworkBehaviour
   }
 
   //Hit and heal functions
-  public void Hit(int damage)
-  {
-
+  public void Hit(int damage) {
     this.lifeValue = (damage > this.lifeValue) ? 0 : this.lifeValue - damage;
-    this.lifePercent = (this.lifeValue / this.lifeMax) * 100;
+    this.lifePercent = (float) this.lifeValue / (float)this.lifeMax * 100f;
   }
 
   void Heal(int value)

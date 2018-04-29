@@ -52,7 +52,6 @@ public class GameManager : NetworkBehaviour
 
   // Update is called once per frame
   void Update() {
-    Debug.Log(GetPlayers());
     if (GetPlayers().Count <= 0 && IsGameStarted) {
       GameLost();
     }
