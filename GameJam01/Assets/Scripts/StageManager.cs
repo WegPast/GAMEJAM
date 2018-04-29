@@ -142,6 +142,7 @@ public class StageManager : NetworkBehaviour
   public void NextStage()
   {
     stageIndex++;
+    waveIndex = 0;
     this.IncrementStageDifficulty();
     this.ResetWaveDifficulty();
   }
