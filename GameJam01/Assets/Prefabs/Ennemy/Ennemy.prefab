@@ -170,9 +170,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d3f59414dd5dd34eb237bf02d87f446, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifePercent: 0
   lifeValue: 5
   lifeMax: 5
+  lifePercent: 0
   isImmortal: 0
 --- !u!114 &114216086475791658
 MonoBehaviour:
@@ -257,7 +257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d61fe2fe683317e4794e44c7abff765e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropChance: 100
+  dropChance: 10
   movementSpeed: 4
   prefab: {fileID: 1573635461337952, guid: fc8d8deafdd22f04f826e084e5ff9369, type: 2}
 --- !u!212 &212129332515954732
