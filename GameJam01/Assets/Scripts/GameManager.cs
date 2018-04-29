@@ -7,20 +7,17 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : NetworkBehaviour
 {
-  public int maxDifficultyLvl = 3;
   public Text textAddress;
 
   private static int nbEnnemiesKilled;
   private bool isGameStarted = false;
-  private GameObject waveManager;
+  private GameObject stageManager;
   private enum GameStatus { startMenu, gameStarted, gameLost };
   private GameStatus currentGameState;
-  private int difficultyLvl = 0;
   private LevelManager levelManager;
   private NetworkManager netManager;
   private GameObject myPlayer;
   private GameObject waveCounter;
-  private WaveHandler waveHandler;
 
   void OnEnable() {
     SceneManager.sceneLoaded += OnSceneLoaded;
@@ -56,16 +53,12 @@ public class GameManager : NetworkBehaviour
       GameLost();
     }
     if (CurrentGameState == GameStatus.gameStarted) {
-      if (!waveManager) {
-        waveManager = GameObject.Find("WavesManager");
+      if (!stageManager) {
+        stageManager = GameObject.Find("StageManager");
       } else {
-        waveCounter.GetComponent<Text>().text = "Wave #" + waveManager.GetComponent<WaveHandler>().waveNumber.ToString();
+        waveCounter.GetComponent<Text>().text = "Stage #" + stageManager.GetComponent<StageManager>().stageIndex.ToString() + " | Wave #" + stageManager.GetComponent<StageManager>().waveIndex.ToString();
       }
     }
-  }
-
-  public void IncreaseDifficultyLvl() {
-    if ((DifficultyLvl + 1) <= maxDifficultyLvl) DifficultyLvl++;
   }
 
   public void GameLost() {
