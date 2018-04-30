@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : NetworkBehaviour
 {
   public Text textAddress;
+  public GameObject theLocalPlayer;
 
   private static int nbEnnemiesKilled;
   private bool isGameStarted = false;
@@ -16,7 +17,6 @@ public class GameManager : NetworkBehaviour
   private GameStatus currentGameState;
   private LevelManager levelManager;
   private NetworkManager netManager;
-  private GameObject myPlayer;
   private GameObject waveCounter;
 
   void OnEnable() {

@@ -39,13 +39,6 @@ public class PlayerControl : NetworkBehaviour
   // Use this for initialization
   void Start()
   {
-    if (isLocalPlayer)
-    {
-      GameObject.Find("Main Camera").GetComponent<CameraControl>().player = this.gameObject;
-      GameObject.Find("Main Camera").transform.position = new Vector3(0f, 0f, -20f);
-
-    }
-
       transform.position = new Vector3(0F, 0F, -5F);
     gameManager = FindObjectOfType<GameManager>();
     gameManager.IsGameStarted = true;
@@ -61,6 +54,14 @@ public class PlayerControl : NetworkBehaviour
     }
 
     lifeManager = GetComponent<LifeManager>();
+
+    if (isLocalPlayer) {
+      GameObject.Find("Main Camera").GetComponent<CameraControl>().player = this.gameObject;
+      GameObject.Find("Main Camera").transform.position = new Vector3(0f, 0f, -20f);
+      gameManager.theLocalPlayer = this.gameObject;
+
+    }
+
 
   }
 
