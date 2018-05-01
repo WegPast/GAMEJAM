@@ -9,15 +9,17 @@ public class GameManager : NetworkBehaviour
 {
   public Text textAddress;
   public GameObject theLocalPlayer;
+  public enum GameStatus { startMenu, gameStarted, gameLost };
+  public GameStatus currentGameState;
+  public bool isLocalPlayerInitialized = false;
 
   private static int nbEnnemiesKilled;
   private bool isGameStarted = false;
   private GameObject stageManager;
-  private enum GameStatus { startMenu, gameStarted, gameLost };
-  private GameStatus currentGameState;
   private LevelManager levelManager;
   private NetworkManager netManager;
   private GameObject waveCounter;
+  private PlayerDataManager playerDataManager;
 
   void OnEnable() {
     SceneManager.sceneLoaded += OnSceneLoaded;
@@ -27,6 +29,7 @@ public class GameManager : NetworkBehaviour
   void Start() {
     levelManager = GetComponent<LevelManager>();
     netManager = FindObjectOfType<NetworkManager>();
+    playerDataManager = FindObjectOfType<PlayerDataManager>();
     textAddress.text = PlayerPrefs.GetString("ConnectionIP", "localhost");
     DontDestroyOnLoad(gameObject);
   }
@@ -52,7 +55,16 @@ public class GameManager : NetworkBehaviour
     if (GetPlayers().Count <= 0 && IsGameStarted) {
       GameLost();
     }
+
+    // if game is started
     if (CurrentGameState == GameStatus.gameStarted) {
+
+      // initialize the local player (to be done once)
+      if (theLocalPlayer && !isLocalPlayerInitialized) {
+        playerDataManager.InitPlayerDataManager();
+        isLocalPlayerInitialized = true;
+      }
+
       if (!stageManager) {
         stageManager = GameObject.Find("StageManager");
       } else {
@@ -105,7 +117,7 @@ public class GameManager : NetworkBehaviour
   }
 
   public int DifficultyLvl { get; set; }
-  private GameStatus CurrentGameState { get; set; }
+  public GameStatus CurrentGameState { get; set; }
   public bool IsGameStarted { get; set; }
   public static int NbEnnemiesKilled { get; set; }
 }

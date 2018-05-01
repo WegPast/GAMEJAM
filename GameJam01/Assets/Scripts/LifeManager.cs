@@ -33,7 +33,7 @@ public class LifeManager : NetworkBehaviour
     this.lifePercent = (float) this.lifeValue / (float)this.lifeMax * 100f;
   }
 
-  void Heal(int value)
+  public void Heal(int value)
   {
     this.lifeValue += value;
     this.lifePercent = (this.lifeValue / this.lifeMax) * 100;

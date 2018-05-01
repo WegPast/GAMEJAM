@@ -275,6 +275,48 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 45de83b25f9e70342a61d077b33bdb85, type: 2}
   m_IsPrefabParent: 0
+--- !u!1001 &1395201996
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4623038915025768, guid: 41e55c21907c0bf42a79c21a83143294, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4623038915025768, guid: 41e55c21907c0bf42a79c21a83143294, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4623038915025768, guid: 41e55c21907c0bf42a79c21a83143294, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4623038915025768, guid: 41e55c21907c0bf42a79c21a83143294, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4623038915025768, guid: 41e55c21907c0bf42a79c21a83143294, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4623038915025768, guid: 41e55c21907c0bf42a79c21a83143294, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4623038915025768, guid: 41e55c21907c0bf42a79c21a83143294, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4623038915025768, guid: 41e55c21907c0bf42a79c21a83143294, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 41e55c21907c0bf42a79c21a83143294, type: 2}
+  m_IsPrefabParent: 0
 --- !u!114 &1520917159 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114201218660979932, guid: 439ed26ab4744c341b771062c8513bfa,

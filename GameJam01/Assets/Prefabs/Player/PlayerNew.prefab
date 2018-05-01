@@ -352,6 +352,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunLeftInfo: {fileID: 0}
   gunRightInfo: {fileID: 0}
+  lifeBarBckgd: {fileID: 0}
 --- !u!114 &114880354738204960
 MonoBehaviour:
   m_ObjectHideFlags: 1

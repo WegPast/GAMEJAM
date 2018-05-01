@@ -113,6 +113,31 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &793823313 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1098911246908446, guid: c102412644ce53a4eb9b1f1c4e6d818f,
+    type: 2}
+  m_PrefabInternal: {fileID: 1992432963}
+--- !u!223 &793823315
+Canvas:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 793823313}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!1001 &1189255860
 Prefab:
   m_ObjectHideFlags: 0
@@ -365,6 +390,66 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114648615275190760, guid: c102412644ce53a4eb9b1f1c4e6d818f,
+        type: 2}
+      propertyPath: m_ScreenMatchMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114648615275190760, guid: c102412644ce53a4eb9b1f1c4e6d818f,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114648615275190760, guid: c102412644ce53a4eb9b1f1c4e6d818f,
+        type: 2}
+      propertyPath: m_UiScaleMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224003029191999080, guid: c102412644ce53a4eb9b1f1c4e6d818f,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.000011444
+      objectReference: {fileID: 0}
+    - target: {fileID: 224003029191999080, guid: c102412644ce53a4eb9b1f1c4e6d818f,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 396.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 224003029191999080, guid: c102412644ce53a4eb9b1f1c4e6d818f,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 64.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 224003029191999080, guid: c102412644ce53a4eb9b1f1c4e6d818f,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -32.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114760659794056408, guid: c102412644ce53a4eb9b1f1c4e6d818f,
+        type: 2}
+      propertyPath: m_FontData.m_FontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 114648615275190760, guid: c102412644ce53a4eb9b1f1c4e6d818f,
+        type: 2}
+      propertyPath: m_ScaleFactor
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224883783099453356, guid: c102412644ce53a4eb9b1f1c4e6d818f,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 19.59961
+      objectReference: {fileID: 0}
+    - target: {fileID: 224329740155216676, guid: c102412644ce53a4eb9b1f1c4e6d818f,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -78.39844
+      objectReference: {fileID: 0}
+    - target: {fileID: 224329740155216676, guid: c102412644ce53a4eb9b1f1c4e6d818f,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 37.128906
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c102412644ce53a4eb9b1f1c4e6d818f, type: 2}
