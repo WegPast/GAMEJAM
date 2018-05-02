@@ -12,6 +12,9 @@ public class Weapon : NetworkBehaviour
   [Range(0.05f, 30f)]
   public float fireRate;
 
+  [Header("Weapon's info"), TextArea(1,5)]
+  public string description;
+
   public GameObject fireSpot;
 
   private GameObject parentGameObject;

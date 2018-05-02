@@ -11,9 +11,18 @@ public class ShopManager : MonoBehaviour {
   public Image uiWeaponSpriteRight;
   public Image hovercraftWeaponSpriteRight;
 
+  [Header("Available weapons")]
+  public Weapon[] availableWeapons;
+
   // Use this for initialization
   void Start () {
-		
+    foreach (var item in availableWeapons) {
+
+      Debug.Log("--- Weapon : "+item.name+"----");
+      Debug.Log("Description : \n"+item.description);
+      Debug.Log("Firerate : "+item.fireRate);
+      Debug.Log("Projectile : "+item.projectileType.name);
+    }
 	}
 	
 	// Update is called once per frame

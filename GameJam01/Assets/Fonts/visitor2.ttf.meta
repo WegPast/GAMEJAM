@@ -1,8 +1,7 @@
 fileFormatVersion: 2
 guid: 7c8a4189bbfe8bd469638034425f4938
-timeCreated: 1521334879
-licenseType: Free
 TrueTypeFontImporter:
+  externalObjects: {}
   serializedVersion: 4
   fontSize: 16
   forceTextureCase: -2
@@ -14,8 +13,10 @@ TrueTypeFontImporter:
   - Visitor TT2 BRK
   fallbackFontReferences: []
   customCharacters: 
-  fontRenderingMode: 0
+  fontRenderingMode: 3
   ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
   userData: 
   assetBundleName: 
   assetBundleVariant: 
