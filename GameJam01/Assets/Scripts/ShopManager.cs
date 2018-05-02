@@ -1,11 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShopManager : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+  [Header("Left side")]
+  public Image uiWeaponSpriteLeft;
+  public Image hovercraftWeaponSpriteLeft;
+  public Image uiWeaponSpriteRight;
+  public Image hovercraftWeaponSpriteRight;
+
+  // Use this for initialization
+  void Start () {
 		
 	}
 	
