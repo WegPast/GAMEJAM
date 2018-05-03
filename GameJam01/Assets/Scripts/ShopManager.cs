@@ -41,18 +41,14 @@ public class ShopManager : MonoBehaviour
       } else {
         currentSelectedLeftWeaponIndex++;
       }
-      GameObject weaponBody = availableWeapons[currentSelectedLeftWeaponIndex].transform.Find("Body").gameObject;
-      uiWeaponSpriteLeft.sprite = weaponBody.GetComponent<SpriteRenderer>().sprite;
-      hovercraftWeaponSpriteLeft.sprite = weaponBody.GetComponent<SpriteRenderer>().sprite;
+      SwitchWeaponsSprite(side, currentSelectedLeftWeaponIndex);
     } else {
       if ((currentSelectedRightWeaponIndex + 1) >= availableWeapons.Length) {
         currentSelectedRightWeaponIndex = 0;
       } else {
         currentSelectedRightWeaponIndex++;
       }
-      GameObject weaponBody = availableWeapons[currentSelectedRightWeaponIndex].transform.Find("Body").gameObject;
-      uiWeaponSpriteRight.sprite = weaponBody.GetComponent<SpriteRenderer>().sprite;
-      hovercraftWeaponSpriteRight.sprite = weaponBody.GetComponent<SpriteRenderer>().sprite;
+      SwitchWeaponsSprite(side, currentSelectedRightWeaponIndex);
     }
   }
 
@@ -63,20 +59,38 @@ public class ShopManager : MonoBehaviour
       } else {
         currentSelectedLeftWeaponIndex--;
       }
-      GameObject weaponBody = availableWeapons[currentSelectedLeftWeaponIndex].transform.Find("Body").gameObject;
+      SwitchWeaponsSprite(side, currentSelectedLeftWeaponIndex);
+    } else {
+      if ((currentSelectedRightWeaponIndex - 1) < 0) {
+        currentSelectedRightWeaponIndex = availableWeapons.Length - 1;
+      } else {
+        currentSelectedRightWeaponIndex--;
+      }
+      SwitchWeaponsSprite(side, currentSelectedRightWeaponIndex);
+    }
+  }
+
+  public void SwitchWeaponsSprite(string side, int index) {
+
+    GameObject weaponBody = availableWeapons[index].transform.Find("Body").gameObject;
+    if (side == "left") {
       uiWeaponSpriteLeft.sprite = weaponBody.GetComponent<SpriteRenderer>().sprite;
       hovercraftWeaponSpriteLeft.sprite = weaponBody.GetComponent<SpriteRenderer>().sprite;
-
-    } else {
-
-      if ((currentSelectedRightWeaponIndex - 1) >= availableWeapons.Length) {
-        currentSelectedRightWeaponIndex = 0;
-      } else {
-        currentSelectedRightWeaponIndex++;
-      }
-      GameObject weaponBody = availableWeapons[currentSelectedRightWeaponIndex].transform.Find("Body").gameObject;
+    }
+    if (side == "right") {
       uiWeaponSpriteRight.sprite = weaponBody.GetComponent<SpriteRenderer>().sprite;
       hovercraftWeaponSpriteRight.sprite = weaponBody.GetComponent<SpriteRenderer>().sprite;
+    }
+  }
+
+  public void SwitchWeaponInfos(string side, int index) {
+    Weapon selectedWeapon = availableWeapons[index];
+    string description = selectedWeapon.description;
+    float firerate = selectedWeapon.fireRate;
+    Projectiles projectileType = selectedWeapon.projectileType;
+    if (side == "left") {
+    }
+    if (side == "right") {
     }
   }
 }
