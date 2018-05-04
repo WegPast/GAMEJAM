@@ -6,6 +6,9 @@ using UnityEngine.UI;
 public class ShopManager : MonoBehaviour
 {
 
+  public GameObject weaponMenu;
+  public GameObject skillsMenu;
+
   [Header("Left side")]
   public Image uiWeaponSpriteLeft;
   public Image hovercraftWeaponSpriteLeft;
@@ -93,4 +96,5 @@ public class ShopManager : MonoBehaviour
     if (side == "right") {
     }
   }
+
 }
