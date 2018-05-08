@@ -6,15 +6,17 @@ using UnityEngine;
 public class Weapon : NetworkBehaviour
 {
 
-  public Projectiles projectileType; // Contains damage, speed etc...
 
   [Header("Weapon's properties")]
   [Range(0.05f, 30f)]
   public float fireRate;
+  public Projectiles projectileType; // Contains damage, speed etc...
 
-  [Header("Weapon's info"), TextArea(1,5)]
+  [Header("Weapon's informations"), TextArea(1,5)]
   public string description;
 
+
+  [Header("Others"),Space(10f)]
   public GameObject fireSpot;
 
   private GameObject parentGameObject;

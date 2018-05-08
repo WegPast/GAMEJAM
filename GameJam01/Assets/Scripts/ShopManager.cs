@@ -8,28 +8,32 @@ public class ShopManager : MonoBehaviour
 
   public GameObject weaponMenu;
   public GameObject skillsMenu;
+  public PlayerDataManager playerDataManager;
 
-  [Header("Left side")]
-  public Image uiWeaponSpriteLeft;
-  public Image hovercraftWeaponSpriteLeft;
-  public Image uiWeaponSpriteRight;
-  public Image hovercraftWeaponSpriteRight;
+  [Header("Left side Weapon")]
+  public Image imgWeaponSpriteLeft;
+  public Text txtWeaponDescLeft;
+  public Text txtWeaponSpecLeft;
+  public Image imgHCWeaponSpriteLeft;
+
+  [Header("Left side Projectile")]
+  public Text txtProjectileDescLeft;
+  public Text txtProjectileSpecLeft;
+
+  [Header("Right side Weapon")]
+  public Image imgWeaponSpriteRight;
+  public Image imgHCWeaponSpriteRight;
 
   [Header("Available weapons")]
   public Weapon[] availableWeapons;
+
 
   private int currentSelectedLeftWeaponIndex = 0;
   private int currentSelectedRightWeaponIndex = 0;
 
   // Use this for initialization
   void Start() {
-    //foreach (var item in availableWeapons) {
-
-    //  Debug.Log("--- Weapon : " + item.name + " ---");
-    //  Debug.Log("Description : \n" + item.description);
-    //  Debug.Log("Firerate : " + item.fireRate);
-    //  Debug.Log("Projectile : " + item.projectileType.name);
-    //}
+    playerDataManager = FindObjectOfType<PlayerDataManager>();
   }
 
   // Update is called once per frame
@@ -37,6 +41,18 @@ public class ShopManager : MonoBehaviour
 
   }
 
+  public void InitShop() {
+
+  }
+
+  /**
+   * Change weapon description/info/sprite depending on side
+   * 
+   * @param : side (string) the side to change
+   * 
+   * @TODO: need refactoring !!
+   * 
+   **/
   public void NextWeapon(string side) {
     if (side == "left") {
       if ((currentSelectedLeftWeaponIndex + 1) >= availableWeapons.Length) {
@@ -45,6 +61,7 @@ public class ShopManager : MonoBehaviour
         currentSelectedLeftWeaponIndex++;
       }
       SwitchWeaponsSprite(side, currentSelectedLeftWeaponIndex);
+      SwitchWeaponInfos(side, currentSelectedLeftWeaponIndex);
     } else {
       if ((currentSelectedRightWeaponIndex + 1) >= availableWeapons.Length) {
         currentSelectedRightWeaponIndex = 0;
@@ -52,6 +69,7 @@ public class ShopManager : MonoBehaviour
         currentSelectedRightWeaponIndex++;
       }
       SwitchWeaponsSprite(side, currentSelectedRightWeaponIndex);
+      SwitchWeaponInfos(side, currentSelectedRightWeaponIndex);
     }
   }
 
@@ -63,6 +81,7 @@ public class ShopManager : MonoBehaviour
         currentSelectedLeftWeaponIndex--;
       }
       SwitchWeaponsSprite(side, currentSelectedLeftWeaponIndex);
+      SwitchWeaponInfos(side, currentSelectedLeftWeaponIndex);
     } else {
       if ((currentSelectedRightWeaponIndex - 1) < 0) {
         currentSelectedRightWeaponIndex = availableWeapons.Length - 1;
@@ -70,6 +89,7 @@ public class ShopManager : MonoBehaviour
         currentSelectedRightWeaponIndex--;
       }
       SwitchWeaponsSprite(side, currentSelectedRightWeaponIndex);
+      SwitchWeaponInfos(side, currentSelectedRightWeaponIndex);
     }
   }
 
@@ -77,23 +97,26 @@ public class ShopManager : MonoBehaviour
 
     GameObject weaponBody = availableWeapons[index].transform.Find("Body").gameObject;
     if (side == "left") {
-      uiWeaponSpriteLeft.sprite = weaponBody.GetComponent<SpriteRenderer>().sprite;
-      hovercraftWeaponSpriteLeft.sprite = weaponBody.GetComponent<SpriteRenderer>().sprite;
+      imgWeaponSpriteLeft.sprite = weaponBody.GetComponent<SpriteRenderer>().sprite;
+      imgHCWeaponSpriteLeft.sprite = weaponBody.GetComponent<SpriteRenderer>().sprite;
     }
     if (side == "right") {
-      uiWeaponSpriteRight.sprite = weaponBody.GetComponent<SpriteRenderer>().sprite;
-      hovercraftWeaponSpriteRight.sprite = weaponBody.GetComponent<SpriteRenderer>().sprite;
+      imgWeaponSpriteRight.sprite = weaponBody.GetComponent<SpriteRenderer>().sprite;
+      imgHCWeaponSpriteRight.sprite = weaponBody.GetComponent<SpriteRenderer>().sprite;
     }
   }
 
   public void SwitchWeaponInfos(string side, int index) {
     Weapon selectedWeapon = availableWeapons[index];
-    string description = selectedWeapon.description;
-    float firerate = selectedWeapon.fireRate;
-    Projectiles projectileType = selectedWeapon.projectileType;
+    string description = selectedWeapon.description != "" ? selectedWeapon.description  : "- No description found. -";
+    string firerateTxt = selectedWeapon.fireRate.ToString() != "" ? selectedWeapon.fireRate.ToString() : "unknown";
+    //Projectiles projectileType = selectedWeapon.projectileType;  // to be put in another fn
     if (side == "left") {
+      txtWeaponDescLeft.text = description;
+      txtWeaponSpecLeft.text = "FR : " + firerateTxt;
     }
     if (side == "right") {
+      // @TODO the same as above when right panel is finished
     }
   }
 
