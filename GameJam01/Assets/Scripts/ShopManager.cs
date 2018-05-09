@@ -34,6 +34,10 @@ public class ShopManager : MonoBehaviour
   // Use this for initialization
   void Start() {
     playerDataManager = FindObjectOfType<PlayerDataManager>();
+    if (!playerDataManager) {
+      Debug.LogWarning("ShopManager can't find any PlayerDataManager !");
+    }
+    InitShop();
   }
 
   // Update is called once per frame
@@ -43,6 +47,20 @@ public class ShopManager : MonoBehaviour
 
   public void InitShop() {
 
+    if (playerDataManager) {
+      int leftIndex = GetWeaponIndexByShopName(playerDataManager.localPlayerLeftWeapon.shopName);
+      if (leftIndex >= 0) {
+        currentSelectedLeftWeaponIndex = leftIndex;
+        SwitchWeaponsSprite("left", currentSelectedLeftWeaponIndex);
+      }
+
+      int rightIndex = GetWeaponIndexByShopName(playerDataManager.localPlayerRightWeapon.shopName);
+      if (rightIndex >= 0) {
+        currentSelectedRightWeaponIndex = rightIndex;
+        SwitchWeaponsSprite("right", currentSelectedRightWeaponIndex);
+      }
+
+    }
   }
 
   /**
@@ -108,7 +126,7 @@ public class ShopManager : MonoBehaviour
 
   public void SwitchWeaponInfos(string side, int index) {
     Weapon selectedWeapon = availableWeapons[index];
-    string description = selectedWeapon.description != "" ? selectedWeapon.description  : "- No description found. -";
+    string description = selectedWeapon.description != "" ? selectedWeapon.description : "- No description found. -";
     string firerateTxt = selectedWeapon.fireRate.ToString() != "" ? selectedWeapon.fireRate.ToString() : "unknown";
     //Projectiles projectileType = selectedWeapon.projectileType;  // to be put in another fn
     if (side == "left") {
@@ -118,6 +136,17 @@ public class ShopManager : MonoBehaviour
     if (side == "right") {
       // @TODO the same as above when right panel is finished
     }
+  }
+
+  public int GetWeaponIndexByShopName(string shopName) {
+    int index = 0;
+    foreach (var weapon in availableWeapons) {
+      if(weapon.shopName == shopName) {
+        return index;
+      }
+      index++;
+    }
+    return -1;
   }
 
 }

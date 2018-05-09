@@ -12,8 +12,10 @@ public class Weapon : NetworkBehaviour
   public float fireRate;
   public Projectiles projectileType; // Contains damage, speed etc...
 
-  [Header("Weapon's informations"), TextArea(1,5)]
+  [Header("Weapon's informations"), TextArea(1,5), Tooltip("A short description for the weapon")]
   public string description;
+  [Tooltip("Weapon's name for the shop")]
+  public string shopName; 
 
 
   [Header("Others"),Space(10f)]

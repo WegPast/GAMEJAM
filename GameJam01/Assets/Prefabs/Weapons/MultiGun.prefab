@@ -119,6 +119,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114556750003434996
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -181,9 +182,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8abf578dca4d84148b8758f4e2d9dfdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireRate: 14
   projectileType: {fileID: 114046606857253414, guid: e15456bf850dcb2479dcf849f086229d,
     type: 2}
-  fireRate: 14
+  description: Spreading a large amount of bullets, this weapon will surely bring
+    ennemies to their knees.
+  shopName: Multi-gun
   fireSpot: {fileID: 1974217590826884}
 --- !u!212 &212957549945773070
 SpriteRenderer:
@@ -198,6 +202,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:

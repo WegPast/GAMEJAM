@@ -131,11 +131,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8abf578dca4d84148b8758f4e2d9dfdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireRate: 1.04
   projectileType: {fileID: 114339415727265694, guid: 114f48073d607b849a8bcd0e8699a38a,
     type: 2}
-  fireRate: 1.04
   description: A powerful rifle. low fire rate but great damage and good projectile
     speed.
+  shopName: Rifle
   fireSpot: {fileID: 1457463025503110}
 --- !u!114 &114315224822168442
 MonoBehaviour:
