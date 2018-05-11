@@ -24,8 +24,14 @@ public class ShopManager : MonoBehaviour
   public Image imgWeaponSpriteRight;
   public Image imgHCWeaponSpriteRight;
 
-  [Header("Available weapons")]
+  [Header("Weapons")]
+  [Space(20f)]
+  [Header("--- Available weapons and projectiles ---")]
   public Weapon[] availableWeapons;
+
+  [Header("Projectiles")]
+  public Projectiles[] availableRifleProjectiles;
+  public Projectiles[] availableMultigunProjectiles;
 
 
   private int currentSelectedLeftWeaponIndex = 0;
@@ -48,13 +54,15 @@ public class ShopManager : MonoBehaviour
   public void InitShop() {
 
     if (playerDataManager) {
-      int leftIndex = GetWeaponIndexByShopName(playerDataManager.localPlayerLeftWeapon.shopName);
+      int leftIndex = GetWeaponIndexByShopName(playerDataManager
+        .localPlayerLeftWeapon
+        );
       if (leftIndex >= 0) {
         currentSelectedLeftWeaponIndex = leftIndex;
         SwitchWeaponsSprite("left", currentSelectedLeftWeaponIndex);
       }
 
-      int rightIndex = GetWeaponIndexByShopName(playerDataManager.localPlayerRightWeapon.shopName);
+      int rightIndex = GetWeaponIndexByShopName(playerDataManager.localPlayerRightWeapon);
       if (rightIndex >= 0) {
         currentSelectedRightWeaponIndex = rightIndex;
         SwitchWeaponsSprite("right", currentSelectedRightWeaponIndex);
@@ -124,6 +132,19 @@ public class ShopManager : MonoBehaviour
     }
   }
 
+  public void SwitchProjectileSprite(string side, int index) {
+
+    Projectiles selectedProjectile = availableWeapons[index].projectileType;
+    Projectiles[] availableProjectile = availableWeapons[index].availableProjectiles;
+    if (side == "left") {
+
+    }
+    if (side == "right") {
+      // @TODO
+    }
+  }
+
+
   public void SwitchWeaponInfos(string side, int index) {
     Weapon selectedWeapon = availableWeapons[index];
     string description = selectedWeapon.description != "" ? selectedWeapon.description : "- No description found. -";
@@ -141,12 +162,13 @@ public class ShopManager : MonoBehaviour
   public int GetWeaponIndexByShopName(string shopName) {
     int index = 0;
     foreach (var weapon in availableWeapons) {
-      if(weapon.shopName == shopName) {
+      if (weapon.shopName == shopName) {
         return index;
       }
       index++;
     }
     return -1;
   }
+
 
 }

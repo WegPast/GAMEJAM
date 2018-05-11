@@ -15,7 +15,8 @@ public class Weapon : NetworkBehaviour
   [Header("Weapon's informations"), TextArea(1,5), Tooltip("A short description for the weapon")]
   public string description;
   [Tooltip("Weapon's name for the shop")]
-  public string shopName; 
+  public string shopName;
+  public Projectiles[] availableProjectiles;
 
 
   [Header("Others"),Space(10f)]

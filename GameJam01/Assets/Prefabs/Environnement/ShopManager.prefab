@@ -34,7 +34,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1199164936856194}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.7605205, y: 0.40007198, z: 99.931885}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -51,10 +51,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2e414560462b4c49a33a5f79779ca96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiWeaponSpriteLeft: {fileID: 0}
-  hovercraftWeaponSpriteLeft: {fileID: 0}
-  uiWeaponSpriteRight: {fileID: 0}
-  hovercraftWeaponSpriteRight: {fileID: 0}
+  weaponMenu: {fileID: 0}
+  skillsMenu: {fileID: 0}
+  playerDataManager: {fileID: 0}
+  imgWeaponSpriteLeft: {fileID: 0}
+  txtWeaponDescLeft: {fileID: 0}
+  txtWeaponSpecLeft: {fileID: 0}
+  imgHCWeaponSpriteLeft: {fileID: 0}
+  txtProjectileDescLeft: {fileID: 0}
+  txtProjectileSpecLeft: {fileID: 0}
+  imgWeaponSpriteRight: {fileID: 0}
+  imgHCWeaponSpriteRight: {fileID: 0}
   availableWeapons:
   - {fileID: 114260399183434546, guid: 729cc6897ccc8c1448ee5b6b16bc1b32, type: 2}
   - {fileID: 114964413656712790, guid: 9bc381293aa1b164a90a7286a6a10231, type: 2}
+  availableRifleProjectiles:
+  - {fileID: 114339415727265694, guid: 114f48073d607b849a8bcd0e8699a38a, type: 2}
+  - {fileID: 114339415727265694, guid: 19e41eb150d0c1e4d9e6a142e77ffa00, type: 2}
+  availableMultigunProjectiles:
+  - {fileID: 114046606857253414, guid: e15456bf850dcb2479dcf849f086229d, type: 2}

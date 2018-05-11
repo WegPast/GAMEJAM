@@ -15,10 +15,10 @@ public class PlayerDataManager : MonoBehaviour
 
   // player data =============================
   [Header("Local Player Weapons and Projectiles")]
-  public Weapon localPlayerLeftWeapon;
-  public Projectiles localPlayerLeftProjectiles;
-  public Weapon localPlayerRightWeapon;
-  public Projectiles localPlayerRightProjectiles;
+  public string localPlayerLeftWeapon;
+  public string localPlayerLeftProjectiles;
+  public string localPlayerRightWeapon;
+  public string localPlayerRightProjectiles;
 
   [Header("Local Player Bonus (Kept by this Player Data Manager)")]
   public int localPlayerLifeMaxBonus;
@@ -41,10 +41,10 @@ public class PlayerDataManager : MonoBehaviour
   }
 
   public void SavePlayerData() {
-    localPlayerLeftWeapon = localPlayerControl.WeaponLeft;
-    localPlayerLeftProjectiles = localPlayerControl.WeaponLeft.projectileType;
-    localPlayerRightWeapon = localPlayerControl.WeaponRight;
-    localPlayerRightProjectiles = localPlayerControl.WeaponRight.projectileType;
+    localPlayerLeftWeapon = localPlayerControl.WeaponLeft.shopName;
+    localPlayerLeftProjectiles = localPlayerControl.WeaponLeft.projectileType.shopName;
+    localPlayerRightWeapon = localPlayerControl.WeaponRight.shopName;
+    localPlayerRightProjectiles = localPlayerControl.WeaponRight.projectileType.shopName;
   }
 
   public void LoadPlayerData() {
@@ -52,10 +52,11 @@ public class PlayerDataManager : MonoBehaviour
     ApplyLifeMaxBonus(localPlayerLifeMaxBonus);
     ApplySpeedBonus(localPlayerSpeedBonus);
 
-    localPlayerControl.WeaponLeft = localPlayerLeftWeapon;
-    localPlayerControl.WeaponLeft.projectileType = localPlayerLeftProjectiles;
-    localPlayerControl.WeaponRight = localPlayerRightWeapon;
-    localPlayerControl.WeaponRight.projectileType = localPlayerRightProjectiles;
+    // @TODO : change weapon and projectile in another way. (like using guncontroller etc..)
+    //localPlayerControl.WeaponLeft = localPlayerLeftWeapon;
+    //localPlayerControl.WeaponLeft.projectileType = localPlayerLeftProjectiles;
+    //localPlayerControl.WeaponRight = localPlayerRightWeapon;
+    //localPlayerControl.WeaponRight.projectileType = localPlayerRightProjectiles;
 
   }
 

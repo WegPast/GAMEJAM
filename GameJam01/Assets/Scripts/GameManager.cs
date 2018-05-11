@@ -91,7 +91,8 @@ public class GameManager : NetworkBehaviour
     if (netManager && netManager.IsClientConnected()) {
       netManager.StopHost();
     }
-    levelManager.ChangeScene("02A Lost");
+    //levelManager.ChangeScene("02A Lost");
+    levelManager.ChangeScene("01C Shop");
   }
 
   public List<GameObject> GetPlayers() {

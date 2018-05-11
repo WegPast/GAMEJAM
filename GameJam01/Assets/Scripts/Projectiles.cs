@@ -13,6 +13,9 @@ public class Projectiles : NetworkBehaviour
   public float speed = 30f;
   public int damage = 10;
 
+  [Header("Shop informations")]
+  public string shopName;
+
   // Use this for initialization
   void Awake()
   {
