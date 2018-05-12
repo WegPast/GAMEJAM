@@ -13,7 +13,8 @@ public class Projectiles : NetworkBehaviour
   public float speed = 30f;
   public int damage = 10;
 
-  [Header("Shop informations")]
+  [Header("Projectile's informations"), TextArea(1, 5), Tooltip("A short description for the rpojectile")]
+  public string description;
   public string shopName;
 
   // Use this for initialization

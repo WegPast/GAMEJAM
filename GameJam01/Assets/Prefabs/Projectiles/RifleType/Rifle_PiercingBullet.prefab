@@ -9,35 +9,35 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1057599199127314}
+  m_RootGameObject: {fileID: 1022714013714692}
   m_IsPrefabParent: 1
---- !u!1 &1057599199127314
+--- !u!1 &1022714013714692
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4940661618709018}
-  - component: {fileID: 212425897537553442}
-  - component: {fileID: 114046606857253414}
-  - component: {fileID: 61630677719764466}
-  - component: {fileID: 114654340491448594}
-  - component: {fileID: 114213728323626440}
-  - component: {fileID: 50704814180639418}
+  - component: {fileID: 4750404037062928}
+  - component: {fileID: 212512698907243362}
+  - component: {fileID: 114339415727265694}
+  - component: {fileID: 61834759163594924}
+  - component: {fileID: 114333035263596040}
+  - component: {fileID: 114504638318490736}
+  - component: {fileID: 50291350788084404}
   m_Layer: 9
-  m_Name: SmallBullet
+  m_Name: Rifle_PiercingBullet
   m_TagString: PlayerProjectiles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4940661618709018
+--- !u!4 &4750404037062928
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1057599199127314}
+  m_GameObject: {fileID: 1022714013714692}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -45,13 +45,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50704814180639418
+--- !u!50 &50291350788084404
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1057599199127314}
+  m_GameObject: {fileID: 1022714013714692}
   m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -65,19 +65,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &61630677719764466
+--- !u!61 &61834759163594924
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1057599199127314}
+  m_GameObject: {fileID: 1022714013714692}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.00033449382, y: -0.011580184}
+  m_Offset: {x: 0.00018310547, y: 0.013221741}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -88,31 +88,64 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.061617337, y: 0.14696303}
+  m_Size: {x: 0.119140625, y: 0.5085907}
   m_EdgeRadius: 0
---- !u!114 &114046606857253414
+--- !u!114 &114333035263596040
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1057599199127314}
+  m_GameObject: {fileID: 1022714013714692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 191
+    i1: 49
+    i2: 89
+    i3: 64
+    i4: 63
+    i5: 88
+    i6: 61
+    i7: 116
+    i8: 201
+    i9: 203
+    i10: 215
+    i11: 68
+    i12: 147
+    i13: 101
+    i14: 68
+    i15: 63
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
+--- !u!114 &114339415727265694
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1022714013714692}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 960bdeaa7e3d61d459dcdb55533c8a90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iconSprite: {fileID: 21300000, guid: 53e6896b8155e4e4fb22346dda563a82, type: 3}
+  iconSprite: {fileID: 21300002, guid: 53e6896b8155e4e4fb22346dda563a82, type: 3}
   isFromMyPlayer: 0
-  speed: 29.26
-  damage: 2
-  description: Default bullet for the Multi-gun. Average speed and weak damage.
-  shopName: 
---- !u!114 &114213728323626440
+  speed: 70
+  damage: 8
+  description: A piercing bullet that damage each enemy it touch (pierce throught
+    3 enemies)
+  shopName: Piercing rifle bullet
+--- !u!114 &114504638318490736
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1057599199127314}
+  m_GameObject: {fileID: 1022714013714692}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -1768714887, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
@@ -128,44 +161,12 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
---- !u!114 &114654340491448594
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1057599199127314}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 225
-    i1: 84
-    i2: 86
-    i3: 191
-    i4: 133
-    i5: 13
-    i6: 203
-    i7: 36
-    i8: 121
-    i9: 220
-    i10: 248
-    i11: 73
-    i12: 240
-    i13: 134
-    i14: 34
-    i15: 157
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
---- !u!212 &212425897537553442
+--- !u!212 &212512698907243362
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1057599199127314}
+  m_GameObject: {fileID: 1022714013714692}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -195,7 +196,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300006, guid: 84245fe34f0be7b44b8998daba56ef08, type: 3}
+  m_Sprite: {fileID: 21300004, guid: 84245fe34f0be7b44b8998daba56ef08, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
