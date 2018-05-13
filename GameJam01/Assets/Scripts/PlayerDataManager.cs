@@ -40,6 +40,9 @@ public class PlayerDataManager : MonoBehaviour
     }
   }
 
+  /// <summary>
+  /// Will save the player data from de Local Player if it's still alive
+  /// </summary>
   public void SavePlayerData() {
     localPlayerLeftWeapon = localPlayerControl.WeaponLeft.shopName;
     localPlayerLeftProjectiles = localPlayerControl.WeaponLeft.projectileType.shopName;

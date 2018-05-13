@@ -54,12 +54,12 @@ MonoBehaviour:
   weaponMenu: {fileID: 0}
   skillsMenu: {fileID: 0}
   playerDataManager: {fileID: 0}
-  imgWeaponSpriteLeft: {fileID: 0}
-  txtWeaponDescLeft: {fileID: 0}
-  txtWeaponSpecLeft: {fileID: 0}
-  imgHCWeaponSpriteLeft: {fileID: 0}
-  txtProjectileDescLeft: {fileID: 0}
-  txtProjectileSpecLeft: {fileID: 0}
+  leftImgWeaponSprite: {fileID: 0}
+  leftTxtWeaponDesc: {fileID: 0}
+  leftTxtWeaponSpec: {fileID: 0}
+  leftImgHCWeaponSprite: {fileID: 0}
+  leftTxtProjectileDesc: {fileID: 0}
+  leftTxtProjectileSpec: {fileID: 0}
   leftProjectilesSprites:
   - {fileID: 0}
   - {fileID: 0}
@@ -72,12 +72,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  imgWeaponSpriteRight: {fileID: 0}
-  txtWeaponDescRight: {fileID: 0}
-  txtWeaponSpecRight: {fileID: 0}
-  imgHCWeaponSpriteRight: {fileID: 0}
-  txtProjectileDescRight: {fileID: 0}
-  txtProjectileSpecRight: {fileID: 0}
+  rightImgWeaponSprite: {fileID: 0}
+  rightTxtWeaponDesc: {fileID: 0}
+  rightTxtWeaponSpec: {fileID: 0}
+  rightImgHCWeaponSprite: {fileID: 0}
+  rightTxtProjectileDesc: {fileID: 0}
+  rightTxtProjectileSpec: {fileID: 0}
   rightProjectilesSprites:
   - {fileID: 0}
   - {fileID: 0}
