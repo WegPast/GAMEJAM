@@ -20,7 +20,7 @@ public class GunController : MonoBehaviour
     deltaTimeFire = deltaTimeFireMax;
   }
 
-  private void InstantiateWeapon()
+  private void InstantiateWeapon(Projectiles projectiles = null)
   {
     instantiatedWeapon = Instantiate(attachedWeapon, transform.position, transform.parent.rotation);
     instantiatedWeapon.transform.parent = transform;
@@ -28,9 +28,13 @@ public class GunController : MonoBehaviour
     // By default instantiated object take same parent transforme properties. 
     // GunRight has a scale x of -1. So here we reset weapon scale.
     instantiatedWeapon.transform.localScale = Vector3.one;
+
+    if (projectiles) {
+      instantiatedWeapon.GetComponent<Weapon>().projectileType = projectiles;
+    }
   }
 
-  public void ChangeWeapon(GameObject newWeapon)
+  public void ChangeWeapon(GameObject newWeapon, Projectiles projectiles = null)
   {
 
     attachedWeapon = newWeapon;
@@ -38,7 +42,7 @@ public class GunController : MonoBehaviour
     {
       Destroy(instantiatedWeapon);
     }
-    InstantiateWeapon();
+    InstantiateWeapon(projectiles);
 
   }
 

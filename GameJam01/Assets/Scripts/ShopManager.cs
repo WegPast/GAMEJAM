@@ -85,8 +85,8 @@ public class ShopManager : MonoBehaviour
     string side;
 
     if (playerDataManager) {
-      leftIndex = GetWeaponIndexByShopName(playerDataManager.localPlayerLeftWeapon);
-      leftProjectileIndex = GetProjectileIndexByShopName(playerDataManager.localPlayerLeftProjectiles, availableWeapons[leftIndex]);
+      leftIndex = GetWeaponIndexByShopName(playerDataManager.localPlayerLeftWeapon.shopName);
+      leftProjectileIndex = GetProjectileIndexByShopName(playerDataManager.localPlayerLeftProjectiles.shopName, availableWeapons[leftIndex]);
     }
     if (leftIndex >= 0) {
       side = "left";
@@ -100,8 +100,8 @@ public class ShopManager : MonoBehaviour
     }
 
     if (playerDataManager) {
-      rightIndex = GetWeaponIndexByShopName(playerDataManager.localPlayerRightWeapon);
-      rightProjectileIndex = GetProjectileIndexByShopName(playerDataManager.localPlayerRightProjectiles, availableWeapons[rightIndex]);
+      rightIndex = GetWeaponIndexByShopName(playerDataManager.localPlayerRightWeapon.shopName);
+      rightProjectileIndex = GetProjectileIndexByShopName(playerDataManager.localPlayerRightProjectiles.shopName, availableWeapons[rightIndex]);
     }
     if (rightIndex >= 0) {
       side = "right";
@@ -344,6 +344,18 @@ public class ShopManager : MonoBehaviour
         break;
     }
 
+  }
+
+
+  public void AcceptChanges() {
+    if (playerDataManager) {
+      Hashtable data = new Hashtable();
+      data["LeftWeapon"] = availableWeapons[leftCurrentSelectedWeaponIndex].shopName;
+      data["LeftProjectiles"] = leftCurrentSelectedProjectile.shopName;
+      data["RightWeapon"] = availableWeapons[rightCurrentSelectedWeaponIndex].shopName;
+      data["RightProjectiles"] = rightCurrentSelectedProjectile.shopName;
+      playerDataManager.SetPlayerData(data);
+    }
   }
 
   public void TestSaveData() {

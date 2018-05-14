@@ -15,10 +15,10 @@ public class PlayerDataManager : MonoBehaviour
 
   // player data =============================
   [Header("Local Player Weapons and Projectiles")]
-  public string localPlayerLeftWeapon;
-  public string localPlayerLeftProjectiles;
-  public string localPlayerRightWeapon;
-  public string localPlayerRightProjectiles;
+  public Weapon localPlayerLeftWeapon;
+  public Projectiles localPlayerLeftProjectiles;
+  public Weapon localPlayerRightWeapon;
+  public Projectiles localPlayerRightProjectiles;
 
   [Header("Local Player Bonus (Kept by this Player Data Manager)")]
   public int localPlayerLifeMaxBonus;
@@ -44,23 +44,17 @@ public class PlayerDataManager : MonoBehaviour
   /// Will save the player data from de Local Player if it's still alive
   /// </summary>
   public void SavePlayerData() {
-    localPlayerLeftWeapon = localPlayerControl.WeaponLeft.shopName;
-    localPlayerLeftProjectiles = localPlayerControl.WeaponLeft.projectileType.shopName;
-    localPlayerRightWeapon = localPlayerControl.WeaponRight.shopName;
-    localPlayerRightProjectiles = localPlayerControl.WeaponRight.projectileType.shopName;
+    localPlayerLeftWeapon = localPlayerControl.WeaponLeft;
+    localPlayerLeftProjectiles = localPlayerControl.WeaponLeft.projectileType;
+    localPlayerRightWeapon = localPlayerControl.WeaponRight;
+    localPlayerRightProjectiles = localPlayerControl.WeaponRight.projectileType;
   }
 
-  public void LoadPlayerData() {
-
-    ApplyLifeMaxBonus(localPlayerLifeMaxBonus);
-    ApplySpeedBonus(localPlayerSpeedBonus);
-
-    // @TODO : change weapon and projectile in another way. (like using guncontroller etc..)
-    //localPlayerControl.WeaponLeft = localPlayerLeftWeapon;
-    //localPlayerControl.WeaponLeft.projectileType = localPlayerLeftProjectiles;
-    //localPlayerControl.WeaponRight = localPlayerRightWeapon;
-    //localPlayerControl.WeaponRight.projectileType = localPlayerRightProjectiles;
-
+  public void SetPlayerData(Hashtable data) {
+    localPlayerLeftWeapon = (Weapon)data["LeftWeapon"];
+    localPlayerLeftProjectiles = (Projectiles)data["LeftProjectiles"];
+    localPlayerRightWeapon = (Weapon)data["RightWeapon"];
+    localPlayerRightProjectiles = (Projectiles)data["RightProjectiles"];
   }
 
   /**

@@ -32,6 +32,7 @@ public class PlayerControl : NetworkBehaviour
     }
   }
 
+  public PlayerDataManager playerDataManager;
   public GameObject body;
   private GameManager gameManager;
 
@@ -46,6 +47,7 @@ public class PlayerControl : NetworkBehaviour
   void Start() {
     transform.position = new Vector3(0F, 0F, -5F);
     gameManager = FindObjectOfType<GameManager>();
+    playerDataManager = FindObjectOfType<PlayerDataManager>();
     gameManager.IsGameStarted = true;
     GameManager.NbEnnemiesKilled = 0;
 
@@ -120,6 +122,14 @@ public class PlayerControl : NetworkBehaviour
     this.gunLeft.GetComponent<GunController>().ChangeWeapon(newWeapon);
   }
 
+  public void ChangeGunLeftWeapon(GameObject newWeapon, Projectiles projectiles = null) {
+    this.gunLeft.GetComponent<GunController>().ChangeWeapon(newWeapon, projectiles);
+  }
+
+  public void ChangeGunRightWeapon(GameObject newWeapon, Projectiles projectiles = null) {
+    this.gunRight.GetComponent<GunController>().ChangeWeapon(newWeapon, projectiles);
+  }
+
   //Client
   [Client]
   void SendFiringState(bool firingState) {
@@ -144,6 +154,13 @@ public class PlayerControl : NetworkBehaviour
     if (projectile) NetworkServer.Spawn(projectile);
   }
 
+
+  public void LoadPlayerData() {
+    if (isLocalPlayer && playerDataManager) {
+      ChangeGunLeftWeapon(playerDataManager.localPlayerLeftWeapon.gameObject, playerDataManager.localPlayerLeftProjectiles);
+      ChangeGunLeftWeapon(playerDataManager.localPlayerRightWeapon.gameObject, playerDataManager.localPlayerRightProjectiles);
+    }
+  }
 
   public void CheckPlayerLife() {
     if (lifeManager.lifeValue <= 0f) {
