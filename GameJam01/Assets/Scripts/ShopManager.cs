@@ -85,6 +85,7 @@ public class ShopManager : MonoBehaviour
     string side;
 
     if (playerDataManager) {
+      Debug.Log(playerDataManager.localPlayerLeftWeapon);
       leftIndex = GetWeaponIndexByShopName(playerDataManager.localPlayerLeftWeapon.shopName);
       leftProjectileIndex = GetProjectileIndexByShopName(playerDataManager.localPlayerLeftProjectiles.shopName, availableWeapons[leftIndex]);
     }
@@ -350,10 +351,10 @@ public class ShopManager : MonoBehaviour
   public void AcceptChanges() {
     if (playerDataManager) {
       Hashtable data = new Hashtable();
-      data["LeftWeapon"] = availableWeapons[leftCurrentSelectedWeaponIndex].shopName;
-      data["LeftProjectiles"] = leftCurrentSelectedProjectile.shopName;
-      data["RightWeapon"] = availableWeapons[rightCurrentSelectedWeaponIndex].shopName;
-      data["RightProjectiles"] = rightCurrentSelectedProjectile.shopName;
+      data["LeftWeapon"] = availableWeapons[leftCurrentSelectedWeaponIndex];
+      data["LeftProjectiles"] = leftCurrentSelectedProjectile;
+      data["RightWeapon"] = availableWeapons[rightCurrentSelectedWeaponIndex];
+      data["RightProjectiles"] = rightCurrentSelectedProjectile;
       playerDataManager.SetPlayerData(data);
     }
   }

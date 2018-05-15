@@ -64,9 +64,9 @@ public class PlayerControl : NetworkBehaviour
       GameObject.Find("Main Camera").GetComponent<CameraControl>().player = this.gameObject;
       GameObject.Find("Main Camera").transform.position = new Vector3(0f, 0f, -20f);
       gameManager.theLocalPlayer = this.gameObject;
-
     }
 
+    LoadPlayerData();
   }
 
   void Update() {
@@ -156,9 +156,13 @@ public class PlayerControl : NetworkBehaviour
 
 
   public void LoadPlayerData() {
-    if (isLocalPlayer && playerDataManager) {
-      ChangeGunLeftWeapon(playerDataManager.localPlayerLeftWeapon.gameObject, playerDataManager.localPlayerLeftProjectiles);
-      ChangeGunLeftWeapon(playerDataManager.localPlayerRightWeapon.gameObject, playerDataManager.localPlayerRightProjectiles);
+    if (isLocalPlayer && playerDataManager && playerDataManager.hasBeenInit) {
+      // loading weapon and their selected projectile
+      ChangeGunLeftWeapon(playerDataManager.localPlayerLeftWeapon.gameObject,
+        playerDataManager.localPlayerLeftProjectiles);
+      ChangeGunLeftWeapon(playerDataManager.localPlayerRightWeapon.gameObject,
+        playerDataManager.localPlayerRightProjectiles);
+
     }
   }
 

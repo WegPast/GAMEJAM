@@ -25,18 +25,33 @@ public class PlayerDataManager : MonoBehaviour
   public int localPlayerSpeedBonus;
   // end player data -------------------------
 
+
+  public bool hasBeenInit = false;
+
   private void Start() {
-    DontDestroyOnLoad(gameObject);
 
     gameManager = FindObjectOfType<GameManager>();
+    if (gameManager.playerDataManager) {
+      if (gameManager.playerDataManager != this) {
+        Destroy(gameObject);
+      } else {
+        DontDestroyOnLoad(gameObject);
+      }
+    }
   }
 
   public void InitPlayerDataManager() {
-    if (gameManager.CurrentGameState == GameManager.GameStatus.gameStarted) {
-      localPlayerControl = gameManager.theLocalPlayer.GetComponent<PlayerControl>();
-      localPlayerGameObject = localPlayerControl.gameObject;
-      localPlayerLifeManager = localPlayerGameObject.GetComponent<LifeManager>();
-      SavePlayerData();
+    localPlayerControl = gameManager.theLocalPlayer.GetComponent<PlayerControl>();
+    localPlayerGameObject = localPlayerControl.gameObject;
+    localPlayerLifeManager = localPlayerGameObject.GetComponent<LifeManager>();
+    SavePlayerData();
+    hasBeenInit = true;
+    Debug.Log("localPlayerControl.WeaponLeft : " + localPlayerControl.WeaponLeft);
+  }
+
+  public void Update() {
+    if (gameManager.CurrentGameState == GameManager.GameStatus.gameStarted && gameManager.theLocalPlayer) {
+      InitPlayerDataManager();
     }
   }
 

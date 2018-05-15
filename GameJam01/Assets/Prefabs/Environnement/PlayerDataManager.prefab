@@ -57,3 +57,4 @@ MonoBehaviour:
   localPlayerRightProjectiles: {fileID: 0}
   localPlayerLifeMaxBonus: 0
   localPlayerSpeedBonus: 0
+  hasBeenInit: 0

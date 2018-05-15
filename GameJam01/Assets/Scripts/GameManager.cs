@@ -19,7 +19,7 @@ public class GameManager : NetworkBehaviour
   private LevelManager levelManager;
   private NetworkManager netManager;
   private GameObject waveCounter;
-  private PlayerDataManager playerDataManager;
+  public PlayerDataManager playerDataManager;
 
   void OnEnable() {
     SceneManager.sceneLoaded += OnSceneLoaded;
