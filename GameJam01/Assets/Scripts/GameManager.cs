@@ -9,9 +9,8 @@ public class GameManager : NetworkBehaviour
 {
   public Text textAddress;
   public GameObject theLocalPlayer;
-  public enum GameStatus { startMenu, gameStarted, gameLost };
+  public enum GameStatus { startMenu, gameStarted, gameShop, gameLost };
   public GameStatus currentGameState;
-  public bool isLocalPlayerInitialized = false;
 
   private static int nbEnnemiesKilled;
   private bool isGameStarted = false;
@@ -72,11 +71,10 @@ public class GameManager : NetworkBehaviour
     // if game is started
     if (CurrentGameState == GameStatus.gameStarted) {
 
-      // initialize the local player (to be done once)
-      if (theLocalPlayer && !isLocalPlayerInitialized) {
-        playerDataManager.InitPlayerDataManager();
-        isLocalPlayerInitialized = true;
-      }
+      //// initialize the local player (to be done once)
+      //if (theLocalPlayer && !playerDataManager.isLocalPlayerInitialized) {
+      //  playerDataManager.InitPlayerDataManager();
+      //}
 
       if (!stageManager) {
         stageManager = GameObject.Find("StageManager");

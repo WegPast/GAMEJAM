@@ -34,12 +34,12 @@ public class ShopManager : MonoBehaviour
   public Image[] rightProjectilesSprites;
   public Button[] rightProjectilesBtn;
 
-  [Header("Weapons"), Header("--- Available weapons and projectiles ---"), Space(20f)]
-  public Weapon[] availableWeapons;
+  [Header("Weapons"), Header("--- Available weapons ---"), Space(20f)]
+  private Weapon[] availablePlayerWeapons;
 
-  [Header("Projectiles")]
-  public Projectiles[] availableRifleProjectiles;
-  public Projectiles[] availableMultigunProjectiles;
+  //[Header("Projectiles")]
+  //public Projectiles[] availableRifleProjectiles;
+  //public Projectiles[] availableMultigunProjectiles;
 
   [Header("Shop Manager properties")]
   public Sprite noProjectileSprite;
@@ -64,13 +64,14 @@ public class ShopManager : MonoBehaviour
 
   // Use this for initialization
   void Start() {
-    leftSelectedProjByWeap = new int[availableWeapons.Length];
-    rightSelectedProjByWeap = new int[availableWeapons.Length];
-    rightSelectedProjByWeap[0] = 0;
     playerDataManager = FindObjectOfType<PlayerDataManager>();
     if (!playerDataManager) {
-      Debug.LogWarning("ShopManager can't find any PlayerDataManager !");
+      Debug.LogError("ShopManager can't find any PlayerDataManager !");
     }
+    availablePlayerWeapons = playerDataManager.availableWeapons;
+    leftSelectedProjByWeap = new int[availablePlayerWeapons.Length];
+    rightSelectedProjByWeap = new int[availablePlayerWeapons.Length];
+    rightSelectedProjByWeap[0] = 0;
     InitShop();
   }
 
@@ -85,9 +86,10 @@ public class ShopManager : MonoBehaviour
     string side;
 
     if (playerDataManager) {
-      Debug.Log(playerDataManager.localPlayerLeftWeapon);
-      leftIndex = GetWeaponIndexByShopName(playerDataManager.localPlayerLeftWeapon.shopName);
-      leftProjectileIndex = GetProjectileIndexByShopName(playerDataManager.localPlayerLeftProjectiles.shopName, availableWeapons[leftIndex]);
+      //Debug.Log(playerDataManager.localPlayerLeftWeaponIndex);
+      //Debug.Log(playerDataManager.localPlayerRightWeaponIndex);
+      leftIndex = playerDataManager.localPlayerLeftWeaponIndex;
+      leftProjectileIndex = playerDataManager.localPlayerLeftProjectilesIndex;
     }
     if (leftIndex >= 0) {
       side = "left";
@@ -101,8 +103,8 @@ public class ShopManager : MonoBehaviour
     }
 
     if (playerDataManager) {
-      rightIndex = GetWeaponIndexByShopName(playerDataManager.localPlayerRightWeapon.shopName);
-      rightProjectileIndex = GetProjectileIndexByShopName(playerDataManager.localPlayerRightProjectiles.shopName, availableWeapons[rightIndex]);
+      rightIndex = playerDataManager.localPlayerRightWeaponIndex;
+      rightProjectileIndex = playerDataManager.localPlayerRightProjectilesIndex;
     }
     if (rightIndex >= 0) {
       side = "right";
@@ -126,7 +128,7 @@ public class ShopManager : MonoBehaviour
    **/
   public void NextWeapon(string side) {
     if (side == "left") {
-      if ((leftCurrentSelectedWeaponIndex + 1) >= availableWeapons.Length) {
+      if ((leftCurrentSelectedWeaponIndex + 1) >= availablePlayerWeapons.Length) {
         leftCurrentSelectedWeaponIndex = 0;
       } else {
         leftCurrentSelectedWeaponIndex++;
@@ -137,7 +139,7 @@ public class ShopManager : MonoBehaviour
       SelectLeftAmmoType(leftSelectedProjByWeap[leftCurrentSelectedWeaponIndex]);
       SwitchProjectileInfos(side, leftSelectedProjByWeap[leftCurrentSelectedWeaponIndex]);
     } else {
-      if ((rightCurrentSelectedWeaponIndex + 1) >= availableWeapons.Length) {
+      if ((rightCurrentSelectedWeaponIndex + 1) >= availablePlayerWeapons.Length) {
         rightCurrentSelectedWeaponIndex = 0;
       } else {
         rightCurrentSelectedWeaponIndex++;
@@ -154,7 +156,7 @@ public class ShopManager : MonoBehaviour
   public void PreviousWeapon(string side) {
     if (side == "left") {
       if ((leftCurrentSelectedWeaponIndex - 1) < 0) {
-        leftCurrentSelectedWeaponIndex = availableWeapons.Length - 1;
+        leftCurrentSelectedWeaponIndex = availablePlayerWeapons.Length - 1;
       } else {
         leftCurrentSelectedWeaponIndex--;
       }
@@ -165,7 +167,7 @@ public class ShopManager : MonoBehaviour
       SwitchProjectileInfos(side, leftSelectedProjByWeap[leftCurrentSelectedWeaponIndex]);
     } else {
       if ((rightCurrentSelectedWeaponIndex - 1) < 0) {
-        rightCurrentSelectedWeaponIndex = availableWeapons.Length - 1;
+        rightCurrentSelectedWeaponIndex = availablePlayerWeapons.Length - 1;
       } else {
         rightCurrentSelectedWeaponIndex--;
       }
@@ -180,7 +182,7 @@ public class ShopManager : MonoBehaviour
 
   public void SwitchWeaponsSprite(string side, int index) {
 
-    GameObject weaponBody = availableWeapons[index].transform.Find("Body").gameObject;
+    GameObject weaponBody = availablePlayerWeapons[index].transform.Find("Body").gameObject;
     if (side == "left") {
       leftImgWeaponSprite.sprite = weaponBody.GetComponent<SpriteRenderer>().sprite;
       leftImgHCWeaponSprite.sprite = weaponBody.GetComponent<SpriteRenderer>().sprite;
@@ -193,8 +195,8 @@ public class ShopManager : MonoBehaviour
 
   public void SwitchProjectileSprite(string side, int index) {
 
-    Projectiles selectedProjectile = availableWeapons[index].projectileType;
-    Projectiles[] availableProjectile = availableWeapons[index].availableProjectiles;
+    Projectiles selectedProjectile = availablePlayerWeapons[index].projectileType;
+    Projectiles[] availableProjectile = availablePlayerWeapons[index].availableProjectiles;
     if (side == "left") {
       for (int i = 0; i < leftProjectilesSprites.Length - 1; i++) {
         if (i <= (availableProjectile.Length - 1)) {
@@ -218,13 +220,13 @@ public class ShopManager : MonoBehaviour
   }
 
   public void SwitchProjectileInfos(string side, int projectileIndex) {
-    Weapon selectedWeapon = availableWeapons[0]; // default weapon
+    Weapon selectedWeapon = availablePlayerWeapons[0]; // default weapon
 
     if (side == "left") {
-      selectedWeapon = availableWeapons[leftCurrentSelectedWeaponIndex];
+      selectedWeapon = availablePlayerWeapons[leftCurrentSelectedWeaponIndex];
     }
     if (side == "right") {
-      selectedWeapon = availableWeapons[rightCurrentSelectedWeaponIndex];
+      selectedWeapon = availablePlayerWeapons[rightCurrentSelectedWeaponIndex];
     }
 
     // fetching projectile informations
@@ -248,7 +250,7 @@ public class ShopManager : MonoBehaviour
   }
 
   public void SwitchWeaponInfos(string side, int index) {
-    Weapon selectedWeapon = availableWeapons[index];
+    Weapon selectedWeapon = availablePlayerWeapons[index];
     string description = selectedWeapon.description != "" ? selectedWeapon.description : "- No description found. -";
     string firerateTxt = selectedWeapon.fireRate.ToString() != "" ? selectedWeapon.fireRate.ToString() : "--";
     //Projectiles projectileType = selectedWeapon.projectileType;  // to be put in another fn
@@ -263,9 +265,9 @@ public class ShopManager : MonoBehaviour
   }
 
   public void SelectLeftAmmoType(int index) {
-    if (index <= availableWeapons[leftCurrentSelectedWeaponIndex].availableProjectiles.Length - 1) {
-      leftCurrentSelectedProjectile = availableWeapons[leftCurrentSelectedWeaponIndex].availableProjectiles[index];
-      leftCurrentSelectedProjectileIndex = GetProjectileIndexByShopName(availableWeapons[leftCurrentSelectedWeaponIndex].projectileType.shopName, availableWeapons[leftCurrentSelectedWeaponIndex]);
+    if (index <= availablePlayerWeapons[leftCurrentSelectedWeaponIndex].availableProjectiles.Length - 1) {
+      leftCurrentSelectedProjectile = availablePlayerWeapons[leftCurrentSelectedWeaponIndex].availableProjectiles[index];
+      leftCurrentSelectedProjectileIndex = playerDataManager.GetProjectileIndexByShopName(availablePlayerWeapons[leftCurrentSelectedWeaponIndex].projectileType.shopName, availablePlayerWeapons[leftCurrentSelectedWeaponIndex]);
       leftSelectedProjByWeap[leftCurrentSelectedWeaponIndex] = index;
       Button clickedBtn = leftProjectilesBtn[index];
       clickedBtn.transform.Find("SelectedProjectileSprite").GetComponent<Image>().color = new Color(0f, 0.6f, 0.03f, 1f);
@@ -280,9 +282,9 @@ public class ShopManager : MonoBehaviour
   }
 
   public void SelectRightAmmoType(int index) {
-    if (index <= availableWeapons[rightCurrentSelectedWeaponIndex].availableProjectiles.Length - 1) {
-      rightCurrentSelectedProjectile = availableWeapons[rightCurrentSelectedWeaponIndex].availableProjectiles[index];
-      rightCurrentSelectedProjectileIndex = GetProjectileIndexByShopName(availableWeapons[rightCurrentSelectedWeaponIndex].projectileType.shopName, availableWeapons[rightCurrentSelectedWeaponIndex]);
+    if (index <= availablePlayerWeapons[rightCurrentSelectedWeaponIndex].availableProjectiles.Length - 1) {
+      rightCurrentSelectedProjectile = availablePlayerWeapons[rightCurrentSelectedWeaponIndex].availableProjectiles[index];
+      rightCurrentSelectedProjectileIndex = playerDataManager.GetProjectileIndexByShopName(availablePlayerWeapons[rightCurrentSelectedWeaponIndex].projectileType.shopName, availablePlayerWeapons[rightCurrentSelectedWeaponIndex]);
       rightSelectedProjByWeap[rightCurrentSelectedWeaponIndex] = index;
       Button clickedBtn = rightProjectilesBtn[index];
       clickedBtn.transform.Find("SelectedProjectileSprite").GetComponent<Image>().color = new Color(0f, 0.6f, 0.03f, 1f);
@@ -297,34 +299,6 @@ public class ShopManager : MonoBehaviour
   }
 
 
-  public int GetWeaponIndexByShopName(string shopName) {
-    int index = 0;
-    foreach (var weapon in availableWeapons) {
-      if (weapon.shopName == shopName) {
-        return index;
-      }
-      index++;
-    }
-    return -1;
-  }
-
-  /// <summary>
-  /// Return the index of weapon available projectiles array by its shop name and the weapon pass in parameter
-  /// </summary>
-  /// <param name="shopName">The projectile shopName</param>
-  /// <param name="weapon">The Weapon(script)</param>
-  /// <returns>The index, or -1 if not found</returns>
-  public int GetProjectileIndexByShopName(string shopName, Weapon weapon) {
-    int index = 0;
-    Projectiles[] availableProjectiles = weapon.availableProjectiles;
-    foreach (var projectile in availableProjectiles) {
-      if (projectile.shopName == shopName) {
-        return index;
-      }
-      index++;
-    }
-    return -1;
-  }
 
   public void DisplayMenu(string menuName) {
 
@@ -351,18 +325,18 @@ public class ShopManager : MonoBehaviour
   public void AcceptChanges() {
     if (playerDataManager) {
       Hashtable data = new Hashtable();
-      data["LeftWeapon"] = availableWeapons[leftCurrentSelectedWeaponIndex];
-      data["LeftProjectiles"] = leftCurrentSelectedProjectile;
-      data["RightWeapon"] = availableWeapons[rightCurrentSelectedWeaponIndex];
-      data["RightProjectiles"] = rightCurrentSelectedProjectile;
+      data["LeftWeapon"] = leftCurrentSelectedWeaponIndex;
+      data["LeftProjectiles"] = leftCurrentSelectedProjectileIndex;
+      data["RightWeapon"] = rightCurrentSelectedWeaponIndex;
+      data["RightProjectiles"] = rightCurrentSelectedProjectileIndex;
       playerDataManager.SetPlayerData(data);
     }
   }
 
   public void TestSaveData() {
     Debug.Log("currentSelectedLeftWeaponIndex " + leftCurrentSelectedWeaponIndex
-      + "\n currentSelectedLeftProjectile " + leftCurrentSelectedProjectile
+      + "\n currentSelectedLeftProjectile " + leftCurrentSelectedProjectileIndex
       + "\n currentSelectedRightWeaponIndex " + rightCurrentSelectedWeaponIndex
-      + "\n currentSelectedRightProjectile " + rightCurrentSelectedProjectile);
+      + "\n currentSelectedRightProjectile " + rightCurrentSelectedProjectileIndex);
   }
 }

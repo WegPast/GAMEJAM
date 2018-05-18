@@ -57,4 +57,7 @@ MonoBehaviour:
   localPlayerRightProjectiles: {fileID: 0}
   localPlayerLifeMaxBonus: 0
   localPlayerSpeedBonus: 0
+  availableWeapons:
+  - {fileID: 114260399183434546, guid: 729cc6897ccc8c1448ee5b6b16bc1b32, type: 2}
+  - {fileID: 114964413656712790, guid: 9bc381293aa1b164a90a7286a6a10231, type: 2}
   hasBeenInit: 0

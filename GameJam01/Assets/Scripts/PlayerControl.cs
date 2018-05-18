@@ -158,10 +158,12 @@ public class PlayerControl : NetworkBehaviour
   public void LoadPlayerData() {
     if (isLocalPlayer && playerDataManager && playerDataManager.hasBeenInit) {
       // loading weapon and their selected projectile
-      ChangeGunLeftWeapon(playerDataManager.localPlayerLeftWeapon.gameObject,
-        playerDataManager.localPlayerLeftProjectiles);
-      ChangeGunLeftWeapon(playerDataManager.localPlayerRightWeapon.gameObject,
-        playerDataManager.localPlayerRightProjectiles);
+      Weapon leftWeapon = playerDataManager.availableWeapons[playerDataManager.localPlayerLeftWeaponIndex];
+      Weapon rightWeapon = playerDataManager.availableWeapons[playerDataManager.localPlayerRightWeaponIndex];
+      ChangeGunLeftWeapon(leftWeapon.gameObject,
+        leftWeapon.availableProjectiles[playerDataManager.localPlayerLeftProjectilesIndex]);
+      ChangeGunLeftWeapon(rightWeapon.gameObject,
+        rightWeapon.availableProjectiles[playerDataManager.localPlayerRightProjectilesIndex]);
 
     }
   }
@@ -171,5 +173,8 @@ public class PlayerControl : NetworkBehaviour
       Destroy(gameObject);
     }
   }
+
+
+
 
 }
