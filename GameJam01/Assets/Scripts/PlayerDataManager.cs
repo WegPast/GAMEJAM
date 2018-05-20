@@ -12,16 +12,16 @@ public class PlayerDataManager : MonoBehaviour
   private PlayerControl localPlayerControl;
   private GameObject localPlayerGameObject;
   private LifeManager localPlayerLifeManager;
-  private bool playerDAtaManagerReady = false;
+  private bool playerDataManagerReady = false;
 
   public bool isLocalPlayerInitialized = false;
 
   // player data =============================
   [Header("Local Player Weapons and Projectiles")]
-  public int localPlayerLeftWeaponIndex;
-  public int localPlayerLeftProjectilesIndex;
-  public int localPlayerRightWeaponIndex;
-  public int localPlayerRightProjectilesIndex;
+  public int localPlayerLeftWeaponIndex = 0;
+  public int localPlayerLeftProjectilesIndex = 0;
+  public int localPlayerRightWeaponIndex = 0;
+  public int localPlayerRightProjectilesIndex = 0;
 
   [Header("Local Player Bonus (Kept by this Player Data Manager)")]
   public int localPlayerLifeMaxBonus;
@@ -34,30 +34,30 @@ public class PlayerDataManager : MonoBehaviour
   public bool hasBeenInit = false;
 
   private void Start() {
-
     gameManager = FindObjectOfType<GameManager>();
     if (gameManager.playerDataManager) {
       if (gameManager.playerDataManager != this) {
         Destroy(gameObject);
       } else {
         DontDestroyOnLoad(gameObject);
-        playerDAtaManagerReady = true;
+        playerDataManagerReady = true;
       }
     }
   }
 
+  // on application Start.
   public void InitPlayerDataManager() {
     localPlayerControl = gameManager.theLocalPlayer.GetComponent<PlayerControl>();
     localPlayerGameObject = localPlayerControl.gameObject;
     localPlayerLifeManager = localPlayerGameObject.GetComponent<LifeManager>();
-    SavePlayerData();
+    //SavePlayerData();
     hasBeenInit = true;
     //Debug.Log("Init,  WeaponLeft : " + localPlayerControl.WeaponLeft);
     //Debug.Log("Init,  WeaponRight : " + localPlayerControl.WeaponRight);
   }
 
   public void Update() {
-    if (gameManager.CurrentGameState == GameManager.GameStatus.gameStarted && gameManager.theLocalPlayer && !isLocalPlayerInitialized && playerDAtaManagerReady) {
+    if (gameManager.CurrentGameState == GameManager.GameStatus.gameStarted && gameManager.theLocalPlayer && !isLocalPlayerInitialized && playerDataManagerReady) {
       InitPlayerDataManager();
       isLocalPlayerInitialized = true;
     }
@@ -68,19 +68,15 @@ public class PlayerDataManager : MonoBehaviour
   /// Will save the player data from de Local Player if it's still alive
   /// </summary>
   public void SavePlayerData() {
-    Debug.Log("Saving...");
-
     localPlayerLeftWeaponIndex = GetWeaponIndexByShopName(localPlayerControl.WeaponLeft.shopName);
     localPlayerLeftProjectilesIndex = GetProjectileIndexByShopName(localPlayerControl.WeaponLeft.projectileType.shopName, availableWeapons[localPlayerLeftWeaponIndex]);
     localPlayerRightWeaponIndex = GetWeaponIndexByShopName(localPlayerControl.WeaponRight.shopName);
     localPlayerRightProjectilesIndex = GetProjectileIndexByShopName(localPlayerControl.WeaponRight.projectileType.shopName, availableWeapons[localPlayerRightWeaponIndex]);
-    Debug.Log("LW : " + localPlayerLeftWeaponIndex
-      + " | LP : " + localPlayerLeftProjectilesIndex
-      + " || RW : " + localPlayerRightWeaponIndex + " | RP : " + localPlayerRightProjectilesIndex);
-    Debug.Log("... End Saving");
+    Debug.Log("Saving : lw " + localPlayerLeftWeaponIndex + " | lp " + localPlayerLeftProjectilesIndex + " | rw " + localPlayerRightWeaponIndex + " | rp " + localPlayerRightProjectilesIndex);
   }
 
   public void SetPlayerData(Hashtable data) {
+    //Debug.Log("SetPlayerDAta : lw "+ data["LeftWeapon"]+" | lp "+ data["LeftProjectiles"] + " | rw " + data["RightWeapon"] + " | rp " + data["RightProjectiles"]);
     localPlayerLeftWeaponIndex = (int)data["LeftWeapon"];
     localPlayerLeftProjectilesIndex = (int)data["LeftProjectiles"];
     localPlayerRightWeaponIndex = (int)data["RightWeapon"];

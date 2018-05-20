@@ -55,10 +55,10 @@ public class GameManager : NetworkBehaviour
     }
 
     if (SceneManager.GetActiveScene().name == "01C Shop") {
-      GameObject mainCamera = GameObject.Find("Main Camera");
-      if (mainCamera) {
-        mainCamera.SetActive(false);
-      }
+      //GameObject mainCamera = GameObject.Find("Main Camera");
+      //if (mainCamera) {
+      //  mainCamera.SetActive(false);
+      //}
     }
   }
 

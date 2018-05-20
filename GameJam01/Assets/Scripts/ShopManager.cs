@@ -330,13 +330,8 @@ public class ShopManager : MonoBehaviour
       data["RightWeapon"] = rightCurrentSelectedWeaponIndex;
       data["RightProjectiles"] = rightCurrentSelectedProjectileIndex;
       playerDataManager.SetPlayerData(data);
+      FindObjectOfType<GameManager>().StartHost();
     }
   }
 
-  public void TestSaveData() {
-    Debug.Log("currentSelectedLeftWeaponIndex " + leftCurrentSelectedWeaponIndex
-      + "\n currentSelectedLeftProjectile " + leftCurrentSelectedProjectileIndex
-      + "\n currentSelectedRightWeaponIndex " + rightCurrentSelectedWeaponIndex
-      + "\n currentSelectedRightProjectile " + rightCurrentSelectedProjectileIndex);
-  }
 }

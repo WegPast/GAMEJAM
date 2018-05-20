@@ -157,6 +157,7 @@ public class PlayerControl : NetworkBehaviour
 
   public void LoadPlayerData() {
     if (isLocalPlayer && playerDataManager && playerDataManager.hasBeenInit) {
+      Debug.Log("LoadPlayerData : lw " + playerDataManager.localPlayerLeftWeaponIndex + " | lp " + playerDataManager.localPlayerLeftProjectilesIndex + " | rw " + playerDataManager.localPlayerRightWeaponIndex + " | rp " + playerDataManager.localPlayerRightProjectilesIndex);
       // loading weapon and their selected projectile
       Weapon leftWeapon = playerDataManager.availableWeapons[playerDataManager.localPlayerLeftWeaponIndex];
       Weapon rightWeapon = playerDataManager.availableWeapons[playerDataManager.localPlayerRightWeaponIndex];
@@ -170,8 +171,14 @@ public class PlayerControl : NetworkBehaviour
 
   public void CheckPlayerLife() {
     if (lifeManager.lifeValue <= 0f) {
-      Destroy(gameObject);
+      Die();
     }
+  }
+
+  public void Die() {
+    playerDataManager.isLocalPlayerInitialized = false;
+    gameManager.theLocalPlayer = null;
+    Destroy(gameObject);
   }
 
 
