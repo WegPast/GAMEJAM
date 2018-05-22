@@ -86,8 +86,6 @@ public class ShopManager : MonoBehaviour
     string side;
 
     if (playerDataManager) {
-      //Debug.Log(playerDataManager.localPlayerLeftWeaponIndex);
-      //Debug.Log(playerDataManager.localPlayerRightWeaponIndex);
       leftIndex = playerDataManager.localPlayerLeftWeaponIndex;
       leftProjectileIndex = playerDataManager.localPlayerLeftProjectilesIndex;
     }
@@ -264,16 +262,16 @@ public class ShopManager : MonoBehaviour
     }
   }
 
-  public void SelectLeftAmmoType(int index) {
-    if (index <= availablePlayerWeapons[leftCurrentSelectedWeaponIndex].availableProjectiles.Length - 1) {
-      leftCurrentSelectedProjectile = availablePlayerWeapons[leftCurrentSelectedWeaponIndex].availableProjectiles[index];
-      leftCurrentSelectedProjectileIndex = playerDataManager.GetProjectileIndexByShopName(availablePlayerWeapons[leftCurrentSelectedWeaponIndex].projectileType.shopName, availablePlayerWeapons[leftCurrentSelectedWeaponIndex]);
-      leftSelectedProjByWeap[leftCurrentSelectedWeaponIndex] = index;
-      Button clickedBtn = leftProjectilesBtn[index];
+  public void SelectLeftAmmoType(int btnIndex) {
+    if (btnIndex <= availablePlayerWeapons[leftCurrentSelectedWeaponIndex].availableProjectiles.Length - 1) {
+      leftCurrentSelectedProjectile = availablePlayerWeapons[leftCurrentSelectedWeaponIndex].availableProjectiles[btnIndex];
+      leftCurrentSelectedProjectileIndex = btnIndex;
+      leftSelectedProjByWeap[leftCurrentSelectedWeaponIndex] = btnIndex;
+      Button clickedBtn = leftProjectilesBtn[btnIndex];
       clickedBtn.transform.Find("SelectedProjectileSprite").GetComponent<Image>().color = new Color(0f, 0.6f, 0.03f, 1f);
-      SwitchProjectileInfos("left", index);
+      SwitchProjectileInfos("left", btnIndex);
       for (int i = 0; i < leftProjectilesBtn.Length; i++) {
-        if (i != index) {
+        if (i != btnIndex) {
           Button notClickedBtn = leftProjectilesBtn[i];
           notClickedBtn.transform.Find("SelectedProjectileSprite").GetComponent<Image>().color = new Color(0f, 0.6f, 0.03f, 0f);
         }
@@ -281,16 +279,17 @@ public class ShopManager : MonoBehaviour
     }
   }
 
-  public void SelectRightAmmoType(int index) {
-    if (index <= availablePlayerWeapons[rightCurrentSelectedWeaponIndex].availableProjectiles.Length - 1) {
-      rightCurrentSelectedProjectile = availablePlayerWeapons[rightCurrentSelectedWeaponIndex].availableProjectiles[index];
-      rightCurrentSelectedProjectileIndex = playerDataManager.GetProjectileIndexByShopName(availablePlayerWeapons[rightCurrentSelectedWeaponIndex].projectileType.shopName, availablePlayerWeapons[rightCurrentSelectedWeaponIndex]);
-      rightSelectedProjByWeap[rightCurrentSelectedWeaponIndex] = index;
-      Button clickedBtn = rightProjectilesBtn[index];
+  public void SelectRightAmmoType(int btnIndex) {
+    if (btnIndex <= availablePlayerWeapons[rightCurrentSelectedWeaponIndex].availableProjectiles.Length - 1) {
+      rightCurrentSelectedProjectile = availablePlayerWeapons[rightCurrentSelectedWeaponIndex].availableProjectiles[btnIndex];
+      rightCurrentSelectedProjectileIndex = btnIndex;
+      rightSelectedProjByWeap[rightCurrentSelectedWeaponIndex] = btnIndex;
+      Debug.Log(rightCurrentSelectedProjectileIndex);
+      Button clickedBtn = rightProjectilesBtn[btnIndex];
       clickedBtn.transform.Find("SelectedProjectileSprite").GetComponent<Image>().color = new Color(0f, 0.6f, 0.03f, 1f);
-      SwitchProjectileInfos("right", index);
+      SwitchProjectileInfos("right", btnIndex);
       for (int i = 0; i < rightProjectilesBtn.Length; i++) {
-        if (i != index) {
+        if (i != btnIndex) {
           Button notClickedBtn = rightProjectilesBtn[i];
           notClickedBtn.transform.Find("SelectedProjectileSprite").GetComponent<Image>().color = new Color(0f, 0.6f, 0.03f, 0f);
         }
@@ -329,6 +328,8 @@ public class ShopManager : MonoBehaviour
       data["LeftProjectiles"] = leftCurrentSelectedProjectileIndex;
       data["RightWeapon"] = rightCurrentSelectedWeaponIndex;
       data["RightProjectiles"] = rightCurrentSelectedProjectileIndex;
+      Debug.Log("leftCurrentSelectedProjectileIndex : "+leftCurrentSelectedProjectileIndex);
+      Debug.Log("rightCurrentSelectedProjectileIndex : " + rightCurrentSelectedProjectileIndex);
       playerDataManager.SetPlayerData(data);
       FindObjectOfType<GameManager>().StartHost();
     }

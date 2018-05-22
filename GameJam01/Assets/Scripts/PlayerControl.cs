@@ -123,6 +123,7 @@ public class PlayerControl : NetworkBehaviour
   }
 
   public void ChangeGunLeftWeapon(GameObject newWeapon, Projectiles projectiles = null) {
+    Debug.Log("ChangeGunLeftWeapon");
     this.gunLeft.GetComponent<GunController>().ChangeWeapon(newWeapon, projectiles);
   }
 
@@ -163,7 +164,7 @@ public class PlayerControl : NetworkBehaviour
       Weapon rightWeapon = playerDataManager.availableWeapons[playerDataManager.localPlayerRightWeaponIndex];
       ChangeGunLeftWeapon(leftWeapon.gameObject,
         leftWeapon.availableProjectiles[playerDataManager.localPlayerLeftProjectilesIndex]);
-      ChangeGunLeftWeapon(rightWeapon.gameObject,
+      ChangeGunRightWeapon(rightWeapon.gameObject,
         rightWeapon.availableProjectiles[playerDataManager.localPlayerRightProjectilesIndex]);
 
     }
@@ -180,8 +181,5 @@ public class PlayerControl : NetworkBehaviour
     gameManager.theLocalPlayer = null;
     Destroy(gameObject);
   }
-
-
-
 
 }
