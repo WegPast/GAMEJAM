@@ -6,6 +6,35 @@ using UnityEngine.Networking;
 public class CrateBonus : NetworkBehaviour
 {
 
+  public enum LootRarity
+  {
+    common, rare, legendary
+  }
+
+  [System.Serializable]
+  public class Loot
+  {
+    [Tooltip("Name : The name of the loot")]
+    public string lootName = "New Loot";
+    [Tooltip("Icon : The loot's sprite, if has to have any...")]
+    public Sprite lootIcon = null;
+    //public LootType lootType = null;
+    [Tooltip("Duration : 0f = immediate use, xf = last x seconds")]
+    public float lootDuration = 0f;
+    [Tooltip("Credits : Add X Credits to the player's Credits")]
+    public int lootCreditValue = 0;
+    [Tooltip("Damage Increase : Multiply by X points the current damage of each player's ship projectiles")]
+    public float lootDamageIncreasedValue = 0;
+    [Tooltip("Max Life Bonus : Add X points to the max life of the player's ship")]
+    public int lootMaxLifeBonusValue = 0;
+    [Tooltip("Repair : Add X points of the player's ship current life (not max life)")]
+    public int lootRepairValue = 0;
+    [Tooltip("Chance : the percentage of chance the loot appear")]
+    public LootRarity lootRarity = LootRarity.common;
+  }
+
+  public Loot[] lootTable;
+
   [
       Header("Time before despawn"),
       Tooltip("Nombre de secondes avant la disparition de la crate"),
@@ -13,78 +42,88 @@ public class CrateBonus : NetworkBehaviour
   ]
   public int secondesBeforeDespawn;
 
-  public enum LootType
-  {
-    repairBonus,
-    bigRepairBonus,
-    hugeRepairBonus,
-    lifeBoostBonus,
-    bigLifeBoostBonus,
-    hugeLifeBoostBonus,
-    movementSpeedBonus,
-    bigMovementSpeedBonus,
-    hugeMovementSpeedBonus,
-    damageSpeedBonus,
-    bigDamageSpeedBonus,
-    hugeDamageSpeedBonus
-  }
-
-  [Header("Sprites for each bonus type")]
-  public Sprite[] iconeTable;
-
-  [Header("Prefabs for each rarity of loot")]
-  public LootType[] commonLoot;
-  public LootType[] rareLoot;
-  public LootType[] legendaryLoot;
-
   [Header("Chance for each rarity")]
   public int commonChance = 70;
   public int rareChance = 25;
   public int legendaryChance = 5;
 
 
-  private int lootIndexInStock;
+  private List<Loot> commonLoot;
+  private List<Loot> rareLoot;
+  private List<Loot> legendaryLoot;
+
+  private Loot lootInStock;
   private GameObject lootTypeIcon;
 
-  // Use this for initialization
+
   void Start() {
-    // Au start on determine ce qui sera le type de bonus.
+    commonLoot = GetAllLootByRarity(LootRarity.common);
+    rareLoot = GetAllLootByRarity(LootRarity.rare);
+    legendaryLoot = GetAllLootByRarity(LootRarity.legendary);
+
     Destroy(this.gameObject, secondesBeforeDespawn);
-    lootIndexInStock = GetRandomLoot();
+
+    // Au start on determine ce qui sera le type de bonus.
+    lootInStock = GetRandomLoot();
     lootTypeIcon = transform.Find("Icon").gameObject;
     SetLootIcon();
   }
 
+  public List<Loot> GetAllLootByRarity(LootRarity rarity) {
+    List<Loot> resultLootList = new List<Loot>();
+    foreach (var loot in lootTable) {
+      if(loot.lootRarity == rarity) {
+        resultLootList.Add(loot);
+      }
+    }
+    return resultLootList;
+  }
+
   public void SetLootIcon() {
-    lootTypeIcon.GetComponent<SpriteRenderer>().sprite = iconeTable[lootIndexInStock];
+    if (lootInStock.lootIcon != null) {
+      lootTypeIcon.GetComponent<SpriteRenderer>().sprite = lootInStock.lootIcon;
+    }
   }
 
   private void OnTriggerEnter2D(Collider2D collision) {
     // On détruit la caisse quand le joueur passe dessus.
     if (collision.gameObject.GetComponent<PlayerControl>()) {
-      PlayerControl playerControl = collision.gameObject.GetComponent<PlayerControl>();
-      Destroy(gameObject);
+      ApplyLootBehaviour(collision.gameObject.GetComponent<PlayerControl>());
     }
   }
 
-  private LootType GetRandomLoot() {
+  private void ApplyLootBehaviour(PlayerControl playerControlCollided) {
+
+    PlayerControl playerControl = playerControlCollided;
+
+    // the bonus repair the player's ship
+    if (lootInStock.lootRepairValue != 0) {
+      playerControl.GetComponent<LifeManager>().Heal(lootInStock.lootRepairValue);
+    }
+
+
+    // When all what the bonus was meant to do is done, destroy it :
+    Destroy(gameObject);
+  }
+
+  private Loot GetRandomLoot() {
     int rarity = Random.Range(0, 100);
     if (rarity > 0 && rarity <= commonChance) { // COMMON
-      int lootIndex = Random.Range(0, commonLoot.Length);
+      int lootIndex = Random.Range(0, commonLoot.Count);
       if (commonLoot[lootIndex] != null) {
         return commonLoot[lootIndex];
       } else {
         throw new System.Exception("No loot in this commonLoots slot");
       }
     } else if (rarity > commonChance && rarity <= rareChance) { // RARE
-      int lootIndex = Random.Range(0, rareLoot.Length);
+      int lootIndex = Random.Range(0, rareLoot.Count);
       if (rareLoot[lootIndex] != null) {
         return rareLoot[lootIndex];
       } else {
         throw new System.Exception("No loot in this rareLoots slot");
       }
     } else { // LEGENDARY !
-      int lootIndex = Random.Range(0, legendaryLoot.Length);
+      int lootIndex = Random.Range(0, legendaryLoot.Count);
       if (legendaryLoot[lootIndex] != null) {
         return legendaryLoot[lootIndex];
       } else {
