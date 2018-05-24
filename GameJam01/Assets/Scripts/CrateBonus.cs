@@ -47,14 +47,12 @@ public class CrateBonus : NetworkBehaviour
   public int rareChance = 25;
   public int legendaryChance = 5;
 
-
   private List<Loot> commonLoot;
   private List<Loot> rareLoot;
   private List<Loot> legendaryLoot;
 
   private Loot lootInStock;
   private GameObject lootTypeIcon;
-
 
   void Start() {
 
@@ -112,15 +110,14 @@ public class CrateBonus : NetworkBehaviour
 
     int rarity = Random.Range(0, 100);
     Debug.Log("rarity : " + rarity);
-    if (rarity > 0 && rarity <= commonChance && (commonLoot.Count>0)) { // COMMON
-      Debug.Log("Common loot");
-      int lootIndex = Random.Range(0, commonLoot.Count);
-      if (commonLoot[lootIndex] != null) {
-        return commonLoot[lootIndex];
-      } else {
-        throw new System.Exception("No loot in this commonLoots slot");
+    if (rarity <= legendaryChance && (legendaryLoot.Count > 0)) {
+      Debug.Log("Legendary loot");
+      int lootIndex = Random.Range(0, legendaryLoot.Count);
+      if (legendaryLoot[lootIndex] != null) {
+        return legendaryLoot[lootIndex];
       }
-    } else if (rarity > commonChance && rarity <= rareChance && (rareLoot.Count > 0)) { // RARE
+
+    } else if (rarity <= rareChance && (rareLoot.Count > 0)) { // RARE
       Debug.Log("Rare loot");
       int lootIndex = Random.Range(0, rareLoot.Count);
       if (rareLoot[lootIndex] != null) {
@@ -128,17 +125,18 @@ public class CrateBonus : NetworkBehaviour
       } else {
         throw new System.Exception("No loot in this rareLoots slot");
       }
-    } else { // LEGENDARY !
-      if (legendaryLoot.Count > 0) {
-        Debug.Log("Legendary loot");
-        int lootIndex = Random.Range(0, legendaryLoot.Count);
-        if (legendaryLoot[lootIndex] != null) {
-          return legendaryLoot[lootIndex];
-        } else {
-          throw new System.Exception("No loot in this legendaryLoots slot");
-        }
+    } else if (rarity <= commonChance && (commonLoot.Count > 0)) { // COMMON
+      Debug.Log("Common loot");
+      int lootIndex = Random.Range(0, commonLoot.Count);
+      if (commonLoot[lootIndex] != null) {
+        return commonLoot[lootIndex];
+      } else {
+        throw new System.Exception("No loot in this commonLoots slot");
       }
+    } else {
+      throw new System.Exception("No loot in this legendaryLoots slot");
     }
     throw new System.Exception("No loot found AT ALL !");
   }
+
 }
