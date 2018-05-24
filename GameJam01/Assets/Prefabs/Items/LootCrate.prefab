@@ -148,9 +148,31 @@ MonoBehaviour:
     lootMaxLifeBonusValue: 0
     lootRepairValue: 30
     lootRarity: 0
-  secondesBeforeDespawn: 0
-  iconeTable:
-  - {fileID: 0}
+  - lootName: Credit
+    lootIcon: {fileID: 21300000, guid: e0dc56a782016ef45b1cf220e93f04f1, type: 3}
+    lootDuration: 0
+    lootCreditValue: 100
+    lootDamageIncreasedValue: 0
+    lootMaxLifeBonusValue: 0
+    lootRepairValue: 0
+    lootRarity: 0
+  - lootName: Credit+
+    lootIcon: {fileID: 21300000, guid: e0dc56a782016ef45b1cf220e93f04f1, type: 3}
+    lootDuration: 0
+    lootCreditValue: 400
+    lootDamageIncreasedValue: 0
+    lootMaxLifeBonusValue: 0
+    lootRepairValue: 0
+    lootRarity: 1
+  - lootName: Repair+
+    lootIcon: {fileID: 21300000, guid: e0dc56a782016ef45b1cf220e93f04f1, type: 3}
+    lootDuration: 0
+    lootCreditValue: 200
+    lootDamageIncreasedValue: 0
+    lootMaxLifeBonusValue: 0
+    lootRepairValue: 0
+    lootRarity: 0
+  secondesBeforeDespawn: 5
   commonChance: 70
   rareChance: 25
   legendaryChance: 5

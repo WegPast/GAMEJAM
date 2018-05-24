@@ -159,6 +159,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114030403868983642
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -257,9 +258,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d61fe2fe683317e4794e44c7abff765e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropChance: 40
+  dropChance: 100
   movementSpeed: 3
-  prefab: {fileID: 1573635461337952, guid: fc8d8deafdd22f04f826e084e5ff9369, type: 2}
+  prefab: {fileID: 1573635461337952, guid: 5927e87ce53639847b433bf67228100d, type: 2}
 --- !u!212 &212129332515954732
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -273,6 +274,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -317,6 +319,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:

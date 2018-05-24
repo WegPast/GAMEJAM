@@ -37,8 +37,8 @@ GameObject:
   - component: {fileID: 4407583767114076}
   - component: {fileID: 114384374406946406}
   - component: {fileID: 114541686334104856}
-  - component: {fileID: 114963588285949728}
   - component: {fileID: 61292692226437472}
+  - component: {fileID: 114963588285949728}
   m_Layer: 0
   m_Name: WeaponCrate
   m_TagString: Untagged
@@ -220,6 +220,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -264,6 +265,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:

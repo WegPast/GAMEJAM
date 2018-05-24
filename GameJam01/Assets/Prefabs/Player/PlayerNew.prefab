@@ -287,8 +287,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d3f59414dd5dd34eb237bf02d87f446, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeValue: 10
-  lifeMax: 10
+  lifeValue: 300
+  lifeMax: 300
   lifePercent: 0
   isImmortal: 0
 --- !u!114 &114215830207829380
@@ -306,6 +306,7 @@ MonoBehaviour:
   projectile: {fileID: 1022714013714692, guid: 114f48073d607b849a8bcd0e8699a38a, type: 2}
   gunLeft: {fileID: 1165019621445096}
   gunRight: {fileID: 1134723199389490}
+  playerDataManager: {fileID: 0}
   body: {fileID: 1078196812169070}
 --- !u!114 &114345861809502792
 MonoBehaviour:
