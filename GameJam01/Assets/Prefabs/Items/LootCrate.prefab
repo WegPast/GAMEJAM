@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lootTable:
-  - lootName: Repair Bonus
+  - lootName: Repair
     lootIcon: {fileID: 21300000, guid: e0dc56a782016ef45b1cf220e93f04f1, type: 3}
     lootDuration: 0
     lootCreditValue: 0
@@ -149,7 +149,7 @@ MonoBehaviour:
     lootRepairValue: 30
     lootRarity: 0
   - lootName: Credit
-    lootIcon: {fileID: 21300000, guid: e0dc56a782016ef45b1cf220e93f04f1, type: 3}
+    lootIcon: {fileID: 21300006, guid: e0dc56a782016ef45b1cf220e93f04f1, type: 3}
     lootDuration: 0
     lootCreditValue: 100
     lootDamageIncreasedValue: 0
@@ -157,7 +157,7 @@ MonoBehaviour:
     lootRepairValue: 0
     lootRarity: 0
   - lootName: Credit+
-    lootIcon: {fileID: 21300000, guid: e0dc56a782016ef45b1cf220e93f04f1, type: 3}
+    lootIcon: {fileID: 21300008, guid: e0dc56a782016ef45b1cf220e93f04f1, type: 3}
     lootDuration: 0
     lootCreditValue: 400
     lootDamageIncreasedValue: 0
@@ -165,13 +165,29 @@ MonoBehaviour:
     lootRepairValue: 0
     lootRarity: 1
   - lootName: Repair+
-    lootIcon: {fileID: 21300000, guid: e0dc56a782016ef45b1cf220e93f04f1, type: 3}
+    lootIcon: {fileID: 21300002, guid: e0dc56a782016ef45b1cf220e93f04f1, type: 3}
     lootDuration: 0
-    lootCreditValue: 200
+    lootCreditValue: 0
+    lootDamageIncreasedValue: 0
+    lootMaxLifeBonusValue: 0
+    lootRepairValue: 100
+    lootRarity: 1
+  - lootName: Repair++
+    lootIcon: {fileID: 21300004, guid: e0dc56a782016ef45b1cf220e93f04f1, type: 3}
+    lootDuration: 0
+    lootCreditValue: 0
+    lootDamageIncreasedValue: 0
+    lootMaxLifeBonusValue: 0
+    lootRepairValue: 200
+    lootRarity: 2
+  - lootName: Credit++
+    lootIcon: {fileID: 21300010, guid: e0dc56a782016ef45b1cf220e93f04f1, type: 3}
+    lootDuration: 0
+    lootCreditValue: 10000
     lootDamageIncreasedValue: 0
     lootMaxLifeBonusValue: 0
     lootRepairValue: 0
-    lootRarity: 0
+    lootRarity: 2
   secondesBeforeDespawn: 5
   commonChance: 70
   rareChance: 25
@@ -264,7 +280,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 53e6896b8155e4e4fb22346dda563a82, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e0dc56a782016ef45b1cf220e93f04f1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -309,7 +325,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: d29fcd25cfc636d489999fc4c1af2ef7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 029688b4fdd5cad4789a2f589b271403, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

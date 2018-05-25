@@ -60,7 +60,6 @@ public class CrateBonus : NetworkBehaviour
 
     // Au start on determine ce qui sera le type de bonus.
     lootInStock = GetRandomLoot();
-    Debug.Log(lootInStock.lootName);
     lootTypeIcon = transform.Find("Icon").gameObject;
     SetLootIcon();
   }
@@ -108,34 +107,41 @@ public class CrateBonus : NetworkBehaviour
     rareLoot = GetAllLootByRarity(LootRarity.rare);
     legendaryLoot = GetAllLootByRarity(LootRarity.legendary);
 
-    int rarity = Random.Range(0, 100);
-    Debug.Log("rarity : " + rarity);
-    if (rarity <= legendaryChance && (legendaryLoot.Count > 0)) {
-      Debug.Log("Legendary loot");
-      int lootIndex = Random.Range(0, legendaryLoot.Count);
-      if (legendaryLoot[lootIndex] != null) {
-        return legendaryLoot[lootIndex];
-      }
+    // calculating percentage chance 
+    int commonChance100 = commonChance;
+    int rareChance100 = commonChance100 + rareChance;
+    int legendaryChance100 = rareChance100 + legendaryChance;
 
-    } else if (rarity <= rareChance && (rareLoot.Count > 0)) { // RARE
-      Debug.Log("Rare loot");
-      int lootIndex = Random.Range(0, rareLoot.Count);
-      if (rareLoot[lootIndex] != null) {
-        return rareLoot[lootIndex];
-      } else {
-        throw new System.Exception("No loot in this rareLoots slot");
-      }
-    } else if (rarity <= commonChance && (commonLoot.Count > 0)) { // COMMON
-      Debug.Log("Common loot");
+    int rarity = Random.Range(0, 100);
+
+    if (rarity <= commonChance100 && (commonLoot.Count > 0)) { // COMMON
       int lootIndex = Random.Range(0, commonLoot.Count);
       if (commonLoot[lootIndex] != null) {
         return commonLoot[lootIndex];
       } else {
         throw new System.Exception("No loot in this commonLoots slot");
       }
-    } else {
-      throw new System.Exception("No loot in this legendaryLoots slot");
     }
+
+    if (rarity > commonChance100 && rarity <= rareChance100 && (rareLoot.Count > 0)) { // RARE
+      int lootIndex = Random.Range(0, rareLoot.Count);
+      if (rareLoot[lootIndex] != null) {
+        return rareLoot[lootIndex];
+      } else {
+        throw new System.Exception("No loot in this rareLoots slot");
+      }
+    }
+
+    if (rarity > rareChance100 && rarity <= legendaryChance100 && (legendaryLoot.Count > 0)) {
+      int lootIndex = Random.Range(0, legendaryLoot.Count);
+      if (legendaryLoot[lootIndex] != null) {
+        return legendaryLoot[lootIndex];
+      } else {
+        throw new System.Exception("No loot in this legendaryLoot slot");
+      }
+    }
+
+    // if no item found
     throw new System.Exception("No loot found AT ALL !");
   }
 
