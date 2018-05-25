@@ -20,6 +20,7 @@ TextureImporter:
     21300030: HUD icons_15
     21300032: HUD icons_16
     21300034: HUD icons_17
+    21300036: CreditIcon
   externalObjects: {}
   serializedVersion: 5
   mipmaps:
@@ -488,6 +489,26 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 94f43962f92b6ac40aae10723d77e2ca
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CreditIcon
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5a4a41b59a4e5245b214beababac87b
       vertices: []
       indices: 
       edges: []

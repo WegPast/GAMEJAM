@@ -13,24 +13,35 @@ public class PlayerHUD : NetworkBehaviour
   private float lifeBarMaxWidth;
   private float lifeBarMaxHeight;
   private float playerPercentLife; // must be between 0.0f and 1.0f
+  private PlayerControl localPlayer;
+
+  public bool hasBeenInit = false;
 
   // Use this for initialization
   void Start() {
-    gunLeftInfo = GameObject.Find("GunLeftInfo").gameObject;
-    gunRightInfo = GameObject.Find("GunRightInfo").gameObject;
-    lifeBarBckgd = GameObject.Find("LifeBar_bckgd").gameObject;
+    //gunLeftInfo = GameObject.Find("GunLeftInfo").gameObject;
+    //gunRightInfo = GameObject.Find("GunRightInfo").gameObject;
+    //lifeBarBckgd = GameObject.Find("LifeBar_bckgd").gameObject;
+
+  }
+
+  public void Init() {
+    localPlayer = FindObjectOfType<GameManager>().theLocalPlayer.GetComponent<PlayerControl>();
     lifeBarMaxWidth = lifeBarBckgd.GetComponent<RectTransform>().rect.width;
     lifeBarMaxHeight = lifeBarBckgd.GetComponent<RectTransform>().rect.height;
-
+    hasBeenInit = true;
   }
 
   // Update is called once per frame
   void Update() {
     if (isLocalPlayer) {
-      SetWeaponIcon(GetComponent<PlayerControl>().WeaponLeft, gunLeftInfo);
-      SetWeaponIcon(GetComponent<PlayerControl>().WeaponRight, gunRightInfo);
-      playerPercentLife = GetComponent<LifeManager>().lifePercent;
+      SetWeaponIcon(localPlayer.WeaponLeft, gunLeftInfo);
+      SetWeaponIcon(localPlayer.WeaponRight, gunRightInfo);
+      playerPercentLife = localPlayer.gameObject.GetComponent<LifeManager>().lifePercent;
       UpdateLifeBarSize();
+    }
+    if (FindObjectOfType<GameManager>().theLocalPlayer != null && !hasBeenInit) {
+      Init();
     }
   }
 

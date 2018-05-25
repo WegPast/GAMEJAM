@@ -26,6 +26,7 @@ public class PlayerDataManager : MonoBehaviour
   [Header("Local Player Bonus (Kept by this Player Data Manager)")]
   public int localPlayerLifeMaxBonus;
   public int localPlayerSpeedBonus;
+  public int localPlayerCredits;
   // end player data -------------------------
 
   [Header("Weapons"), Header("--- Available weapons ---"), Space(20f)]

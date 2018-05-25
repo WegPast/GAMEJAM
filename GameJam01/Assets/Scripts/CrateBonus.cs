@@ -96,6 +96,10 @@ public class CrateBonus : NetworkBehaviour
       playerControl.GetComponent<LifeManager>().Heal(lootInStock.lootRepairValue);
     }
 
+    // Adding lootCreditValue credits to the player's credits
+    if (lootInStock.lootCreditValue != 0) {
+      playerControl.playerDataManager.localPlayerCredits += lootInStock.lootCreditValue;
+    }
 
     // When all what the bonus was meant to do is done, destroy it :
     Destroy(gameObject);
