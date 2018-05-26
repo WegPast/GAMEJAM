@@ -8,10 +8,10 @@ TextureImporter:
     21300006: HUD icons_3
     21300008: HUD icons_4
     21300010: HUD icons_5
-    21300012: HUD icons_6
-    21300014: HUD icons_7
+    21300012: BlackDottedSeprator
+    21300014: WhiteDottedVerticalSeprator
     21300016: HUD icons_8
-    21300018: HUD icons_9
+    21300018: BlackFadedVerticalSeprator
     21300020: HUD icons_10
     21300022: HUD icons_11
     21300024: HUD icons_12
@@ -21,6 +21,15 @@ TextureImporter:
     21300032: HUD icons_16
     21300034: HUD icons_17
     21300036: CreditIcon
+    21300038: GreyDottedSeprator
+    21300040: WhiteDottedSeprator
+    21300042: BlackFadedSeprator
+    21300044: GreyFadedSeprator
+    21300046: WhiteFadedSeprator
+    21300048: GreyDottedVerticalSeprator
+    21300050: BlackDottedVerticalSeprator
+    21300052: GreyFadedVerticalSeprator
+    21300054: WhiteFadedVerticalSeprator
   externalObjects: {}
   serializedVersion: 5
   mipmaps:
@@ -314,186 +323,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HUD icons_6
-      rect:
-        serializedVersion: 2
-        x: 368
-        y: 240
-        width: 20
-        height: 4
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d8212252326b8aa4c8153d2057311038
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD icons_7
-      rect:
-        serializedVersion: 2
-        x: 388
-        y: 240
-        width: 60
-        height: 4
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c11f025157aee074e9974e822023b799
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD icons_9
-      rect:
-        serializedVersion: 2
-        x: 448
-        y: 240
-        width: 12
-        height: 4
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 428ceb8450081c94b854acf1e635b2c0
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD icons_10
-      rect:
-        serializedVersion: 2
-        x: 368
-        y: 232
-        width: 20
-        height: 4
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5fc46e7ade5ee74409e2d69aa673683c
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD icons_12
-      rect:
-        serializedVersion: 2
-        x: 388
-        y: 232
-        width: 60
-        height: 4
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a9a317960b545eb469e446dceaee26a4
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD icons_13
-      rect:
-        serializedVersion: 2
-        x: 448
-        y: 232
-        width: 12
-        height: 4
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1f38174557584b0408f171947b69db5c
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD icons_15
-      rect:
-        serializedVersion: 2
-        x: 368
-        y: 224
-        width: 20
-        height: 4
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7d42601daa5cf2446a082fc0c27ba44b
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD icons_16
-      rect:
-        serializedVersion: 2
-        x: 388
-        y: 224
-        width: 60
-        height: 4
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d5bd0708ad2820f42bbd6f4584bed15a
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD icons_17
-      rect:
-        serializedVersion: 2
-        x: 448
-        y: 224
-        width: 12
-        height: 4
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 94f43962f92b6ac40aae10723d77e2ca
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: CreditIcon
       rect:
         serializedVersion: 2
@@ -502,13 +331,253 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: b5a4a41b59a4e5245b214beababac87b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlackDottedSeprator
+      rect:
+        serializedVersion: 2
+        x: 328
+        y: 244
+        width: 48
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 16, y: 0, z: 16, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3a442ed6a21c4b4fa087bbf9e6c03c8
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreyDottedSeprator
+      rect:
+        serializedVersion: 2
+        x: 328
+        y: 236
+        width: 48
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 16, y: 0, z: 16, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b7d75d1559bb8b44af370bac9acffef
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WhiteDottedSeprator
+      rect:
+        serializedVersion: 2
+        x: 328
+        y: 228
+        width: 48
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 16, y: 0, z: 16, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e47dba8cf5f727479d4ba08440f766b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlackFadedSeprator
+      rect:
+        serializedVersion: 2
+        x: 328
+        y: 216
+        width: 48
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 16, y: 0, z: 16, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 439737a6dd13b4a418096be4a64ef36b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreyFadedSeprator
+      rect:
+        serializedVersion: 2
+        x: 328
+        y: 208
+        width: 48
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 16, y: 0, z: 16, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0d096f264bf1c54b87ae66c2d9e077e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WhiteFadedSeprator
+      rect:
+        serializedVersion: 2
+        x: 328
+        y: 200
+        width: 48
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 16, y: 0, z: 16, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1f09c2aabc54d24daed5fd9c30f5161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreyDottedVerticalSeprator
+      rect:
+        serializedVersion: 2
+        x: 428
+        y: 200
+        width: 4
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 16, z: 0, w: 16}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 334af9e798790bc40bf211c3c0f584dd
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlackDottedVerticalSeprator
+      rect:
+        serializedVersion: 2
+        x: 436
+        y: 200
+        width: 4
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 16, z: 0, w: 16}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b9c049e3de5181419a8c89a0bfb993e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WhiteDottedVerticalSeprator
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 200
+        width: 4
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 16, z: 0, w: 16}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f4c8ae355c56b14f9935eb5ca1efbce
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlackFadedVerticalSeprator
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 200
+        width: 4
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 16, z: 0, w: 16}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de4ae5920bfaf60498f0a150c4a5a313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreyFadedVerticalSeprator
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 200
+        width: 4
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 16, z: 0, w: 16}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d7d8a8f4d0e5c443aa281836ca1588d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WhiteFadedVerticalSeprator
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 200
+        width: 4
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 16, z: 0, w: 16}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b3c3636961a4604a87da40eb88ec28f
       vertices: []
       indices: 
       edges: []

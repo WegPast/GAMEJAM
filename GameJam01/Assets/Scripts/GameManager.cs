@@ -34,10 +34,6 @@ public class GameManager : NetworkBehaviour
   void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
     if (SceneManager.GetActiveScene().name == "00A StartMenu") {
       CurrentGameState = GameStatus.startMenu;
-      //GameObject mainCamera = GameObject.Find("Main Camera");
-      //if (mainCamera) {
-      //  mainCamera.SetActive(true);
-      //}
     }
 
     if (SceneManager.GetActiveScene().name == "02A Lost") {
@@ -48,17 +44,11 @@ public class GameManager : NetworkBehaviour
     }
 
     if (SceneManager.GetActiveScene().name == "01B Game") {
-      //GameObject mainCamera = GameObject.Find("Main Camera");
-      //if (mainCamera) {
-      //  mainCamera.SetActive(true);
-      //}
+      CurrentGameState = GameStatus.gameStarted;
     }
 
     if (SceneManager.GetActiveScene().name == "01C Shop") {
-      //GameObject mainCamera = GameObject.Find("Main Camera");
-      //if (mainCamera) {
-      //  mainCamera.SetActive(false);
-      //}
+      CurrentGameState = GameStatus.gameShop;
     }
   }
 

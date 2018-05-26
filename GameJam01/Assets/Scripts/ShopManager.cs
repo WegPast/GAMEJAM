@@ -8,6 +8,7 @@ public class ShopManager : MonoBehaviour
 
   public GameObject weaponMenu;
   public GameObject skillsMenu;
+  public Text playerCreditsText;
   public PlayerDataManager playerDataManager;
 
   [Header("Left side Weapon")]
@@ -112,6 +113,11 @@ public class ShopManager : MonoBehaviour
       SwitchProjectileSprite(side, rightCurrentSelectedWeaponIndex);
       SelectRightAmmoType(rightProjectileIndex);
 
+    }
+
+    // general initialization
+    if (playerDataManager) {
+      playerCreditsText.text = playerDataManager.localPlayerCredits.ToString();
     }
 
   }
@@ -328,7 +334,7 @@ public class ShopManager : MonoBehaviour
       data["LeftProjectiles"] = leftCurrentSelectedProjectileIndex;
       data["RightWeapon"] = rightCurrentSelectedWeaponIndex;
       data["RightProjectiles"] = rightCurrentSelectedProjectileIndex;
-      Debug.Log("leftCurrentSelectedProjectileIndex : "+leftCurrentSelectedProjectileIndex);
+      Debug.Log("leftCurrentSelectedProjectileIndex : " + leftCurrentSelectedProjectileIndex);
       Debug.Log("rightCurrentSelectedProjectileIndex : " + rightCurrentSelectedProjectileIndex);
       playerDataManager.SetPlayerData(data);
       FindObjectOfType<GameManager>().StartHost();

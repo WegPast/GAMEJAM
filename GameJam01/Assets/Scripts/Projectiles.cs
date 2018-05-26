@@ -13,9 +13,12 @@ public class Projectiles : NetworkBehaviour
   public float speed = 30f;
   public int damage = 10;
 
-  [Header("Projectile's informations"), TextArea(1, 5), Tooltip("A short description for the rpojectile")]
+  [Header("Projectile's informations"), TextArea(1, 5), Tooltip("A short description for the projectile")]
   public string description;
+  [Tooltip("Projectile's name for the shop")]
   public string shopName;
+  [Tooltip("Projectile's price for the shop")]
+  public int shopPrice;
 
   // Use this for initialization
   void Awake()

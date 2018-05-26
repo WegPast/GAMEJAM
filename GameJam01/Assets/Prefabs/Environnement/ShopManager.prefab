@@ -53,6 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponMenu: {fileID: 0}
   skillsMenu: {fileID: 0}
+  playerCreditsText: {fileID: 0}
   playerDataManager: {fileID: 0}
   leftImgWeaponSprite: {fileID: 0}
   leftTxtWeaponDesc: {fileID: 0}
@@ -90,12 +91,4 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  availableWeapons:
-  - {fileID: 114260399183434546, guid: 729cc6897ccc8c1448ee5b6b16bc1b32, type: 2}
-  - {fileID: 114964413656712790, guid: 9bc381293aa1b164a90a7286a6a10231, type: 2}
-  availableRifleProjectiles:
-  - {fileID: 114339415727265694, guid: 114f48073d607b849a8bcd0e8699a38a, type: 2}
-  - {fileID: 114339415727265694, guid: 19e41eb150d0c1e4d9e6a142e77ffa00, type: 2}
-  availableMultigunProjectiles:
-  - {fileID: 114046606857253414, guid: e15456bf850dcb2479dcf849f086229d, type: 2}
   noProjectileSprite: {fileID: 21300010, guid: 84245fe34f0be7b44b8998daba56ef08, type: 3}
