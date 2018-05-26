@@ -29,29 +29,37 @@ public class LifeManager : NetworkBehaviour
 
   //Hit and heal functions
   public void Hit(int damage) {
-    this.lifeValue = (damage > this.lifeValue) ? 0 : this.lifeValue - damage;
-    this.lifePercent = (float) this.lifeValue / (float)this.lifeMax * 100f;
+    lifeValue = (damage > lifeValue) ? 0 : lifeValue - damage;
+    UpdateLifePercent();
   }
 
   public void Heal(int value)
   {
-    this.lifeValue += value;
-    this.lifePercent = (this.lifeValue / this.lifeMax) * 100;
+    if ((lifeValue + value) > lifeMax) {
+      lifeValue = lifeMax;
+      lifePercent = 100.0f;
+    } else {
+      lifeValue += value;
+      UpdateLifePercent();
+    }
   }
 
   // Setters
-  void InitializeLife(int lifeMax, bool isImmortal)
+  void InitializeLife(int lifeMaxValue, bool isImmortalValue)
   {
-    this.isImmortal = isImmortal;
-    this.lifeMax = lifeMax;
-    this.lifeValue = lifeMax;
-    this.lifePercent = 100.0f;
+    isImmortal = isImmortalValue;
+    lifeMax = lifeMaxValue;
+    lifeValue = lifeMaxValue;
+    lifePercent = 100.0f;
   }
 
-  void ChangeLifeMax(int lifeMax)
+  void ChangeLifeMax(int lifeMaxValue)
   {
-    this.lifeMax = lifeMax;
-    this.lifePercent = (this.lifeValue / this.lifeMax) * 100;
+    lifeMax = lifeMaxValue;
+    UpdateLifePercent();
   }
 
+  private void UpdateLifePercent() {
+    lifePercent = (float)lifeValue / (float)lifeMax * 100f;
+  }
 }

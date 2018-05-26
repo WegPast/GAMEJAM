@@ -42,6 +42,7 @@ public class PlayerDataManager : MonoBehaviour
       } else {
         DontDestroyOnLoad(gameObject);
         playerDataManagerReady = true;
+        Debug.Log("player data manager ready");
       }
     }
   }
@@ -53,12 +54,15 @@ public class PlayerDataManager : MonoBehaviour
     localPlayerLifeManager = localPlayerGameObject.GetComponent<LifeManager>();
     //SavePlayerData();
     hasBeenInit = true;
-    //Debug.Log("Init,  WeaponLeft : " + localPlayerControl.WeaponLeft);
-    //Debug.Log("Init,  WeaponRight : " + localPlayerControl.WeaponRight);
+    Debug.Log("Init,  WeaponLeft : " + localPlayerControl.WeaponLeft);
+    Debug.Log("Init,  WeaponRight : " + localPlayerControl.WeaponRight);
   }
 
   public void Update() {
-    if (gameManager.CurrentGameState == GameManager.GameStatus.gameStarted && gameManager.theLocalPlayer && !isLocalPlayerInitialized && playerDataManagerReady) {
+    if (gameManager.CurrentGameState == GameManager.GameStatus.gameStarted 
+        && gameManager.theLocalPlayer 
+        && !isLocalPlayerInitialized 
+        && playerDataManagerReady) {
       InitPlayerDataManager();
       isLocalPlayerInitialized = true;
     }

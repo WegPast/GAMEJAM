@@ -61,8 +61,6 @@ public class PlayerControl : NetworkBehaviour
     lifeManager = GetComponent<LifeManager>();
 
     if (isLocalPlayer) {
-      GameObject.Find("Main Camera").GetComponent<CameraControl>().player = this.gameObject;
-      GameObject.Find("Main Camera").transform.position = new Vector3(0f, 0f, -20f);
       gameManager.theLocalPlayer = this.gameObject;
     }
 

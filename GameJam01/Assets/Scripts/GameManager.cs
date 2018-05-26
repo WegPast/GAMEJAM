@@ -14,10 +14,8 @@ public class GameManager : NetworkBehaviour
 
   private static int nbEnnemiesKilled;
   private bool isGameStarted = false;
-  private GameObject stageManager;
   private LevelManager levelManager;
   private NetworkManager netManager;
-  private GameObject waveCounter;
   public PlayerDataManager playerDataManager;
 
   void OnEnable() {
@@ -36,10 +34,10 @@ public class GameManager : NetworkBehaviour
   void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
     if (SceneManager.GetActiveScene().name == "00A StartMenu") {
       CurrentGameState = GameStatus.startMenu;
-      GameObject mainCamera = GameObject.Find("Main Camera");
-      if (mainCamera) {
-        mainCamera.SetActive(true);
-      }
+      //GameObject mainCamera = GameObject.Find("Main Camera");
+      //if (mainCamera) {
+      //  mainCamera.SetActive(true);
+      //}
     }
 
     if (SceneManager.GetActiveScene().name == "02A Lost") {
@@ -50,8 +48,10 @@ public class GameManager : NetworkBehaviour
     }
 
     if (SceneManager.GetActiveScene().name == "01B Game") {
-      CurrentGameState = GameStatus.gameStarted;
-      waveCounter = GameObject.Find("WaveCounter");
+      //GameObject mainCamera = GameObject.Find("Main Camera");
+      //if (mainCamera) {
+      //  mainCamera.SetActive(true);
+      //}
     }
 
     if (SceneManager.GetActiveScene().name == "01C Shop") {
@@ -76,11 +76,7 @@ public class GameManager : NetworkBehaviour
       //  playerDataManager.InitPlayerDataManager();
       //}
 
-      if (!stageManager) {
-        stageManager = GameObject.Find("StageManager");
-      } else {
-        waveCounter.GetComponent<Text>().text = "Stage #" + stageManager.GetComponent<StageManager>().stageIndex.ToString() + " | Wave #" + stageManager.GetComponent<StageManager>().waveIndex.ToString();
-      }
+
     }
   }
 

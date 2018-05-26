@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -9,6 +10,9 @@ public class PlayerHUD : NetworkBehaviour
   public GameObject gunLeftInfo;
   public GameObject gunRightInfo;
   public GameObject lifeBarBckgd;
+  public Text waveCounter;
+  public StageManager stageManager;
+  public Text playerCredit;
 
   private float lifeBarMaxWidth;
   private float lifeBarMaxHeight;
@@ -16,14 +20,6 @@ public class PlayerHUD : NetworkBehaviour
   private PlayerControl localPlayer;
 
   public bool hasBeenInit = false;
-
-  // Use this for initialization
-  void Start() {
-    //gunLeftInfo = GameObject.Find("GunLeftInfo").gameObject;
-    //gunRightInfo = GameObject.Find("GunRightInfo").gameObject;
-    //lifeBarBckgd = GameObject.Find("LifeBar_bckgd").gameObject;
-
-  }
 
   public void Init() {
     localPlayer = FindObjectOfType<GameManager>().theLocalPlayer.GetComponent<PlayerControl>();
@@ -34,15 +30,26 @@ public class PlayerHUD : NetworkBehaviour
 
   // Update is called once per frame
   void Update() {
-    if (isLocalPlayer) {
+
+    // wainting for GameManager to load
+    if (FindObjectOfType<GameManager>().theLocalPlayer && !hasBeenInit) {
+      Init();
+    }
+
+    if (hasBeenInit && localPlayer && localPlayer.isLocalPlayer) {
       SetWeaponIcon(localPlayer.WeaponLeft, gunLeftInfo);
       SetWeaponIcon(localPlayer.WeaponRight, gunRightInfo);
       playerPercentLife = localPlayer.gameObject.GetComponent<LifeManager>().lifePercent;
       UpdateLifeBarSize();
+      UpdateCreditValue();
     }
-    if (FindObjectOfType<GameManager>().theLocalPlayer != null && !hasBeenInit) {
-      Init();
-    }
+
+    waveCounter.text = "Stage #" + stageManager.stageIndex.ToString() + " | Wave #" + stageManager.waveIndex.ToString();
+
+  }
+
+  private void UpdateCreditValue() {
+    playerCredit.text = localPlayer.playerDataManager.localPlayerCredits.ToString();
   }
 
   public void UpdateLifeBarSize() {
