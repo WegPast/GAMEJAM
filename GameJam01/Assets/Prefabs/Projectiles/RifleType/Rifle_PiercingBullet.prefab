@@ -140,6 +140,7 @@ MonoBehaviour:
   description: A piercing bullet that damage each enemy it touch (pierce throught
     3 enemies)
   shopName: Piercing rifle bullet
+  shopPrice: 800
 --- !u!114 &114504638318490736
 MonoBehaviour:
   m_ObjectHideFlags: 1

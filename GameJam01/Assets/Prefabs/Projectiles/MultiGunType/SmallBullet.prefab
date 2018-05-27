@@ -107,6 +107,7 @@ MonoBehaviour:
   damage: 2
   description: Default bullet for the Multi-gun. Average speed and weak damage.
   shopName: 
+  shopPrice: 200
 --- !u!114 &114213728323626440
 MonoBehaviour:
   m_ObjectHideFlags: 1

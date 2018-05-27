@@ -185,11 +185,12 @@ MonoBehaviour:
   fireRate: 14
   projectileType: {fileID: 114046606857253414, guid: e15456bf850dcb2479dcf849f086229d,
     type: 2}
+  availableProjectiles:
+  - {fileID: 114046606857253414, guid: e15456bf850dcb2479dcf849f086229d, type: 2}
   description: Spreading a large amount of bullets, this weapon will surely bring
     ennemies to their knees.
   shopName: Multi-gun
-  availableProjectiles:
-  - {fileID: 114046606857253414, guid: e15456bf850dcb2479dcf849f086229d, type: 2}
+  shopPrice: 1200
   fireSpot: {fileID: 1974217590826884}
 --- !u!212 &212957549945773070
 SpriteRenderer:

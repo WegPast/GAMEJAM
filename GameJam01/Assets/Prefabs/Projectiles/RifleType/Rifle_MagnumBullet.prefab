@@ -139,6 +139,7 @@ MonoBehaviour:
   damage: 15
   description: A faster and more powerfull bullet than the default one.
   shopName: Magnum rifle bullet
+  shopPrice: 450
 --- !u!114 &114504638318490736
 MonoBehaviour:
   m_ObjectHideFlags: 1

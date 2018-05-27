@@ -13,11 +13,14 @@ public class ShopManager : MonoBehaviour
 
   [Header("Left side Weapon")]
   public Image leftImgWeaponSprite;
+  public Text leftTxtWeaponPrice;
   public Text leftTxtWeaponDesc;
   public Text leftTxtWeaponSpec;
   public Image leftImgHCWeaponSprite;
+  public Text leftTxtOverview;
 
   [Header("Left side Projectile")]
+  public Text leftTxtProjectilePrice;
   public Text leftTxtProjectileDesc;
   public Text leftTxtProjectileSpec;
   public Image[] leftProjectilesSprites;
@@ -25,11 +28,14 @@ public class ShopManager : MonoBehaviour
 
   [Header("Right side Weapon"), Space(20f)]
   public Image rightImgWeaponSprite;
+  public Text rightTxtWeaponPrice;
   public Text rightTxtWeaponDesc;
   public Text rightTxtWeaponSpec;
   public Image rightImgHCWeaponSprite;
+  public Text rightTxtOverview;
 
   [Header("Right side Projectile")]
+  public Text rightTxtProjectilePrice;
   public Text rightTxtProjectileDesc;
   public Text rightTxtProjectileSpec;
   public Image[] rightProjectilesSprites;
@@ -51,12 +57,16 @@ public class ShopManager : MonoBehaviour
   // Currently selected weapons
   private int leftCurrentSelectedWeaponIndex = 0;
   private int rightCurrentSelectedWeaponIndex = 0;
+  private int leftCurrentSelectedWeaponPrice = 0;
+  private int rightCurrentSelectedWeaponPrice = 0;
 
   // Currently selected projectiles
   private Projectiles leftCurrentSelectedProjectile;
   private int leftCurrentSelectedProjectileIndex = 0; // index in availabeProjectile of a corresponding weapon
+  private int leftCurrentSelectedProjectilePrice = 0;
   private Projectiles rightCurrentSelectedProjectile;
   private int rightCurrentSelectedProjectileIndex = 0; // index in availabeProjectile of a corresponding weapon
+  private int rightCurrentSelectedProjectilePrice = 0;
 
   // index will be the selected weapon, the value the projectile index in the available projectile weapon'array
   private int[] leftSelectedProjByWeap;
@@ -237,19 +247,25 @@ public class ShopManager : MonoBehaviour
     string projectileDesc = selectedWeapon.availableProjectiles[projectileIndex].description;
     string projectileDmg = selectedWeapon.availableProjectiles[projectileIndex].damage.ToString();
     string projectileSpeed = selectedWeapon.availableProjectiles[projectileIndex].speed.ToString();
+    string projectilePrice = selectedWeapon.availableProjectiles[projectileIndex].shopPrice.ToString();
     string description = projectileDesc != "" ? projectileDesc : "- No description found. -";
     string damageTxt = projectileDmg != "" ? projectileDmg : "--";
     string speedTxt = projectileSpeed != "" ? projectileSpeed : "--";
+    string priceTxt = projectilePrice != "" ? projectilePrice : "--";
 
     if (side == "left") {
       leftTxtProjectileDesc.text = description;
+      leftTxtProjectilePrice.text = priceTxt + " cr";
       leftTxtProjectileSpec.text = "DMG : " + damageTxt + "\n" +
                                    "SPEED : " + speedTxt;
+      leftCurrentSelectedProjectilePrice = selectedWeapon.availableProjectiles[projectileIndex].shopPrice;
     }
     if (side == "right") {
       rightTxtProjectileDesc.text = description;
+      rightTxtProjectilePrice.text = priceTxt + " cr";
       rightTxtProjectileSpec.text = "DMG : " + damageTxt + "\n" +
                                 "SPEED : " + speedTxt;
+      rightCurrentSelectedProjectilePrice = selectedWeapon.availableProjectiles[projectileIndex].shopPrice;
     }
   }
 
@@ -257,14 +273,21 @@ public class ShopManager : MonoBehaviour
     Weapon selectedWeapon = availablePlayerWeapons[index];
     string description = selectedWeapon.description != "" ? selectedWeapon.description : "- No description found. -";
     string firerateTxt = selectedWeapon.fireRate.ToString() != "" ? selectedWeapon.fireRate.ToString() : "--";
+    string priceTxt = selectedWeapon.shopPrice.ToString() != "" ? selectedWeapon.shopPrice.ToString() : "--";
     //Projectiles projectileType = selectedWeapon.projectileType;  // to be put in another fn
     if (side == "left") {
       leftTxtWeaponDesc.text = description;
       leftTxtWeaponSpec.text = "FR : " + firerateTxt;
+      leftTxtWeaponPrice.text = priceTxt + " cr";
+      leftCurrentSelectedWeaponPrice = selectedWeapon.shopPrice;
+      UpdateOverview("left");
     }
     if (side == "right") {
       rightTxtWeaponDesc.text = description;
       rightTxtWeaponSpec.text = "FR : " + firerateTxt;
+      rightTxtWeaponPrice.text = priceTxt + " cr";
+      rightCurrentSelectedWeaponPrice = selectedWeapon.shopPrice;
+      UpdateOverview("right");
     }
   }
 
@@ -276,6 +299,7 @@ public class ShopManager : MonoBehaviour
       Button clickedBtn = leftProjectilesBtn[btnIndex];
       clickedBtn.transform.Find("SelectedProjectileSprite").GetComponent<Image>().color = new Color(0f, 0.6f, 0.03f, 1f);
       SwitchProjectileInfos("left", btnIndex);
+      UpdateOverview("left");
       for (int i = 0; i < leftProjectilesBtn.Length; i++) {
         if (i != btnIndex) {
           Button notClickedBtn = leftProjectilesBtn[i];
@@ -294,6 +318,7 @@ public class ShopManager : MonoBehaviour
       Button clickedBtn = rightProjectilesBtn[btnIndex];
       clickedBtn.transform.Find("SelectedProjectileSprite").GetComponent<Image>().color = new Color(0f, 0.6f, 0.03f, 1f);
       SwitchProjectileInfos("right", btnIndex);
+      UpdateOverview("right");
       for (int i = 0; i < rightProjectilesBtn.Length; i++) {
         if (i != btnIndex) {
           Button notClickedBtn = rightProjectilesBtn[i];
@@ -326,6 +351,16 @@ public class ShopManager : MonoBehaviour
 
   }
 
+  public void UpdateOverview(string side) {
+    if(side == "left") {
+      int totalPrice = leftCurrentSelectedWeaponPrice + leftCurrentSelectedProjectilePrice;
+      leftTxtOverview.text = "Total cost : " + totalPrice.ToString();
+    }
+    if (side == "right") {
+      int totalPrice = rightCurrentSelectedWeaponPrice + rightCurrentSelectedProjectilePrice;
+      rightTxtOverview.text = "Total cost : " + totalPrice.ToString();
+    }
+  }
 
   public void AcceptChanges() {
     if (playerDataManager) {

@@ -8,13 +8,13 @@ using UnityEngine;
  **/
 public class PlayerDataManager : MonoBehaviour
 {
-  private GameManager gameManager;
   private PlayerControl localPlayerControl;
   private GameObject localPlayerGameObject;
   private LifeManager localPlayerLifeManager;
   private bool playerDataManagerReady = false;
 
   public bool isLocalPlayerInitialized = false;
+  public GameManager gameManager;
 
   // player data =============================
   [Header("Local Player Weapons and Projectiles")]
@@ -31,11 +31,14 @@ public class PlayerDataManager : MonoBehaviour
 
   [Header("Weapons"), Header("--- Available weapons ---"), Space(20f)]
   public Weapon[] availableWeapons;
+  //public List<int> purchasedWeapons;
+  //public ArrayList[] purchasedProjectiles = new ArrayList(int[]);
 
   public bool hasBeenInit = false;
 
   private void Start() {
-    gameManager = FindObjectOfType<GameManager>();
+
+    //gameManager = FindObjectOfType<GameManager>();
     if (gameManager.playerDataManager) {
       if (gameManager.playerDataManager != this) {
         Destroy(gameObject);
