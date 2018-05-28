@@ -121,7 +121,6 @@ public class PlayerControl : NetworkBehaviour
   }
 
   public void ChangeGunLeftWeapon(GameObject newWeapon, Projectiles projectiles = null) {
-    Debug.Log("ChangeGunLeftWeapon");
     this.gunLeft.GetComponent<GunController>().ChangeWeapon(newWeapon, projectiles);
   }
 
@@ -156,7 +155,7 @@ public class PlayerControl : NetworkBehaviour
 
   public void LoadPlayerData() {
     if (isLocalPlayer && playerDataManager && playerDataManager.hasBeenInit) {
-      Debug.Log("LoadPlayerData : lw " + playerDataManager.localPlayerLeftWeaponIndex + " | lp " + playerDataManager.localPlayerLeftProjectilesIndex + " | rw " + playerDataManager.localPlayerRightWeaponIndex + " | rp " + playerDataManager.localPlayerRightProjectilesIndex);
+      //Debug.Log("LoadPlayerData : lw " + playerDataManager.localPlayerLeftWeaponIndex + " | lp " + playerDataManager.localPlayerLeftProjectilesIndex + " | rw " + playerDataManager.localPlayerRightWeaponIndex + " | rp " + playerDataManager.localPlayerRightProjectilesIndex);
       // loading weapon and their selected projectile
       Weapon leftWeapon = playerDataManager.availableWeapons[playerDataManager.localPlayerLeftWeaponIndex];
       Weapon rightWeapon = playerDataManager.availableWeapons[playerDataManager.localPlayerRightWeaponIndex];

@@ -31,12 +31,21 @@ public class PlayerDataManager : MonoBehaviour
 
   [Header("Weapons"), Header("--- Available weapons ---"), Space(20f)]
   public Weapon[] availableWeapons;
-  //public List<int> purchasedWeapons;
-  //public ArrayList[] purchasedProjectiles = new ArrayList(int[]);
+  public List<int> purchasedWeapons;
+  public bool[,] purchasedProjectiles; // [purchasedWeaponIndex,purchasedProjectileIndex]
 
   public bool hasBeenInit = false;
 
   private void Start() {
+    purchasedProjectiles = new bool[availableWeapons.Length, 5];
+    for (int i = 0; i < availableWeapons.Length; i++) {
+      purchasedProjectiles[i, 0] = true;
+      purchasedProjectiles[i, 1] = false;
+      purchasedProjectiles[i, 2] = false;
+      purchasedProjectiles[i, 3] = false;
+      purchasedProjectiles[i, 4] = false;
+    }
+    //purchasedProjectiles[0, 2] = true; // ex : weapon 0 (rifle) , projectile 2 (piercing) purchased
 
     //gameManager = FindObjectOfType<GameManager>();
     if (gameManager.playerDataManager) {
@@ -45,7 +54,7 @@ public class PlayerDataManager : MonoBehaviour
       } else {
         DontDestroyOnLoad(gameObject);
         playerDataManagerReady = true;
-        Debug.Log("player data manager ready");
+        //Debug.Log("player data manager ready");
       }
     }
   }
@@ -57,14 +66,14 @@ public class PlayerDataManager : MonoBehaviour
     localPlayerLifeManager = localPlayerGameObject.GetComponent<LifeManager>();
     //SavePlayerData();
     hasBeenInit = true;
-    Debug.Log("Init,  WeaponLeft : " + localPlayerControl.WeaponLeft);
-    Debug.Log("Init,  WeaponRight : " + localPlayerControl.WeaponRight);
+    //Debug.Log("Init,  WeaponLeft : " + localPlayerControl.WeaponLeft);
+    //Debug.Log("Init,  WeaponRight : " + localPlayerControl.WeaponRight);
   }
 
   public void Update() {
-    if (gameManager.CurrentGameState == GameManager.GameStatus.gameStarted 
-        && gameManager.theLocalPlayer 
-        && !isLocalPlayerInitialized 
+    if (gameManager.CurrentGameState == GameManager.GameStatus.gameStarted
+        && gameManager.theLocalPlayer
+        && !isLocalPlayerInitialized
         && playerDataManagerReady) {
       InitPlayerDataManager();
       isLocalPlayerInitialized = true;
@@ -80,7 +89,7 @@ public class PlayerDataManager : MonoBehaviour
     localPlayerLeftProjectilesIndex = GetProjectileIndexByShopName(localPlayerControl.WeaponLeft.projectileType.shopName, availableWeapons[localPlayerLeftWeaponIndex]);
     localPlayerRightWeaponIndex = GetWeaponIndexByShopName(localPlayerControl.WeaponRight.shopName);
     localPlayerRightProjectilesIndex = GetProjectileIndexByShopName(localPlayerControl.WeaponRight.projectileType.shopName, availableWeapons[localPlayerRightWeaponIndex]);
-    Debug.Log("Saving : lw " + localPlayerLeftWeaponIndex + " | lp " + localPlayerLeftProjectilesIndex + " | rw " + localPlayerRightWeaponIndex + " | rp " + localPlayerRightProjectilesIndex);
+    //Debug.Log("Saving : lw " + localPlayerLeftWeaponIndex + " | lp " + localPlayerLeftProjectilesIndex + " | rw " + localPlayerRightWeaponIndex + " | rp " + localPlayerRightProjectilesIndex);
   }
 
   public void SetPlayerData(Hashtable data) {
@@ -137,5 +146,22 @@ public class PlayerDataManager : MonoBehaviour
     return -1;
   }
 
+  public bool IsWeaponPurchased(int index) {
+    Debug.Log("weapon " + index + " is purchased :" + (purchasedWeapons.IndexOf(index) >= 0));
+    return purchasedWeapons.IndexOf(index) >= 0;
+  }
+
+  public bool IsProjectilePurchased(int index) {
+    for (int weapIndex = 0; weapIndex < availableWeapons.Length; weapIndex++) {
+      for (int projectIndex = 0; projectIndex < 6; projectIndex++) {
+        if (projectIndex == index) {
+          Debug.Log("projectile " + index + " for weapon "+ weapIndex+" is purchased :" + purchasedProjectiles[weapIndex, projectIndex]);
+          return purchasedProjectiles[weapIndex, projectIndex];
+        }
+      }
+    }
+    Debug.Log("projectile " + index + " is purchased :" + false);
+    return false;
+  }
 
 }

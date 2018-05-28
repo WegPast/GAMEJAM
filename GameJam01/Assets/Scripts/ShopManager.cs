@@ -352,7 +352,7 @@ public class ShopManager : MonoBehaviour
   }
 
   public void UpdateOverview(string side) {
-    if(side == "left") {
+    if (side == "left") {
       int totalPrice = leftCurrentSelectedWeaponPrice + leftCurrentSelectedProjectilePrice;
       leftTxtOverview.text = "Total cost : " + totalPrice.ToString();
     }
@@ -365,15 +365,38 @@ public class ShopManager : MonoBehaviour
   public void AcceptChanges() {
     if (playerDataManager) {
       Hashtable data = new Hashtable();
+
+      // left 
       data["LeftWeapon"] = leftCurrentSelectedWeaponIndex;
+      if (!playerDataManager.IsWeaponPurchased(leftCurrentSelectedWeaponIndex)) {
+      playerDataManager.purchasedWeapons.Add(leftCurrentSelectedWeaponIndex);
+      }
+
       data["LeftProjectiles"] = leftCurrentSelectedProjectileIndex;
+      if (!playerDataManager.IsProjectilePurchased(leftCurrentSelectedProjectileIndex)) {
+        playerDataManager.purchasedProjectiles[leftCurrentSelectedWeaponIndex, leftCurrentSelectedProjectileIndex] = true;
+      }
+      
+
+      // right
       data["RightWeapon"] = rightCurrentSelectedWeaponIndex;
+      if (!playerDataManager.IsWeaponPurchased(rightCurrentSelectedWeaponIndex)) {
+        playerDataManager.purchasedWeapons.Add(rightCurrentSelectedWeaponIndex);
+      }
+
       data["RightProjectiles"] = rightCurrentSelectedProjectileIndex;
-      Debug.Log("leftCurrentSelectedProjectileIndex : " + leftCurrentSelectedProjectileIndex);
-      Debug.Log("rightCurrentSelectedProjectileIndex : " + rightCurrentSelectedProjectileIndex);
+      if (!playerDataManager.IsProjectilePurchased(rightCurrentSelectedProjectileIndex)) {
+        playerDataManager.purchasedProjectiles[leftCurrentSelectedWeaponIndex, rightCurrentSelectedProjectileIndex] = true;
+      }
+
+
+      //Debug.Log("leftCurrentSelectedProjectileIndex : " + leftCurrentSelectedProjectileIndex);
+      //Debug.Log("rightCurrentSelectedProjectileIndex : " + rightCurrentSelectedProjectileIndex);
       playerDataManager.SetPlayerData(data);
       FindObjectOfType<GameManager>().StartHost();
     }
   }
+
+
 
 }
