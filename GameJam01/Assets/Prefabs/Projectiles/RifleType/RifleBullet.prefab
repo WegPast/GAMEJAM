@@ -139,7 +139,7 @@ MonoBehaviour:
   damage: 10
   description: The defalut bullet for the Rifle. Powerfull and fast.
   shopName: Rifle bullet
-  shopPrice: 220
+  shopPrice: 0
 --- !u!114 &114504638318490736
 MonoBehaviour:
   m_ObjectHideFlags: 1

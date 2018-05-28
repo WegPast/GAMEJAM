@@ -108,7 +108,6 @@ public class ShopManager : MonoBehaviour
       SwitchWeaponInfos(side, leftCurrentSelectedWeaponIndex);
       SwitchProjectileSprite(side, leftCurrentSelectedWeaponIndex);
       SelectLeftAmmoType(leftProjectileIndex);
-
     }
 
     if (playerDataManager) {
@@ -122,7 +121,6 @@ public class ShopManager : MonoBehaviour
       SwitchWeaponInfos(side, rightCurrentSelectedWeaponIndex);
       SwitchProjectileSprite(side, rightCurrentSelectedWeaponIndex);
       SelectRightAmmoType(rightProjectileIndex);
-
     }
 
     // general initialization

@@ -346,13 +346,13 @@ TextureImporter:
       name: BlackDottedSeprator
       rect:
         serializedVersion: 2
-        x: 328
+        x: 344
         y: 244
-        width: 48
+        width: 32
         height: 4
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 16, y: 0, z: 16, w: 0}
+      border: {x: 12, y: 0, z: 16, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -366,13 +366,13 @@ TextureImporter:
       name: GreyDottedSeprator
       rect:
         serializedVersion: 2
-        x: 328
+        x: 344
         y: 236
-        width: 48
+        width: 32
         height: 4
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 16, y: 0, z: 16, w: 0}
+      border: {x: 0, y: 0, z: 20, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -386,13 +386,13 @@ TextureImporter:
       name: WhiteDottedSeprator
       rect:
         serializedVersion: 2
-        x: 328
+        x: 344
         y: 228
-        width: 48
+        width: 32
         height: 4
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 16, y: 0, z: 16, w: 0}
+      border: {x: 0, y: 0, z: 16, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -469,10 +469,10 @@ TextureImporter:
         x: 428
         y: 200
         width: 4
-        height: 48
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 16, z: 0, w: 16}
+      border: {x: 0, y: 16, z: 0, w: 12}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -509,10 +509,10 @@ TextureImporter:
         x: 420
         y: 200
         width: 4
-        height: 48
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 16, z: 0, w: 16}
+      border: {x: 0, y: 16, z: 0, w: 12}
       outline: []
       physicsShape: []
       tessellationDetail: 0
