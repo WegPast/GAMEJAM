@@ -13,31 +13,37 @@ public class ShopManager : MonoBehaviour
 
   [Header("Left side Weapon")]
   public Image leftImgWeaponSprite;
+  public Text leftTxtWeaponName;
   public Text leftTxtWeaponPrice;
   public Text leftTxtWeaponDesc;
   public Text leftTxtWeaponSpec;
+  public Text leftTxtWeaponStatus;
   public Image leftImgHCWeaponSprite;
-  public Text leftTxtOverview;
 
   [Header("Left side Projectile")]
+  public Text leftTxtProjectileName;
   public Text leftTxtProjectilePrice;
   public Text leftTxtProjectileDesc;
   public Text leftTxtProjectileSpec;
+  public Text[] leftTxtProjectileStatus = new Text[4];
   public Image[] leftProjectilesSprites;
   public Button[] leftProjectilesBtn;
 
   [Header("Right side Weapon"), Space(20f)]
   public Image rightImgWeaponSprite;
+  public Text rightTxtWeaponName;
   public Text rightTxtWeaponPrice;
   public Text rightTxtWeaponDesc;
   public Text rightTxtWeaponSpec;
+  public Text rightTxtWeaponStatus;
   public Image rightImgHCWeaponSprite;
-  public Text rightTxtOverview;
 
   [Header("Right side Projectile")]
+  public Text rightTxtProjectileName;
   public Text rightTxtProjectilePrice;
   public Text rightTxtProjectileDesc;
   public Text rightTxtProjectileSpec;
+  public Text[] rightTxtProjectileStatus = new Text[4];
   public Image[] rightProjectilesSprites;
   public Button[] rightProjectilesBtn;
 
@@ -257,6 +263,7 @@ public class ShopManager : MonoBehaviour
       leftTxtProjectileSpec.text = "DMG : " + damageTxt + "\n" +
                                    "SPEED : " + speedTxt;
       leftCurrentSelectedProjectilePrice = selectedWeapon.availableProjectiles[projectileIndex].shopPrice;
+      SwitchProjectileName("left");
     }
     if (side == "right") {
       rightTxtProjectileDesc.text = description;
@@ -264,6 +271,7 @@ public class ShopManager : MonoBehaviour
       rightTxtProjectileSpec.text = "DMG : " + damageTxt + "\n" +
                                 "SPEED : " + speedTxt;
       rightCurrentSelectedProjectilePrice = selectedWeapon.availableProjectiles[projectileIndex].shopPrice;
+      SwitchProjectileName("right");
     }
   }
 
@@ -278,14 +286,14 @@ public class ShopManager : MonoBehaviour
       leftTxtWeaponSpec.text = "FR : " + firerateTxt;
       leftTxtWeaponPrice.text = priceTxt + " cr";
       leftCurrentSelectedWeaponPrice = selectedWeapon.shopPrice;
-      UpdateOverview("left");
+      SwitchWeaponName(side);
     }
     if (side == "right") {
       rightTxtWeaponDesc.text = description;
       rightTxtWeaponSpec.text = "FR : " + firerateTxt;
       rightTxtWeaponPrice.text = priceTxt + " cr";
       rightCurrentSelectedWeaponPrice = selectedWeapon.shopPrice;
-      UpdateOverview("right");
+      SwitchWeaponName(side);
     }
   }
 
@@ -297,7 +305,6 @@ public class ShopManager : MonoBehaviour
       Button clickedBtn = leftProjectilesBtn[btnIndex];
       clickedBtn.transform.Find("SelectedProjectileSprite").GetComponent<Image>().color = new Color(0f, 0.6f, 0.03f, 1f);
       SwitchProjectileInfos("left", btnIndex);
-      UpdateOverview("left");
       for (int i = 0; i < leftProjectilesBtn.Length; i++) {
         if (i != btnIndex) {
           Button notClickedBtn = leftProjectilesBtn[i];
@@ -316,7 +323,6 @@ public class ShopManager : MonoBehaviour
       Button clickedBtn = rightProjectilesBtn[btnIndex];
       clickedBtn.transform.Find("SelectedProjectileSprite").GetComponent<Image>().color = new Color(0f, 0.6f, 0.03f, 1f);
       SwitchProjectileInfos("right", btnIndex);
-      UpdateOverview("right");
       for (int i = 0; i < rightProjectilesBtn.Length; i++) {
         if (i != btnIndex) {
           Button notClickedBtn = rightProjectilesBtn[i];
@@ -349,14 +355,32 @@ public class ShopManager : MonoBehaviour
 
   }
 
-  public void UpdateOverview(string side) {
+  public void SwitchWeaponName(string side) {
     if (side == "left") {
-      int totalPrice = leftCurrentSelectedWeaponPrice + leftCurrentSelectedProjectilePrice;
-      leftTxtOverview.text = "Total cost : " + totalPrice.ToString();
+      leftTxtWeaponName.text = availablePlayerWeapons[leftCurrentSelectedWeaponIndex].shopName;
     }
     if (side == "right") {
-      int totalPrice = rightCurrentSelectedWeaponPrice + rightCurrentSelectedProjectilePrice;
-      rightTxtOverview.text = "Total cost : " + totalPrice.ToString();
+      rightTxtWeaponName.text = availablePlayerWeapons[rightCurrentSelectedWeaponIndex].shopName;
+    }
+  }
+
+  public void SwitchProjectileName(string side) {
+    if (side == "left") {
+      leftTxtProjectileName.text = availablePlayerWeapons[leftCurrentSelectedWeaponIndex].availableProjectiles[leftCurrentSelectedProjectileIndex].shopName;
+    }
+    if (side == "right") {
+      rightTxtProjectileName.text = availablePlayerWeapons[rightCurrentSelectedWeaponIndex].availableProjectiles[rightCurrentSelectedProjectileIndex].shopName;
+    }
+  }
+
+  public void UpdateProjectilesStatus(string side) {
+    if (side == "left") {
+      for (int i = 0; i < leftTxtProjectileStatus.Length; i++) {
+        leftTxtProjectileStatus[i].text = playerDataManager.purchasedProjectiles[leftCurrentSelectedWeaponIndex,]
+      }
+    }
+    if (side == "right") {
+
     }
   }
 
@@ -367,14 +391,14 @@ public class ShopManager : MonoBehaviour
       // left 
       data["LeftWeapon"] = leftCurrentSelectedWeaponIndex;
       if (!playerDataManager.IsWeaponPurchased(leftCurrentSelectedWeaponIndex)) {
-      playerDataManager.purchasedWeapons.Add(leftCurrentSelectedWeaponIndex);
+        playerDataManager.purchasedWeapons.Add(leftCurrentSelectedWeaponIndex);
       }
 
       data["LeftProjectiles"] = leftCurrentSelectedProjectileIndex;
       if (!playerDataManager.IsProjectilePurchased(leftCurrentSelectedProjectileIndex)) {
         playerDataManager.purchasedProjectiles[leftCurrentSelectedWeaponIndex, leftCurrentSelectedProjectileIndex] = true;
       }
-      
+
 
       // right
       data["RightWeapon"] = rightCurrentSelectedWeaponIndex;
