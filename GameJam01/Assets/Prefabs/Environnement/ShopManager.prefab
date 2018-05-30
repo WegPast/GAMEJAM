@@ -56,11 +56,22 @@ MonoBehaviour:
   playerCreditsText: {fileID: 0}
   playerDataManager: {fileID: 0}
   leftImgWeaponSprite: {fileID: 0}
+  leftTxtWeaponName: {fileID: 0}
+  leftTxtWeaponPrice: {fileID: 0}
   leftTxtWeaponDesc: {fileID: 0}
   leftTxtWeaponSpec: {fileID: 0}
+  leftTxtWeaponStatus: {fileID: 0}
   leftImgHCWeaponSprite: {fileID: 0}
+  leftTxtProjectileName: {fileID: 0}
+  leftTxtProjectilePrice: {fileID: 0}
   leftTxtProjectileDesc: {fileID: 0}
   leftTxtProjectileSpec: {fileID: 0}
+  leftTxtProjectileStatus:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   leftProjectilesSprites:
   - {fileID: 0}
   - {fileID: 0}
@@ -74,11 +85,22 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   rightImgWeaponSprite: {fileID: 0}
+  rightTxtWeaponName: {fileID: 0}
+  rightTxtWeaponPrice: {fileID: 0}
   rightTxtWeaponDesc: {fileID: 0}
   rightTxtWeaponSpec: {fileID: 0}
+  rightTxtWeaponStatus: {fileID: 0}
   rightImgHCWeaponSprite: {fileID: 0}
+  rightTxtProjectileName: {fileID: 0}
+  rightTxtProjectilePrice: {fileID: 0}
   rightTxtProjectileDesc: {fileID: 0}
   rightTxtProjectileSpec: {fileID: 0}
+  rightTxtProjectileStatus:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   rightProjectilesSprites:
   - {fileID: 0}
   - {fileID: 0}

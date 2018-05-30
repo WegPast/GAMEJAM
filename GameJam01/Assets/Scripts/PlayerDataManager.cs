@@ -164,4 +164,16 @@ public class PlayerDataManager : MonoBehaviour
     return false;
   }
 
+
+  public void AddCredit(int amount) {
+    localPlayerCredits += amount;
+  }
+
+  public void SubstractCredit(int amount) {
+    if(localPlayerCredits - amount < 0) {
+      localPlayerCredits = 0;
+    } else {
+      localPlayerCredits -= amount;
+    }
+  }
 }
