@@ -65,6 +65,8 @@ public class ShopManager : MonoBehaviour
   private int rightCurrentSelectedWeaponIndex = 0;
   private int leftCurrentSelectedWeaponPrice = 0;
   private int rightCurrentSelectedWeaponPrice = 0;
+  private int leftCurrentEquippedWeaponIndex = 0;
+  private int rightCurrentEquippedWeaponIndex = 0;
 
   // Currently selected projectiles
   private Projectiles leftCurrentSelectedProjectile;
@@ -73,10 +75,27 @@ public class ShopManager : MonoBehaviour
   private Projectiles rightCurrentSelectedProjectile;
   private int rightCurrentSelectedProjectileIndex = 0; // index in availabeProjectile of a corresponding weapon
   private int rightCurrentSelectedProjectilePrice = 0;
+  private int leftCurrentEquippedProjectileIndex = 0;
+  private int rightCurrentEquippedProjectileIndex = 0;
 
   // index will be the selected weapon, the value the projectile index in the available projectile weapon'array
   private int[] leftSelectedProjByWeap;
   private int[] rightSelectedProjByWeap;
+
+  public class ItemShopStatus
+  {
+    public Color color;
+    public string text;
+
+    public ItemShopStatus(Color color, string text) {
+      this.color = color;
+      this.text = text;
+    }
+  }
+
+  private ItemShopStatus UNLOCKED = new ItemShopStatus(new Color(0f, 1f, 0f, 1f), "unlocked");
+  private ItemShopStatus LOCKED = new ItemShopStatus(new Color(1f, 0f, 0f, 1f), "locked");
+  private ItemShopStatus EQUIPPED = new ItemShopStatus(new Color(0f, 0.68f, 1f, 1f), "equipped");
 
 
   // Use this for initialization
@@ -110,6 +129,7 @@ public class ShopManager : MonoBehaviour
       side = "left";
       leftCurrentSelectedWeaponIndex = leftIndex;
       leftCurrentSelectedProjectileIndex = leftProjectileIndex;
+      leftCurrentEquippedProjectileIndex = leftProjectileIndex;
       SwitchWeaponsSprite(side, leftCurrentSelectedWeaponIndex);
       SwitchWeaponInfos(side, leftCurrentSelectedWeaponIndex);
       SwitchProjectileSprite(side, leftCurrentSelectedWeaponIndex);
@@ -123,6 +143,8 @@ public class ShopManager : MonoBehaviour
     if (rightIndex >= 0) {
       side = "right";
       rightCurrentSelectedWeaponIndex = rightIndex;
+      rightCurrentSelectedProjectileIndex = rightProjectileIndex;
+      rightCurrentEquippedProjectileIndex = rightProjectileIndex;
       SwitchWeaponsSprite(side, rightCurrentSelectedWeaponIndex);
       SwitchWeaponInfos(side, rightCurrentSelectedWeaponIndex);
       SwitchProjectileSprite(side, rightCurrentSelectedWeaponIndex);
@@ -287,6 +309,7 @@ public class ShopManager : MonoBehaviour
       leftTxtWeaponPrice.text = priceTxt + " cr";
       leftCurrentSelectedWeaponPrice = selectedWeapon.shopPrice;
       SwitchWeaponName(side);
+      UpdateProjectilesStatus(side);
     }
     if (side == "right") {
       rightTxtWeaponDesc.text = description;
@@ -294,6 +317,7 @@ public class ShopManager : MonoBehaviour
       rightTxtWeaponPrice.text = priceTxt + " cr";
       rightCurrentSelectedWeaponPrice = selectedWeapon.shopPrice;
       SwitchWeaponName(side);
+      UpdateProjectilesStatus(side);
     }
   }
 
@@ -305,6 +329,7 @@ public class ShopManager : MonoBehaviour
       Button clickedBtn = leftProjectilesBtn[btnIndex];
       clickedBtn.transform.Find("SelectedProjectileSprite").GetComponent<Image>().color = new Color(0f, 0.6f, 0.03f, 1f);
       SwitchProjectileInfos("left", btnIndex);
+      UpdateProjectilesStatus("left");
       for (int i = 0; i < leftProjectilesBtn.Length; i++) {
         if (i != btnIndex) {
           Button notClickedBtn = leftProjectilesBtn[i];
@@ -323,6 +348,7 @@ public class ShopManager : MonoBehaviour
       Button clickedBtn = rightProjectilesBtn[btnIndex];
       clickedBtn.transform.Find("SelectedProjectileSprite").GetComponent<Image>().color = new Color(0f, 0.6f, 0.03f, 1f);
       SwitchProjectileInfos("right", btnIndex);
+      UpdateProjectilesStatus("right");
       for (int i = 0; i < rightProjectilesBtn.Length; i++) {
         if (i != btnIndex) {
           Button notClickedBtn = rightProjectilesBtn[i];
@@ -374,13 +400,83 @@ public class ShopManager : MonoBehaviour
   }
 
   public void UpdateProjectilesStatus(string side) {
+    Text[] txtProjectileStatus = null;
+    Text txtProjectileCost = null;
+    int currentSelectedWeaponIndex = 0, currentSelectedProjectileIndex = 0;
+
     if (side == "left") {
-      for (int i = 0; i < leftTxtProjectileStatus.Length; i++) {
-        leftTxtProjectileStatus[i].text = playerDataManager.purchasedProjectiles[leftCurrentSelectedWeaponIndex,]
+      txtProjectileStatus = leftTxtProjectileStatus;
+      txtProjectileCost = leftTxtProjectilePrice;
+      currentSelectedWeaponIndex = leftCurrentSelectedWeaponIndex;
+      currentSelectedProjectileIndex = leftCurrentSelectedProjectileIndex;
+    }
+
+    if (side == "right") {
+      txtProjectileStatus = rightTxtProjectileStatus;
+      txtProjectileCost = rightTxtProjectilePrice;
+      currentSelectedWeaponIndex = rightCurrentSelectedWeaponIndex;
+      currentSelectedProjectileIndex = rightCurrentSelectedProjectileIndex;
+    }
+
+    for (int i = 0; i < txtProjectileStatus.Length; i++) {
+      // FIRST : Is the item purchased ?
+      bool isPurchased = playerDataManager.purchasedProjectiles[currentSelectedWeaponIndex, (i + 1)];
+
+      // SECOND : Is the item the one that is curretly selected ?
+      bool isSelectedItem = currentSelectedProjectileIndex == (i + 1);
+
+      if (isPurchased) {
+        txtProjectileStatus[i].text = UNLOCKED.text;
+        txtProjectileStatus[i].color = UNLOCKED.color;
+        txtProjectileCost.text = "0";
+      } else {
+        txtProjectileStatus[i].text = LOCKED.text;
+        txtProjectileStatus[i].color = LOCKED.color;
+        //txtProjectileCost.text = availablePlayerWeapons[currentSelectedProjectileIndex].shopPrice.ToString();
+
       }
     }
-    if (side == "right") {
 
+  }
+
+  public void BuySelectedProjectile(string side) {
+    Text[] txtProjectileStatus = null;
+    Text txtProjectileCost = null;
+    int currentSelectedWeaponIndex = 0, currentSelectedProjectileIndex = 0;
+    int currentEquippeddWeaponIndex = 0, currentEquippedProjectileIndex = 0;
+
+    if (side == "left") {
+      txtProjectileStatus = leftTxtProjectileStatus;
+      txtProjectileCost = leftTxtProjectilePrice;
+      currentSelectedWeaponIndex = leftCurrentSelectedWeaponIndex;
+      currentSelectedProjectileIndex = leftCurrentSelectedProjectileIndex;
+      currentEquippeddWeaponIndex = leftCurrentEquippedProjectileIndex;
+    }
+
+    if (side == "right") {
+      txtProjectileStatus = rightTxtProjectileStatus;
+      txtProjectileCost = rightTxtProjectilePrice;
+      currentSelectedWeaponIndex = rightCurrentSelectedWeaponIndex;
+      currentSelectedProjectileIndex = rightCurrentSelectedProjectileIndex;
+      currentEquippeddWeaponIndex = rightCurrentEquippedProjectileIndex;
+    }
+
+
+    bool isAlreadyPurchasedItem = playerDataManager.purchasedProjectiles[currentSelectedWeaponIndex, currentSelectedProjectileIndex];
+    if (!isAlreadyPurchasedItem) {
+      playerDataManager.purchasedProjectiles[currentSelectedWeaponIndex, currentSelectedProjectileIndex] = true;
+    }
+
+    // update text first befor setting "equipped" status so if isAlreadyPurchasedItem == true
+    // , then the "equipped" status is not wiped out !
+    UpdateProjectilesStatus(side);
+
+    // if already purchased, then equip it !
+    if (isAlreadyPurchasedItem) {
+
+      txtProjectileStatus[currentSelectedProjectileIndex - 1].text = EQUIPPED.text;
+      txtProjectileStatus[currentSelectedProjectileIndex - 1].color = EQUIPPED.color;
+      txtProjectileCost.text = "0";
     }
   }
 
@@ -398,7 +494,6 @@ public class ShopManager : MonoBehaviour
       if (!playerDataManager.IsProjectilePurchased(leftCurrentSelectedProjectileIndex)) {
         playerDataManager.purchasedProjectiles[leftCurrentSelectedWeaponIndex, leftCurrentSelectedProjectileIndex] = true;
       }
-
 
       // right
       data["RightWeapon"] = rightCurrentSelectedWeaponIndex;
