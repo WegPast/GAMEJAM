@@ -151,7 +151,7 @@ MonoBehaviour:
   - lootName: Credit
     lootIcon: {fileID: 21300006, guid: e0dc56a782016ef45b1cf220e93f04f1, type: 3}
     lootDuration: 0
-    lootCreditValue: 100
+    lootCreditValue: 500
     lootDamageIncreasedValue: 0
     lootMaxLifeBonusValue: 0
     lootRepairValue: 0
@@ -159,7 +159,7 @@ MonoBehaviour:
   - lootName: Credit+
     lootIcon: {fileID: 21300008, guid: e0dc56a782016ef45b1cf220e93f04f1, type: 3}
     lootDuration: 0
-    lootCreditValue: 400
+    lootCreditValue: 1200
     lootDamageIncreasedValue: 0
     lootMaxLifeBonusValue: 0
     lootRepairValue: 0
