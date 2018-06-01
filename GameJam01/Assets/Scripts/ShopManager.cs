@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEditor;
 
 public class ShopManager : MonoBehaviour {
 
@@ -411,6 +412,67 @@ public class ShopManager : MonoBehaviour {
     }
   }
 
+
+  public void UpdateWeaponStatus(string side) {
+    Text[] txtProjectileStatus = null;
+    Text txtProjectileCost = null;
+    int currentSelectedWeaponIndex = 0, currentSelectedProjectileIndex = 0, currentEquippedProjectileIndex = 0;
+
+    if (side == "left") {
+      txtProjectileStatus = leftTxtProjectileStatus;
+      txtProjectileCost = leftTxtProjectilePrice;
+      currentSelectedWeaponIndex = leftCurrentSelectedWeaponIndex;
+      currentSelectedProjectileIndex = leftCurrentSelectedProjectileIndex;
+      currentEquippedProjectileIndex = leftCurrentEquippedProjectileIndex;
+    }
+
+    if (side == "right") {
+      txtProjectileStatus = rightTxtProjectileStatus;
+      txtProjectileCost = rightTxtProjectilePrice;
+      currentSelectedWeaponIndex = rightCurrentSelectedWeaponIndex;
+      currentSelectedProjectileIndex = rightCurrentSelectedProjectileIndex;
+      currentEquippedProjectileIndex = rightCurrentEquippedProjectileIndex;
+    }
+
+    for (int i = 0; i < txtProjectileStatus.Length; i++) {
+
+      // Is the current Item is ... :
+      bool isPurchased = playerDataManager.purchasedProjectiles[currentSelectedWeaponIndex, i];
+      bool isSelectedItem = (currentSelectedProjectileIndex == i);
+      bool isEquippedItem = (currentEquippedProjectileIndex == i);
+      bool isDefaultItem = (i == 0);
+      //Debug.Log("\n Item["+i+"] isPurchased : " + isPurchased
+      //          + "\n isSelectedItem : " + isSelectedItem
+      //          + "\n isEquippedItem : " + isEquippedItem
+      //          + "\n isDefaultItem : " + isDefaultItem);
+      if (isPurchased) {
+        if (isEquippedItem) {
+          txtProjectileStatus[i].text = EQUIPPED.text;
+          txtProjectileStatus[i].color = EQUIPPED.color;
+          if (isSelectedItem) {
+            txtProjectileCost.text = EQUIPPED.text;
+          }
+        } else if (isDefaultItem) {
+          txtProjectileStatus[i].text = DEFAULT.text;
+          txtProjectileStatus[i].color = DEFAULT.color;
+          if (isSelectedItem) {
+            txtProjectileCost.text = DEFAULT.text;
+          }
+        } else {
+          txtProjectileStatus[i].text = UNLOCKED.text;
+          txtProjectileStatus[i].color = UNLOCKED.color;
+          if (isSelectedItem) {
+            txtProjectileCost.text = UNLOCKED.text;
+          }
+        }
+      } else {
+        txtProjectileStatus[i].text = LOCKED.text;
+        txtProjectileStatus[i].color = LOCKED.color;
+      }
+    }
+  }
+
+
   public void UpdateProjectilesStatus(string side) {
     Text[] txtProjectileStatus = null;
     Text txtProjectileCost = null;
@@ -470,8 +532,69 @@ public class ShopManager : MonoBehaviour {
     }
   }
 
+
   /// <summary>
-  /// Buy or eqquip the selected projectile
+  /// Buy or eqquip the selected Weapon
+  /// </summary>
+  /// <param name="side"></param>
+  public void BuySelectedWeapon(string side) {
+    Text txtWeaponStatus = null;
+    Text txtWeaponCost = null;
+    Text txtBtnBuyWeap = null;
+    int currentSelectedWeaponIndex = 0;
+
+    if (side == "left") {
+      txtWeaponStatus = leftTxtWeaponStatus;
+      txtWeaponCost = leftTxtWeaponPrice;
+      currentSelectedWeaponIndex = leftCurrentSelectedWeaponIndex;
+      txtBtnBuyWeap = leftTextBtnBuyWeap;
+    }
+
+    if (side == "right") {
+      txtWeaponStatus = rightTxtWeaponStatus;
+      txtWeaponCost = rightTxtWeaponPrice;
+      currentSelectedWeaponIndex = rightCurrentSelectedWeaponIndex;
+      txtBtnBuyWeap = rightTextBtnBuyWeap;
+    }
+
+    // buying the Weapon ===== 
+    int weaponPrice = availablePlayerWeapons[currentSelectedWeaponIndex].shopPrice;
+
+    bool isAlreadyPurchasedItem = ArrayUtility.Contains<int>(playerDataManager.purchasedWeapons.ToArray(), currentSelectedWeaponIndex);
+    if (!isAlreadyPurchasedItem) {
+      if ((playerDataManager.localPlayerCredits - weaponPrice) >= 0) {
+        playerDataManager.purchasedWeapons.Add(currentSelectedWeaponIndex);
+        playerDataManager.SubstractCredit(weaponPrice);
+        UpdatePlayerCreditText();
+        txtWeaponCost.text = UNLOCKED.text;
+      } else {
+        creditEffect.GetComponent<Animator>().SetTrigger("execute");
+        txtWeaponCost.text = "Not enough Credits";
+      }
+    }
+
+
+    // Equip the Weapon (if already purchased)  ======
+    if (isAlreadyPurchasedItem) {
+      if (side == "left") {
+        leftCurrentEquippedWeaponIndex = leftCurrentSelectedWeaponIndex;
+      }
+      if (side == "right") {
+        rightCurrentEquippedWeaponIndex = rightCurrentSelectedWeaponIndex;
+      }
+
+      txtWeaponStatus.text = EQUIPPED.text;
+      txtWeaponStatus.color = EQUIPPED.color;
+      txtWeaponCost.text = EQUIPPED.text;
+    }
+
+
+    UpdateWeaponStatus(side);
+  }
+
+
+  /// <summary>
+  /// Buy or eqquip the selected Weapectile
   /// </summary>
   /// <param name="side"></param>
   public void BuySelectedProjectile(string side) {
@@ -530,6 +653,9 @@ public class ShopManager : MonoBehaviour {
 
     UpdateProjectilesStatus(side);
   }
+
+
+
 
   public void UpdatePlayerCreditText() {
     playerCreditsText.text = playerDataManager.localPlayerCredits.ToString();
