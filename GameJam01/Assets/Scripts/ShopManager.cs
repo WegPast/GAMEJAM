@@ -31,6 +31,7 @@ public class ShopManager : MonoBehaviour {
   public Button[] leftProjectilesBtn;
   public Text leftTextBtnBuyProj;
   public Text leftTextBtnBuyWeap;
+  public GameObject leftMaskProj;
 
   [Header("Right side Weapon"), Space(20f)]
   public Image rightImgWeaponSprite;
@@ -51,6 +52,7 @@ public class ShopManager : MonoBehaviour {
   public Image[] rightProjectilesSprites;
   public Button[] rightProjectilesBtn;
   public Text rightTextBtnBuyProj;
+  public GameObject rightMaskProj;
 
   [Header("Weapons"), Header("--- Available weapons ---"), Space(20f)]
   private Weapon[] availablePlayerWeapons;
@@ -182,6 +184,7 @@ public class ShopManager : MonoBehaviour {
       SelectLeftAmmoType(leftSelectedProjByWeap[leftCurrentSelectedWeaponIndex]);
       SwitchProjectileInfos(side, leftSelectedProjByWeap[leftCurrentSelectedWeaponIndex]);
       UpdateProjectilesStatus(side);
+      UpdateWeaponStatus(side);
     } else {
       if ((rightCurrentSelectedWeaponIndex + 1) >= availablePlayerWeapons.Length) {
         rightCurrentSelectedWeaponIndex = 0;
@@ -195,6 +198,7 @@ public class ShopManager : MonoBehaviour {
       SelectRightAmmoType(rightSelectedProjByWeap[rightCurrentSelectedWeaponIndex]);
       SwitchProjectileInfos(side, rightSelectedProjByWeap[rightCurrentSelectedWeaponIndex]);
       UpdateProjectilesStatus(side);
+      UpdateWeaponStatus(side);
     }
   }
 
@@ -211,6 +215,7 @@ public class ShopManager : MonoBehaviour {
       SelectLeftAmmoType(leftSelectedProjByWeap[leftCurrentSelectedWeaponIndex]);
       SwitchProjectileInfos(side, leftSelectedProjByWeap[leftCurrentSelectedWeaponIndex]);
       UpdateProjectilesStatus(side);
+      UpdateWeaponStatus(side);
     } else {
       if ((rightCurrentSelectedWeaponIndex - 1) < 0) {
         rightCurrentSelectedWeaponIndex = availablePlayerWeapons.Length - 1;
@@ -224,6 +229,7 @@ public class ShopManager : MonoBehaviour {
       SelectRightAmmoType(rightSelectedProjByWeap[rightCurrentSelectedWeaponIndex]);
       SwitchProjectileInfos(side, rightSelectedProjByWeap[rightCurrentSelectedWeaponIndex]);
       UpdateProjectilesStatus(side);
+      UpdateWeaponStatus(side);
     }
   }
 
@@ -320,6 +326,7 @@ public class ShopManager : MonoBehaviour {
       SelectLeftAmmoType(0);
       SwitchWeaponName(side);
       UpdateProjectilesStatus(side);
+      UpdateWeaponStatus(side);
     }
     if (side == "right") {
       rightTxtWeaponDesc.text = description;
@@ -331,6 +338,7 @@ public class ShopManager : MonoBehaviour {
       SelectRightAmmoType(0);
       SwitchWeaponName(side);
       UpdateProjectilesStatus(side);
+      UpdateWeaponStatus(side);
     }
   }
 
@@ -412,63 +420,53 @@ public class ShopManager : MonoBehaviour {
     }
   }
 
-
   public void UpdateWeaponStatus(string side) {
-    Text[] txtProjectileStatus = null;
-    Text txtProjectileCost = null;
+    Text txtWeaponCost = null, txtWeaponStatus = null;
+    GameObject maskProj = null;
     int currentSelectedWeaponIndex = 0, currentSelectedProjectileIndex = 0, currentEquippedProjectileIndex = 0;
 
     if (side == "left") {
-      txtProjectileStatus = leftTxtProjectileStatus;
-      txtProjectileCost = leftTxtProjectilePrice;
+      txtWeaponCost = leftTxtWeaponPrice;
+      txtWeaponStatus = leftTxtWeaponStatus;
+      maskProj = leftMaskProj;
       currentSelectedWeaponIndex = leftCurrentSelectedWeaponIndex;
       currentSelectedProjectileIndex = leftCurrentSelectedProjectileIndex;
       currentEquippedProjectileIndex = leftCurrentEquippedProjectileIndex;
     }
 
     if (side == "right") {
-      txtProjectileStatus = rightTxtProjectileStatus;
-      txtProjectileCost = rightTxtProjectilePrice;
+      txtWeaponCost = rightTxtWeaponPrice;
+      txtWeaponStatus = rightTxtWeaponStatus;
+      maskProj = rightMaskProj;
       currentSelectedWeaponIndex = rightCurrentSelectedWeaponIndex;
       currentSelectedProjectileIndex = rightCurrentSelectedProjectileIndex;
       currentEquippedProjectileIndex = rightCurrentEquippedProjectileIndex;
     }
 
-    for (int i = 0; i < txtProjectileStatus.Length; i++) {
 
-      // Is the current Item is ... :
-      bool isPurchased = playerDataManager.purchasedProjectiles[currentSelectedWeaponIndex, i];
-      bool isSelectedItem = (currentSelectedProjectileIndex == i);
-      bool isEquippedItem = (currentEquippedProjectileIndex == i);
-      bool isDefaultItem = (i == 0);
-      //Debug.Log("\n Item["+i+"] isPurchased : " + isPurchased
-      //          + "\n isSelectedItem : " + isSelectedItem
-      //          + "\n isEquippedItem : " + isEquippedItem
-      //          + "\n isDefaultItem : " + isDefaultItem);
-      if (isPurchased) {
-        if (isEquippedItem) {
-          txtProjectileStatus[i].text = EQUIPPED.text;
-          txtProjectileStatus[i].color = EQUIPPED.color;
-          if (isSelectedItem) {
-            txtProjectileCost.text = EQUIPPED.text;
-          }
-        } else if (isDefaultItem) {
-          txtProjectileStatus[i].text = DEFAULT.text;
-          txtProjectileStatus[i].color = DEFAULT.color;
-          if (isSelectedItem) {
-            txtProjectileCost.text = DEFAULT.text;
-          }
-        } else {
-          txtProjectileStatus[i].text = UNLOCKED.text;
-          txtProjectileStatus[i].color = UNLOCKED.color;
-          if (isSelectedItem) {
-            txtProjectileCost.text = UNLOCKED.text;
-          }
-        }
+    // Is the current Item is ... :
+    bool isPurchased = ArrayUtility.Contains<int>(playerDataManager.purchasedWeapons.ToArray(), currentSelectedWeaponIndex);
+    bool isEquippedItem = (currentEquippedProjectileIndex == currentSelectedWeaponIndex);
+    bool isDefaultItem = (currentSelectedWeaponIndex == 0);
+    if (isPurchased) {
+      if (isEquippedItem) {
+        txtWeaponStatus.text = EQUIPPED.text;
+        txtWeaponStatus.color = EQUIPPED.color;
+        txtWeaponCost.text = EQUIPPED.text;
+      } else if (isDefaultItem) {
+        txtWeaponStatus.text = DEFAULT.text;
+        txtWeaponStatus.color = DEFAULT.color;
+        txtWeaponCost.text = DEFAULT.text;
       } else {
-        txtProjectileStatus[i].text = LOCKED.text;
-        txtProjectileStatus[i].color = LOCKED.color;
+        txtWeaponStatus.text = UNLOCKED.text;
+        txtWeaponStatus.color = UNLOCKED.color;
+        txtWeaponCost.text = UNLOCKED.text;
       }
+      maskProj.SetActive(false);
+    } else {
+      txtWeaponStatus.text = LOCKED.text;
+      txtWeaponStatus.color = LOCKED.color;
+      maskProj.SetActive(true);
     }
   }
 
