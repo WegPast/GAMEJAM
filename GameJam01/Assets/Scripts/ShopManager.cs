@@ -446,22 +446,14 @@ public class ShopManager : MonoBehaviour {
 
     // Is the current Item is ... :
     bool isPurchased = ArrayUtility.Contains<int>(playerDataManager.purchasedWeapons.ToArray(), currentSelectedWeaponIndex);
-    bool isEquippedItem = (currentEquippedProjectileIndex == currentSelectedWeaponIndex);
+    //bool isEquippedItem = (currentEquippedProjectileIndex == currentSelectedWeaponIndex);
     bool isDefaultItem = (currentSelectedWeaponIndex == 0);
     if (isPurchased) {
-      if (isEquippedItem) {
-        txtWeaponStatus.text = EQUIPPED.text;
-        txtWeaponStatus.color = EQUIPPED.color;
-        txtWeaponCost.text = EQUIPPED.text;
-      } else if (isDefaultItem) {
-        txtWeaponStatus.text = DEFAULT.text;
-        txtWeaponStatus.color = DEFAULT.color;
-        txtWeaponCost.text = DEFAULT.text;
-      } else {
-        txtWeaponStatus.text = UNLOCKED.text;
-        txtWeaponStatus.color = UNLOCKED.color;
-        txtWeaponCost.text = UNLOCKED.text;
-      }
+      txtWeaponStatus.text = EQUIPPED.text;
+      txtWeaponStatus.color = EQUIPPED.color;
+      txtWeaponCost.text = EQUIPPED.text;
+      // automatically equip the selected weapon if it is purchased
+      currentEquippedProjectileIndex = currentSelectedWeaponIndex;
       maskProj.SetActive(false);
     } else {
       txtWeaponStatus.text = LOCKED.text;
