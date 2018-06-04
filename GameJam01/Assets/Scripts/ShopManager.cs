@@ -20,6 +20,7 @@ public class ShopManager : MonoBehaviour {
   public Text leftTxtWeaponSpec;
   public Text leftTxtWeaponStatus;
   public Image leftImgHCWeaponSprite;
+  public Text leftTextBtnBuyWeap;
 
   [Header("Left side Projectile")]
   public Text leftTxtProjectileName;
@@ -30,7 +31,6 @@ public class ShopManager : MonoBehaviour {
   public Image[] leftProjectilesSprites;
   public Button[] leftProjectilesBtn;
   public Text leftTextBtnBuyProj;
-  public Text leftTextBtnBuyWeap;
   public GameObject leftMaskProj;
 
   [Header("Right side Weapon"), Space(20f)]
@@ -90,17 +90,21 @@ public class ShopManager : MonoBehaviour {
   public class ItemShopStatus {
     public Color color;
     public string text;
+    public string weaponBtnText;
+    public string projectileBtnText;
 
-    public ItemShopStatus(Color color, string text) {
+    public ItemShopStatus(Color color, string text, string weaponBtnText = "", string projectileBtnText = "") {
       this.color = color;
       this.text = text;
+      this.weaponBtnText = weaponBtnText;
+      this.projectileBtnText = projectileBtnText;
     }
   }
 
-  private ItemShopStatus UNLOCKED = new ItemShopStatus(new Color(0f, 1f, 0f, 1f), "unlocked");
-  private ItemShopStatus LOCKED = new ItemShopStatus(new Color(1f, 0f, 0f, 1f), "locked");
-  private ItemShopStatus EQUIPPED = new ItemShopStatus(new Color(0f, 0.68f, 1f, 1f), "equipped");
-  private ItemShopStatus DEFAULT = new ItemShopStatus(Color.white, "default");
+  private ItemShopStatus UNLOCKED = new ItemShopStatus(new Color(0f, 1f, 0f, 1f), "unlocked", "Equip this weapon", "Equip this ammo type");
+  private ItemShopStatus LOCKED = new ItemShopStatus(new Color(1f, 0f, 0f, 1f), "locked", "Buy this weapon", "Buy this ammo type");
+  private ItemShopStatus EQUIPPED = new ItemShopStatus(new Color(0f, 0.68f, 1f, 1f), "equipped", "Equipped weapon", "Equipped ammo type");
+  private ItemShopStatus DEFAULT = new ItemShopStatus(Color.white, "default", "Default weapon", "Default ammo type");
 
 
   // Use this for initialization
@@ -460,6 +464,9 @@ public class ShopManager : MonoBehaviour {
       txtWeaponStatus.color = LOCKED.color;
       maskProj.SetActive(true);
     }
+
+    UpdateBuyWeaponBtnText(side);
+    UpdateBuyProjectileBtnText(side);
   }
 
 
@@ -520,6 +527,8 @@ public class ShopManager : MonoBehaviour {
         txtProjectileStatus[i].color = LOCKED.color;
       }
     }
+
+    UpdateBuyProjectileBtnText(side);
   }
 
 
@@ -644,7 +653,94 @@ public class ShopManager : MonoBehaviour {
     UpdateProjectilesStatus(side);
   }
 
+  public ItemShopStatus GetCurrentSelectedItemStatus(string side, string type) {
+    ItemShopStatus status = null;
+    bool isPurchasedItem;
+    int currentSelectedWeaponIndex = 0, currentEquippedWeaponIndex = 0, currentSelectedProjectileIndex = 0, currentEquippedProjectileIndex = 0;
 
+    if (side == "left") {
+      currentSelectedWeaponIndex = leftCurrentSelectedWeaponIndex;
+      currentEquippedWeaponIndex = leftCurrentEquippedWeaponIndex;
+      currentSelectedProjectileIndex = leftCurrentSelectedProjectileIndex;
+      currentEquippedProjectileIndex = leftCurrentEquippedProjectileIndex;
+    }
+
+    if (side == "right") {
+      currentSelectedWeaponIndex = rightCurrentSelectedWeaponIndex;
+      currentEquippedWeaponIndex = rightCurrentEquippedWeaponIndex;
+      currentSelectedProjectileIndex = rightCurrentSelectedProjectileIndex;
+      currentEquippedProjectileIndex = rightCurrentEquippedProjectileIndex;
+    }
+
+    if (type == "weapon") {
+      isPurchasedItem = ArrayUtility.Contains<int>(playerDataManager.purchasedWeapons.ToArray(), currentSelectedWeaponIndex);
+      if (isPurchasedItem) {
+        status = UNLOCKED;
+        if (currentEquippedWeaponIndex == currentSelectedWeaponIndex) {
+          status = EQUIPPED;
+        }
+      } else {
+        status = LOCKED;
+        if (currentSelectedWeaponIndex == 0) {
+          status = DEFAULT;
+        }
+      }
+    }
+
+    if (type == "projectile") {
+      isPurchasedItem = playerDataManager.purchasedProjectiles[currentSelectedWeaponIndex, currentSelectedProjectileIndex];
+      if (isPurchasedItem) {
+        status = UNLOCKED;
+        // FYI : the equipped projectile is always the default of the selected weapon OR one of the selected weapon.
+        if (currentEquippedProjectileIndex == currentSelectedProjectileIndex) {
+          status = EQUIPPED;
+        }
+      } else {
+        status = LOCKED;
+        if (currentSelectedWeaponIndex == 0) {
+          status = DEFAULT;
+        }
+      }
+    }
+
+    if (type != "projectile" && type != "weapon") {
+      throw new System.Exception("GetCurrentSelectedItemStatus : Bad Argument 'type'");
+    }
+
+      return status;
+  }
+
+  public void UpdateBuyWeaponBtnText(string side) {
+    Text textBuyWeapBtn = null;
+    if (side == "left") {
+      textBuyWeapBtn = leftTextBtnBuyWeap;
+    }
+
+    if (side == "right") {
+      textBuyWeapBtn = rightTextBtnBuyWeap;
+    }
+
+    ItemShopStatus weaponStatus = GetCurrentSelectedItemStatus(side, "weapon");
+    Debug.Log("weaponStatus " + weaponStatus.text);
+
+    textBuyWeapBtn.text = weaponStatus.weaponBtnText;
+
+  }
+
+  public void UpdateBuyProjectileBtnText(string side) {
+    Text textBuyProjBtn = null;
+    if (side == "left") {
+      textBuyProjBtn = leftTextBtnBuyProj;
+    }
+    if (side == "right") {
+      textBuyProjBtn = rightTextBtnBuyProj;
+    }
+
+    ItemShopStatus projectileStatus = GetCurrentSelectedItemStatus(side, "projectile");
+    Debug.Log("projectileStatus " + projectileStatus.text);
+    textBuyProjBtn.text 
+      = projectileStatus.projectileBtnText;
+  }
 
 
   public void UpdatePlayerCreditText() {

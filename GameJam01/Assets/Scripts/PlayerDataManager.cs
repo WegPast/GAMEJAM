@@ -45,7 +45,7 @@ public class PlayerDataManager : MonoBehaviour
       purchasedProjectiles[i, 3] = false;
       purchasedProjectiles[i, 4] = false;
     }
-    //purchasedProjectiles[0, 2] = true; // ex : weapon 0 (rifle) , projectile 2 (piercing) purchased
+    purchasedWeapons.Add(0);
 
     //gameManager = FindObjectOfType<GameManager>();
     if (gameManager.playerDataManager) {

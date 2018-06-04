@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class PlayerControl : NetworkBehaviour
-{
+public class PlayerControl : NetworkBehaviour {
 
   [Header("Player properties")]
   public float speed = 1.0f;
@@ -34,8 +33,9 @@ public class PlayerControl : NetworkBehaviour
 
   public PlayerDataManager playerDataManager;
   public GameObject body;
-  private GameManager gameManager;
+  public bool isPlayerControlInit = false;
 
+  private GameManager gameManager;
   private float deltaTimeFire;
   private float deltaTimeFire2;
   private LifeManager lifeManager;
@@ -72,6 +72,12 @@ public class PlayerControl : NetworkBehaviour
       if (Input.GetButton("Fire1")) { SendFiringState(true); } else { SendFiringState(false); }
       LookAtMouse();
       Move();
+      if (!isPlayerControlInit) {
+        if (isLocalPlayer && playerDataManager && playerDataManager.hasBeenInit) {
+          LoadPlayerData();
+          isPlayerControlInit = true;
+        }
+      }
     }
     //Childs Animations
     HandleGunsAnimation();
@@ -154,17 +160,15 @@ public class PlayerControl : NetworkBehaviour
 
 
   public void LoadPlayerData() {
-    if (isLocalPlayer && playerDataManager && playerDataManager.hasBeenInit) {
-      //Debug.Log("LoadPlayerData : lw " + playerDataManager.localPlayerLeftWeaponIndex + " | lp " + playerDataManager.localPlayerLeftProjectilesIndex + " | rw " + playerDataManager.localPlayerRightWeaponIndex + " | rp " + playerDataManager.localPlayerRightProjectilesIndex);
-      // loading weapon and their selected projectile
-      Weapon leftWeapon = playerDataManager.availableWeapons[playerDataManager.localPlayerLeftWeaponIndex];
-      Weapon rightWeapon = playerDataManager.availableWeapons[playerDataManager.localPlayerRightWeaponIndex];
-      ChangeGunLeftWeapon(leftWeapon.gameObject,
-        leftWeapon.availableProjectiles[playerDataManager.localPlayerLeftProjectilesIndex]);
-      ChangeGunRightWeapon(rightWeapon.gameObject,
-        rightWeapon.availableProjectiles[playerDataManager.localPlayerRightProjectilesIndex]);
+    //Debug.Log("LoadPlayerData : lw " + playerDataManager.localPlayerLeftWeaponIndex + " | lp " + playerDataManager.localPlayerLeftProjectilesIndex + " | rw " + playerDataManager.localPlayerRightWeaponIndex + " | rp " + playerDataManager.localPlayerRightProjectilesIndex);
+    //loading weapon and their selected projectile
+    Weapon leftWeapon = playerDataManager.availableWeapons[playerDataManager.localPlayerLeftWeaponIndex];
+    Weapon rightWeapon = playerDataManager.availableWeapons[playerDataManager.localPlayerRightWeaponIndex];
+    ChangeGunLeftWeapon(leftWeapon.gameObject,
+      leftWeapon.availableProjectiles[playerDataManager.localPlayerLeftProjectilesIndex]);
+    ChangeGunRightWeapon(rightWeapon.gameObject,
+      rightWeapon.availableProjectiles[playerDataManager.localPlayerRightProjectilesIndex]);
 
-    }
   }
 
   public void CheckPlayerLife() {
