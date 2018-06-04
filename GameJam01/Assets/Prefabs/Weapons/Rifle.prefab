@@ -141,7 +141,7 @@ MonoBehaviour:
   description: A powerful rifle. low fire rate but great damage and good projectile
     speed.
   shopName: Rifle
-  shopPrice: 1800
+  shopPrice: 0
   fireSpot: {fileID: 1457463025503110}
 --- !u!114 &114315224822168442
 MonoBehaviour:

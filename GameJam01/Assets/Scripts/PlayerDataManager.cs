@@ -26,7 +26,7 @@ public class PlayerDataManager : MonoBehaviour
   [Header("Local Player Bonus (Kept by this Player Data Manager)")]
   public int localPlayerLifeMaxBonus;
   public int localPlayerSpeedBonus;
-  public int localPlayerCredits;
+  public int localPlayerCredits = 2000;
   // end player data -------------------------
 
   [Header("Weapons"), Header("--- Available weapons ---"), Space(20f)]
@@ -93,7 +93,7 @@ public class PlayerDataManager : MonoBehaviour
   }
 
   public void SetPlayerData(Hashtable data) {
-    //Debug.Log("SetPlayerDAta : lw "+ data["LeftWeapon"]+" | lp "+ data["LeftProjectiles"] + " | rw " + data["RightWeapon"] + " | rp " + data["RightProjectiles"]);
+    //Debug.Log("SetPlayerDAta : lw " + data["LeftWeapon"] + " | lp " + data["LeftProjectiles"] + " | rw " + data["RightWeapon"] + " | rp " + data["RightProjectiles"]);
     localPlayerLeftWeaponIndex = (int)data["LeftWeapon"];
     localPlayerLeftProjectilesIndex = (int)data["LeftProjectiles"];
     localPlayerRightWeaponIndex = (int)data["RightWeapon"];
