@@ -471,6 +471,7 @@ public class ShopManager : MonoBehaviour {
     Text txtWeaponCost = null, txtWeaponStatus = null;
     Button btnWeapBuy = null;
     GameObject maskProj = null;
+    bool isPurchased = false;
     int currentSelectedWeaponIndex = 0, currentSelectedProjectileIndex = 0, currentEquippedProjectileIndex = 0, currentEquippedWeaponIndex = 0;
 
     if (side == "left") {
@@ -482,6 +483,7 @@ public class ShopManager : MonoBehaviour {
       currentSelectedProjectileIndex = leftCurrentSelectedProjectileIndex;
       currentEquippedProjectileIndex = leftCurrentEquippedProjectileIndex;
       btnWeapBuy = leftBtnBuyWeap;
+      isPurchased = System.Array.IndexOf<int>(playerDataManager.purchasedLeftWeapons.ToArray(), currentSelectedWeaponIndex) >= 0;
     }
 
     if (side == "right") {
@@ -493,11 +495,11 @@ public class ShopManager : MonoBehaviour {
       currentSelectedProjectileIndex = rightCurrentSelectedProjectileIndex;
       currentEquippedProjectileIndex = rightCurrentEquippedProjectileIndex;
       btnWeapBuy = rightBtnBuyWeap;
+      isPurchased = System.Array.IndexOf<int>(playerDataManager.purchasedRightWeapons.ToArray(), currentSelectedWeaponIndex) >= 0;
     }
 
 
     // Is the current Item is ... :
-    bool isPurchased = ArrayUtility.Contains<int>(playerDataManager.purchasedWeapons.ToArray(), currentSelectedWeaponIndex);
     bool isEquippedItem = (currentEquippedWeaponIndex == currentSelectedWeaponIndex);
     bool isDefaultItem = (currentSelectedWeaponIndex == 0);
     if (isPurchased) {
@@ -540,6 +542,7 @@ public class ShopManager : MonoBehaviour {
     Button[] selectionBtnsProjectile = null;
     Button btnProjBuy = null;
     Text txtProjectileCost = null;
+    bool isPurchased = false; ;
     int currentSelectedWeaponIndex = 0, currentSelectedProjectileIndex = 0, currentEquippedProjectileIndex = 0, currentEquippedWeaponIndex = 0;
 
     if (side == "left") {
@@ -573,7 +576,15 @@ public class ShopManager : MonoBehaviour {
 
       // Is the current Item is ... :
       if (i < availablePlayerWeapons[currentSelectedWeaponIndex].availableProjectiles.Length) {
-        bool isPurchased = playerDataManager.purchasedProjectiles[currentSelectedWeaponIndex, i];
+
+        if (side == "left") {
+          isPurchased = playerDataManager.purchasedLeftProjectiles[currentSelectedWeaponIndex, i];
+        }
+
+        if (side == "right") {
+          isPurchased = playerDataManager.purchasedRightProjectiles[currentSelectedWeaponIndex, i];
+        }
+
         bool isSelectedItem = (currentSelectedProjectileIndex == i);
         bool isEquippedItem = (currentEquippedProjectileIndex == i && currentSelectedWeaponIndex == currentEquippedWeaponIndex);
         bool isDefaultItem = (i == 0);
@@ -632,6 +643,7 @@ public class ShopManager : MonoBehaviour {
     Text txtWeaponStatus = null;
     Text txtWeaponCost = null;
     Text txtBtnBuyWeap = null;
+    bool isAlreadyPurchasedItem = false;
     int currentSelectedWeaponIndex = 0;
 
     if (side == "left") {
@@ -639,6 +651,8 @@ public class ShopManager : MonoBehaviour {
       txtWeaponCost = leftTxtWeaponPrice;
       currentSelectedWeaponIndex = leftCurrentSelectedWeaponIndex;
       txtBtnBuyWeap = leftTextBtnBuyWeap;
+
+    isAlreadyPurchasedItem = System.Array.IndexOf<int>(playerDataManager.purchasedLeftWeapons.ToArray(), currentSelectedWeaponIndex) >= 0;
     }
 
     if (side == "right") {
@@ -646,16 +660,20 @@ public class ShopManager : MonoBehaviour {
       txtWeaponCost = rightTxtWeaponPrice;
       currentSelectedWeaponIndex = rightCurrentSelectedWeaponIndex;
       txtBtnBuyWeap = rightTextBtnBuyWeap;
+      isAlreadyPurchasedItem = System.Array.IndexOf<int>(playerDataManager.purchasedRightWeapons.ToArray(), currentSelectedWeaponIndex) >= 0;
     }
 
     // buying the Weapon ===== 
     int weaponPrice = availablePlayerWeapons[currentSelectedWeaponIndex].shopPrice;
-
-    bool isAlreadyPurchasedItem = ArrayUtility.Contains<int>(playerDataManager.purchasedWeapons.ToArray(), currentSelectedWeaponIndex);
     if (!isAlreadyPurchasedItem) {
       if ((playerDataManager.localPlayerCredits - weaponPrice) >= 0) {
-        playerDataManager.purchasedWeapons.Add(currentSelectedWeaponIndex);
-        playerDataManager.SubstractCredit(weaponPrice);
+        if (side == "left") {
+          playerDataManager.purchasedLeftWeapons.Add(currentSelectedWeaponIndex);
+        }
+        if (side == "right") {
+          playerDataManager.purchasedRightWeapons.Add(currentSelectedWeaponIndex);
+        }
+            playerDataManager.SubstractCredit(weaponPrice);
         UpdatePlayerCreditText();
         //txtWeaponCost.text = UNLOCKED.text;
       } else {
@@ -696,13 +714,14 @@ public class ShopManager : MonoBehaviour {
     Text txtProjectileCost = null;
     Text txtBtnBuyProj = null;
     int currentSelectedWeaponIndex = 0, currentSelectedProjectileIndex = 0;
-
+    bool isAlreadyPurchasedItem = false;
     if (side == "left") {
       txtProjectileStatus = leftTxtProjectileStatus;
       txtProjectileCost = leftTxtProjectilePrice;
       currentSelectedWeaponIndex = leftCurrentSelectedWeaponIndex;
       currentSelectedProjectileIndex = leftCurrentSelectedProjectileIndex;
       txtBtnBuyProj = leftTextBtnBuyProj;
+      isAlreadyPurchasedItem = playerDataManager.purchasedLeftProjectiles[currentSelectedWeaponIndex, currentSelectedProjectileIndex];
     }
 
     if (side == "right") {
@@ -711,15 +730,21 @@ public class ShopManager : MonoBehaviour {
       currentSelectedWeaponIndex = rightCurrentSelectedWeaponIndex;
       currentSelectedProjectileIndex = rightCurrentSelectedProjectileIndex;
       txtBtnBuyProj = rightTextBtnBuyProj;
+      isAlreadyPurchasedItem = playerDataManager.purchasedRightProjectiles[currentSelectedWeaponIndex, currentSelectedProjectileIndex];
     }
 
     // buying the projectile ===== 
     int projectilePrice = availablePlayerWeapons[currentSelectedWeaponIndex].availableProjectiles[currentSelectedProjectileIndex].shopPrice;
 
-    bool isAlreadyPurchasedItem = playerDataManager.purchasedProjectiles[currentSelectedWeaponIndex, currentSelectedProjectileIndex];
     if (!isAlreadyPurchasedItem) {
       if ((playerDataManager.localPlayerCredits - projectilePrice) >= 0) {
-        playerDataManager.purchasedProjectiles[currentSelectedWeaponIndex, currentSelectedProjectileIndex] = true;
+
+        if (side == "left") {
+          playerDataManager.purchasedLeftProjectiles[currentSelectedWeaponIndex, currentSelectedProjectileIndex] = true;
+        }
+        if (side == "right") {
+          playerDataManager.purchasedRightProjectiles[currentSelectedWeaponIndex, currentSelectedProjectileIndex] = true;
+        }
         playerDataManager.SubstractCredit(projectilePrice);
         UpdatePlayerCreditText();
         txtProjectileCost.text = UNLOCKED.text;
@@ -757,7 +782,8 @@ public class ShopManager : MonoBehaviour {
 
   public ItemShopStatus GetCurrentSelectedItemStatus(string side, string type) {
     ItemShopStatus status = null;
-    bool isPurchasedItem;
+    bool isPurchasedItem = false;
+    bool isPurchasedWeap = false;
     int currentSelectedWeaponIndex = 0, currentEquippedWeaponIndex = 0, currentSelectedProjectileIndex = 0, currentEquippedProjectileIndex = 0;
 
     if (side == "left") {
@@ -765,6 +791,8 @@ public class ShopManager : MonoBehaviour {
       currentEquippedWeaponIndex = leftCurrentEquippedWeaponIndex;
       currentSelectedProjectileIndex = leftCurrentSelectedProjectileIndex;
       currentEquippedProjectileIndex = leftCurrentEquippedProjectileIndex;
+      isPurchasedItem = playerDataManager.purchasedLeftProjectiles[currentSelectedWeaponIndex, currentSelectedProjectileIndex];
+      isPurchasedWeap = System.Array.IndexOf<int>(playerDataManager.purchasedLeftWeapons.ToArray(), currentSelectedWeaponIndex) >= 0;
     }
 
     if (side == "right") {
@@ -772,11 +800,12 @@ public class ShopManager : MonoBehaviour {
       currentEquippedWeaponIndex = rightCurrentEquippedWeaponIndex;
       currentSelectedProjectileIndex = rightCurrentSelectedProjectileIndex;
       currentEquippedProjectileIndex = rightCurrentEquippedProjectileIndex;
+      isPurchasedItem = playerDataManager.purchasedRightProjectiles[currentSelectedWeaponIndex, currentSelectedProjectileIndex];
+      isPurchasedWeap = System.Array.IndexOf<int>(playerDataManager.purchasedRightWeapons.ToArray(), currentSelectedWeaponIndex) >= 0;
     }
 
     if (type == "weapon") {
-      isPurchasedItem = ArrayUtility.Contains<int>(playerDataManager.purchasedWeapons.ToArray(), currentSelectedWeaponIndex);
-      if (isPurchasedItem) {
+      if (isPurchasedWeap) {
         status = UNLOCKED;
         if (currentEquippedWeaponIndex == currentSelectedWeaponIndex) {
           status = EQUIPPED;
@@ -790,7 +819,6 @@ public class ShopManager : MonoBehaviour {
     }
 
     if (type == "projectile") {
-      isPurchasedItem = playerDataManager.purchasedProjectiles[currentSelectedWeaponIndex, currentSelectedProjectileIndex];
       if (isPurchasedItem) {
         status = UNLOCKED;
         // FYI : the equipped projectile is always the default of the selected weapon OR one of the selected weapon.
@@ -878,23 +906,23 @@ public class ShopManager : MonoBehaviour {
       // left 
       data["LeftWeapon"] = leftCurrentSelectedWeaponIndex;
       if (!playerDataManager.IsWeaponPurchased(leftCurrentSelectedWeaponIndex)) {
-        playerDataManager.purchasedWeapons.Add(leftCurrentSelectedWeaponIndex);
+        playerDataManager.purchasedLeftWeapons.Add(leftCurrentSelectedWeaponIndex);
       }
 
       data["LeftProjectiles"] = leftCurrentSelectedProjectileIndex;
       if (!playerDataManager.IsProjectilePurchased(leftCurrentSelectedProjectileIndex)) {
-        playerDataManager.purchasedProjectiles[leftCurrentSelectedWeaponIndex, leftCurrentSelectedProjectileIndex] = true;
+        playerDataManager.purchasedLeftProjectiles[leftCurrentSelectedWeaponIndex, leftCurrentSelectedProjectileIndex] = true;
       }
 
       // right
       data["RightWeapon"] = rightCurrentSelectedWeaponIndex;
       if (!playerDataManager.IsWeaponPurchased(rightCurrentSelectedWeaponIndex)) {
-        playerDataManager.purchasedWeapons.Add(rightCurrentSelectedWeaponIndex);
+        playerDataManager.purchasedRightWeapons.Add(rightCurrentSelectedWeaponIndex);
       }
 
       data["RightProjectiles"] = rightCurrentSelectedProjectileIndex;
       if (!playerDataManager.IsProjectilePurchased(rightCurrentSelectedProjectileIndex)) {
-        playerDataManager.purchasedProjectiles[leftCurrentSelectedWeaponIndex, rightCurrentSelectedProjectileIndex] = true;
+        playerDataManager.purchasedRightProjectiles[rightCurrentSelectedWeaponIndex, rightCurrentSelectedProjectileIndex] = true;
       }
 
       //Debug.Log("leftCurrentSelectedProjectileIndex : " + leftCurrentSelectedProjectileIndex);

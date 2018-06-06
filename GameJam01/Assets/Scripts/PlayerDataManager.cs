@@ -31,21 +31,34 @@ public class PlayerDataManager : MonoBehaviour
 
   [Header("Weapons"), Header("--- Available weapons ---"), Space(20f)]
   public Weapon[] availableWeapons;
-  public List<int> purchasedWeapons;
-  public bool[,] purchasedProjectiles; // [purchasedWeaponIndex,purchasedProjectileIndex]
+  public List<int> purchasedLeftWeapons;
+  public List<int> purchasedRightWeapons;
+  public bool[,] purchasedLeftProjectiles; // [purchasedWeaponIndex,purchasedProjectileIndex]
+  public bool[,] purchasedRightProjectiles; // [purchasedWeaponIndex,purchasedProjectileIndex]
 
   public bool hasBeenInit = false;
 
   private void Start() {
-    purchasedProjectiles = new bool[availableWeapons.Length, 5];
+    purchasedLeftProjectiles = new bool[availableWeapons.Length, 5];
     for (int i = 0; i < availableWeapons.Length; i++) {
-      purchasedProjectiles[i, 0] = true;
-      purchasedProjectiles[i, 1] = false;
-      purchasedProjectiles[i, 2] = false;
-      purchasedProjectiles[i, 3] = false;
-      purchasedProjectiles[i, 4] = false;
+      purchasedLeftProjectiles[i, 0] = true;
+      purchasedLeftProjectiles[i, 1] = false;
+      purchasedLeftProjectiles[i, 2] = false;
+      purchasedLeftProjectiles[i, 3] = false;
+      purchasedLeftProjectiles[i, 4] = false;
     }
-    purchasedWeapons.Add(0);
+
+    purchasedRightProjectiles = new bool[availableWeapons.Length, 5];
+    for (int i = 0; i < availableWeapons.Length; i++) {
+      purchasedRightProjectiles[i, 0] = true;
+      purchasedRightProjectiles[i, 1] = false;
+      purchasedRightProjectiles[i, 2] = false;
+      purchasedRightProjectiles[i, 3] = false;
+      purchasedRightProjectiles[i, 4] = false;
+    }
+
+    purchasedLeftWeapons.Add(0);
+    purchasedRightWeapons.Add(0);
 
     //gameManager = FindObjectOfType<GameManager>();
     if (gameManager.playerDataManager) {
@@ -147,16 +160,16 @@ public class PlayerDataManager : MonoBehaviour
   }
 
   public bool IsWeaponPurchased(int index) {
-    Debug.Log("weapon " + index + " is purchased :" + (purchasedWeapons.IndexOf(index) >= 0));
-    return purchasedWeapons.IndexOf(index) >= 0;
+    Debug.Log("weapon " + index + " is purchased :" + (purchasedLeftWeapons.IndexOf(index) >= 0));
+    return purchasedLeftWeapons.IndexOf(index) >= 0;
   }
 
   public bool IsProjectilePurchased(int index) {
     for (int weapIndex = 0; weapIndex < availableWeapons.Length; weapIndex++) {
       for (int projectIndex = 0; projectIndex < 6; projectIndex++) {
         if (projectIndex == index) {
-          Debug.Log("projectile " + index + " for weapon "+ weapIndex+" is purchased :" + purchasedProjectiles[weapIndex, projectIndex]);
-          return purchasedProjectiles[weapIndex, projectIndex];
+          Debug.Log("projectile " + index + " for weapon "+ weapIndex+" is purchased :" + purchasedLeftProjectiles[weapIndex, projectIndex]);
+          return purchasedLeftProjectiles[weapIndex, projectIndex];
         }
       }
     }
