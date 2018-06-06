@@ -55,6 +55,8 @@ MonoBehaviour:
   skillsMenu: {fileID: 0}
   playerCreditsText: {fileID: 0}
   playerDataManager: {fileID: 0}
+  creditEffect: {fileID: 0}
+  acceptBtn: {fileID: 0}
   leftImgWeaponSprite: {fileID: 0}
   leftTxtWeaponName: {fileID: 0}
   leftTxtWeaponPrice: {fileID: 0}
@@ -62,6 +64,7 @@ MonoBehaviour:
   leftTxtWeaponSpec: {fileID: 0}
   leftTxtWeaponStatus: {fileID: 0}
   leftImgHCWeaponSprite: {fileID: 0}
+  leftBtnBuyWeap: {fileID: 0}
   leftTxtProjectileName: {fileID: 0}
   leftTxtProjectilePrice: {fileID: 0}
   leftTxtProjectileDesc: {fileID: 0}
@@ -84,6 +87,15 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  leftTextBtnBuyProj: {fileID: 0}
+  leftMaskProj: {fileID: 0}
+  leftSelectionBtnsProjectile:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  leftBtnBuyProj: {fileID: 0}
   rightImgWeaponSprite: {fileID: 0}
   rightTxtWeaponName: {fileID: 0}
   rightTxtWeaponPrice: {fileID: 0}
@@ -91,6 +103,7 @@ MonoBehaviour:
   rightTxtWeaponSpec: {fileID: 0}
   rightTxtWeaponStatus: {fileID: 0}
   rightImgHCWeaponSprite: {fileID: 0}
+  rightBtnBuyWeap: {fileID: 0}
   rightTxtProjectileName: {fileID: 0}
   rightTxtProjectilePrice: {fileID: 0}
   rightTxtProjectileDesc: {fileID: 0}
@@ -113,4 +126,13 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  rightTextBtnBuyProj: {fileID: 0}
+  rightMaskProj: {fileID: 0}
+  rightSelectionBtnsProjectile:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  rightBtnBuyProj: {fileID: 0}
   noProjectileSprite: {fileID: 21300010, guid: 84245fe34f0be7b44b8998daba56ef08, type: 3}
