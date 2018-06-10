@@ -187,6 +187,9 @@ MonoBehaviour:
     type: 2}
   availableProjectiles:
   - {fileID: 114046606857253414, guid: e15456bf850dcb2479dcf849f086229d, type: 2}
+  - {fileID: 114398927931212290, guid: 2c341781fd4e03e4399c0fcc527716f4, type: 2}
+  - {fileID: 114079623793173746, guid: 386f75789afabbb48b7c936c3b6414e0, type: 2}
+  - {fileID: 114019979659034096, guid: 2f4362539c5c0884a90a8c5c707c7c51, type: 2}
   description: Spreading a large amount of bullets, this weapon will surely bring
     ennemies to their knees.
   shopName: Multi-gun

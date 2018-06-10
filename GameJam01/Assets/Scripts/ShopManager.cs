@@ -285,7 +285,7 @@ public class ShopManager : MonoBehaviour {
     Projectiles selectedProjectile = availablePlayerWeapons[index].projectileType;
     Projectiles[] availableProjectile = availablePlayerWeapons[index].availableProjectiles;
     if (side == "left") {
-      for (int i = 0; i < leftProjectilesSprites.Length - 1; i++) {
+      for (int i = 0; i < leftProjectilesSprites.Length; i++) {
         if (i <= (availableProjectile.Length - 1)) {
           leftProjectilesSprites[i].sprite = availableProjectile[i].GetComponent<SpriteRenderer>().sprite;
         } else {
@@ -295,7 +295,7 @@ public class ShopManager : MonoBehaviour {
       }
     }
     if (side == "right") {
-      for (int i = 0; i < rightProjectilesSprites.Length - 1; i++) {
+      for (int i = 0; i < rightProjectilesSprites.Length; i++) {
         if (i <= (availableProjectile.Length - 1)) {
           rightProjectilesSprites[i].sprite = availableProjectile[i].GetComponent<SpriteRenderer>().sprite;
         } else {
