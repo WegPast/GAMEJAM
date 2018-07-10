@@ -176,7 +176,7 @@ public class ShopManager : MonoBehaviour {
       SwitchWeaponInfos(side, leftCurrentSelectedWeaponIndex);
       SwitchProjectileSprite(side, leftCurrentSelectedWeaponIndex);
       SelectLeftAmmoType(leftProjectileIndex);
-
+      EquipThisProjectile(side);
     }
 
     if (playerDataManager) {
@@ -193,6 +193,7 @@ public class ShopManager : MonoBehaviour {
       SwitchWeaponInfos(side, rightCurrentSelectedWeaponIndex);
       SwitchProjectileSprite(side, rightCurrentSelectedWeaponIndex);
       SelectRightAmmoType(rightProjectileIndex);
+      EquipThisProjectile(side);
     }
 
   }
@@ -652,7 +653,7 @@ public class ShopManager : MonoBehaviour {
       currentSelectedWeaponIndex = leftCurrentSelectedWeaponIndex;
       txtBtnBuyWeap = leftTextBtnBuyWeap;
 
-    isAlreadyPurchasedItem = System.Array.IndexOf<int>(playerDataManager.purchasedLeftWeapons.ToArray(), currentSelectedWeaponIndex) >= 0;
+      isAlreadyPurchasedItem = System.Array.IndexOf<int>(playerDataManager.purchasedLeftWeapons.ToArray(), currentSelectedWeaponIndex) >= 0;
     }
 
     if (side == "right") {
@@ -673,7 +674,7 @@ public class ShopManager : MonoBehaviour {
         if (side == "right") {
           playerDataManager.purchasedRightWeapons.Add(currentSelectedWeaponIndex);
         }
-            playerDataManager.SubstractCredit(weaponPrice);
+        playerDataManager.SubstractCredit(weaponPrice);
         UpdatePlayerCreditText();
         //txtWeaponCost.text = UNLOCKED.text;
       } else {
@@ -757,27 +758,39 @@ public class ShopManager : MonoBehaviour {
 
     // Equip the projectile (if already purchased)  ======
     if (isAlreadyPurchasedItem) {
-      // if we equip this projectile, we make sur that the selected weapon is equipped too.
-      if (side == "left") {
-        leftCurrentEquippedWeaponIndex = leftCurrentSelectedWeaponIndex;
-        playerDataManager.localPlayerLeftWeaponIndex = leftCurrentEquippedWeaponIndex;
-        leftCurrentEquippedProjectileIndex = leftCurrentSelectedProjectileIndex;
-        playerDataManager.localPlayerLeftProjectilesIndex = leftCurrentEquippedProjectileIndex;
-      }
-      if (side == "right") {
-        rightCurrentEquippedWeaponIndex = rightCurrentSelectedWeaponIndex;
-        playerDataManager.localPlayerRightWeaponIndex = rightCurrentEquippedWeaponIndex;
-        rightCurrentEquippedProjectileIndex = rightCurrentSelectedProjectileIndex;
-        playerDataManager.localPlayerRightProjectilesIndex = rightCurrentEquippedProjectileIndex;
-      }
-
-      txtProjectileStatus[currentSelectedProjectileIndex].text = EQUIPPED.text;
-      txtProjectileStatus[currentSelectedProjectileIndex].color = EQUIPPED.color;
-      txtProjectileCost.text = EQUIPPED.text;
+      EquipThisProjectile(side);
     }
 
     UpdateWeaponStatus(side);
     UpdateProjectilesStatus(side);
+  }
+
+
+  public void EquipThisProjectile(string side) {
+
+    // if we equip this projectile, we make sur that the selected weapon is equipped too.
+    if (side == "left") {
+      leftCurrentEquippedWeaponIndex = leftCurrentSelectedWeaponIndex;
+      playerDataManager.localPlayerLeftWeaponIndex = leftCurrentEquippedWeaponIndex;
+      leftCurrentEquippedProjectileIndex = leftCurrentSelectedProjectileIndex;
+      playerDataManager.localPlayerLeftProjectilesIndex = leftCurrentEquippedProjectileIndex;
+      leftTxtProjectileStatus[leftCurrentSelectedProjectileIndex].text = EQUIPPED.text;
+      leftTxtProjectileStatus[leftCurrentSelectedProjectileIndex].color = EQUIPPED.color;
+      leftTxtProjectilePrice.text = EQUIPPED.text;
+    }
+    if (side == "right") {
+      rightCurrentEquippedWeaponIndex = rightCurrentSelectedWeaponIndex;
+      playerDataManager.localPlayerRightWeaponIndex = rightCurrentEquippedWeaponIndex;
+      rightCurrentEquippedProjectileIndex = rightCurrentSelectedProjectileIndex;
+      playerDataManager.localPlayerRightProjectilesIndex = rightCurrentEquippedProjectileIndex;
+      rightTxtProjectileStatus[rightCurrentSelectedProjectileIndex].text = EQUIPPED.text;
+      rightTxtProjectileStatus[rightCurrentSelectedProjectileIndex].color = EQUIPPED.color;
+      rightTxtProjectilePrice.text = EQUIPPED.text;
+    }
+
+    UpdateWeaponStatus(side);
+    UpdateProjectilesStatus(side);
+
   }
 
   public ItemShopStatus GetCurrentSelectedItemStatus(string side, string type) {
