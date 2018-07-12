@@ -105,6 +105,9 @@ MonoBehaviour:
   isFromMyPlayer: 0
   speed: 30
   damage: 2
+  isExplosive: 0
+  explosion: {fileID: 0}
+  explosionSize: 1
   description: Fire small bullet. Has a chance to deal damage over time on target.
     Effective against flesh.
   shopName: Small Fire Bullet

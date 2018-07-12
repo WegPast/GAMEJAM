@@ -4,15 +4,29 @@ using UnityEngine;
 
 public class Explosive : MonoBehaviour {
 
-	// Use this for initialization
+  public int explosionSize = 0;
 
-	void Start () {
-	}
+  private Animator animator;
+
+  public void Explode() {
+    animator = gameObject.GetComponent<Animator>();
+    switch (explosionSize) {
+      case 1:
+        animator.SetTrigger("explodeSmall");
+        break;
+      case 2:
+        animator.SetTrigger("explodeMed");
+        break;
+      case 3:
+        animator.SetTrigger("explodeBig");
+        break;
+    }
+  }
 
   public void DestroyMe() {
     Destroy(gameObject);
   }
-	
+
 
 }
 

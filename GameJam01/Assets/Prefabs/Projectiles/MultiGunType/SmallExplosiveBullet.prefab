@@ -105,6 +105,9 @@ MonoBehaviour:
   isFromMyPlayer: 0
   speed: 25
   damage: 4
+  isExplosive: 1
+  explosion: {fileID: 1270963817246346, guid: 576c2523f52745c4bab2b8f6a7640f3f, type: 2}
+  explosionSize: 1
   description: Explosive small bullet. Deal good damage and litllte area damag
   shopName: Small Explosive Bullet
   shopPrice: 300

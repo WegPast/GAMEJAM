@@ -105,6 +105,9 @@ MonoBehaviour:
   isFromMyPlayer: 0
   speed: 35
   damage: 3
+  isExplosive: 0
+  explosion: {fileID: 0}
+  explosionSize: 1
   description: Electric bullet, can stun enemies. Great against machine.
   shopName: Small Eletric Bullet
   shopPrice: 500

@@ -5,7 +5,7 @@ AnimationClip:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Explosion
+  m_Name: ExplosionMed
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -21,21 +21,21 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.17875718
-        inSlope: 5.030602
-        outSlope: 5.030602
+        value: 0.040373996
+        inSlope: 9.390608
+        outSlope: 9.390608
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.26748294
+        outWeight: 0.14018692
       - serializedVersion: 3
-        time: 0.41666666
+        time: 0.25
         value: 1.0334961
-        inSlope: 0.35709292
-        outSlope: 0.35709292
+        inSlope: 0.23558855
+        outSlope: 0.23558855
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.16470237
+        inWeight: 0.11993766
         outWeight: 0.33333334
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -65,7 +65,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.41666666
+    m_StopTime: 0.25
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -86,21 +86,21 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.17875718
-        inSlope: 5.030602
-        outSlope: 5.030602
+        value: 0.040373996
+        inSlope: 9.390608
+        outSlope: 9.390608
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.26748294
+        outWeight: 0.14018692
       - serializedVersion: 3
-        time: 0.41666666
+        time: 0.25
         value: 1.0334961
-        inSlope: 0.35709292
-        outSlope: 0.35709292
+        inSlope: 0.23558855
+        outSlope: 0.23558855
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.16470237
+        inWeight: 0.11993766
         outWeight: 0.33333334
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -114,7 +114,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_GenerateMotionCurves: 0
   m_Events:
-  - time: 0.41666666
+  - time: 0.25
     functionName: DestroyMe
     data: 
     objectReferenceParameter: {fileID: 0}
