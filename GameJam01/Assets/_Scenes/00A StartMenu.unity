@@ -766,7 +766,7 @@ Prefab:
     - target: {fileID: 114627946045264974, guid: 41e55c21907c0bf42a79c21a83143294,
         type: 2}
       propertyPath: localPlayerCredits
-      value: 2000
+      value: 6000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 41e55c21907c0bf42a79c21a83143294, type: 2}

@@ -51,13 +51,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113bee370e2ddab4b84c5d6f57ed915e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  localPlayerLeftWeapon: {fileID: 0}
-  localPlayerLeftProjectiles: {fileID: 0}
-  localPlayerRightWeapon: {fileID: 0}
-  localPlayerRightProjectiles: {fileID: 0}
+  isLocalPlayerInitialized: 0
+  gameManager: {fileID: 0}
+  localPlayerLeftWeaponIndex: 0
+  localPlayerLeftProjectilesIndex: 0
+  localPlayerRightWeaponIndex: 0
+  localPlayerRightProjectilesIndex: 0
   localPlayerLifeMaxBonus: 0
   localPlayerSpeedBonus: 0
+  localPlayerCredits: 6000
   availableWeapons:
   - {fileID: 114260399183434546, guid: 729cc6897ccc8c1448ee5b6b16bc1b32, type: 2}
   - {fileID: 114964413656712790, guid: 9bc381293aa1b164a90a7286a6a10231, type: 2}
+  - {fileID: 114964413656712790, guid: 2fdebfb9e6575c5409aed23d3f4deda2, type: 2}
+  purchasedLeftWeapons: 
+  purchasedRightWeapons: 
   hasBeenInit: 0

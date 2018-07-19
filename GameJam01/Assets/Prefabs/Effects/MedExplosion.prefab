@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114393803047089014}
   - component: {fileID: 212129980999730600}
   m_Layer: 10
-  m_Name: SmallExplosion 1
+  m_Name: MedExplosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36,7 +36,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1270963817246346}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -87,7 +87,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d6909a26665e1146a153b79a202bf9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionSize: 1
+  explosionSize: 2
 --- !u!212 &212129980999730600
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -123,7 +123,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300006, guid: 026dd09051d93c34eb13e23b08fc42b6, type: 3}
+  m_Sprite: {fileID: 21300008, guid: f850c80a57004c74381f626c138c7563, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

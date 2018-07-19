@@ -171,8 +171,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d3f59414dd5dd34eb237bf02d87f446, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeValue: 5
-  lifeMax: 5
+  lifeValue: 15
+  lifeMax: 15
   lifePercent: 0
   isImmortal: 0
 --- !u!114 &114216086475791658
