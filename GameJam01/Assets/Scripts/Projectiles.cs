@@ -12,6 +12,10 @@ public class Projectiles : NetworkBehaviour {
   public float speed = 30f;
   public int damage = 10;
 
+  [Header("If is moving by animation (so it must have a body)")]
+  public bool isMovingByAnimation = false;
+  public GameObject innerBody;
+
   [Header("Explosion options (if 'isExplosive' is checked)")]
   public bool isExplosive;
   public GameObject explosion;
@@ -25,17 +29,25 @@ public class Projectiles : NetworkBehaviour {
   [Tooltip("Projectile's price for the shop")]
   public int shopPrice;
 
+  private bool hasExploded = false;
+
   // Use this for initialization
   void Awake() {
     transform.position = new Vector3(transform.position.x, transform.position.y, -5f);
   }
 
   private void FixedUpdate() {
-    transform.Translate(new Vector3(0f, speed / 100, 0f));
+    if (!isMovingByAnimation) {
+      transform.Translate(new Vector3(0f, speed / 100, 0f));
+    }
   }
 
   public void Fire(Quaternion projectilRotation) {
-    transform.rotation = projectilRotation;
+    if (!isMovingByAnimation) {
+      transform.rotation = projectilRotation;
+    } else {
+      transform.parent.rotation = projectilRotation;
+    }
   }
 
   private void OnTriggerEnter2D(Collider2D collision) {
@@ -48,7 +60,7 @@ public class Projectiles : NetworkBehaviour {
     LifeManager lifeManager = collision.gameObject.GetComponent<LifeManager>();
     if (lifeManager) {
       lifeManager.Hit(this.damage);
-      if (isExplosive) {
+      if (isExplosive && !hasExploded) {
         CreateExplosion();
       }
     }
@@ -62,5 +74,7 @@ public class Projectiles : NetworkBehaviour {
     GameObject theExplosion = Instantiate(explosion, transform.position, Quaternion.identity);
     theExplosion.GetComponent<Explosive>().explosionSize = explosionSize;
     theExplosion.GetComponent<Explosive>().Explode();
+    hasExploded = true;
+    Destroy(gameObject);
   }
 }
