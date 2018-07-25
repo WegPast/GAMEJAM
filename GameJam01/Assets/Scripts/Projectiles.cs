@@ -15,6 +15,7 @@ public class Projectiles : NetworkBehaviour {
   [Header("If is moving by animation (so it must have a body)")]
   public bool isMovingByAnimation = false;
   public GameObject innerBody;
+  //public GameObject 
 
   [Header("Explosion options (if 'isExplosive' is checked)")]
   public bool isExplosive;
@@ -43,14 +44,14 @@ public class Projectiles : NetworkBehaviour {
   }
 
   public void Fire(Quaternion projectilRotation) {
-    if (!isMovingByAnimation) {
       transform.rotation = projectilRotation;
-    } else {
-      transform.parent.rotation = projectilRotation;
-    }
   }
 
   private void OnTriggerEnter2D(Collider2D collision) {
+    Impact(collision);
+  }
+
+  public void Impact(Collider2D collision) {
 
     // we stop the projectile
     speed = 0f;
@@ -71,8 +72,9 @@ public class Projectiles : NetworkBehaviour {
   }
 
   public void CreateExplosion() {
-    GameObject theExplosion = Instantiate(explosion, transform.position, Quaternion.identity);
+    GameObject theExplosion = Instantiate(explosion, innerBody.transform.position, transform.rotation);
     theExplosion.GetComponent<Explosive>().explosionSize = explosionSize;
+    theExplosion.GetComponent<Explosive>().damage = damage;
     theExplosion.GetComponent<Explosive>().Explode();
     hasExploded = true;
     Destroy(gameObject);

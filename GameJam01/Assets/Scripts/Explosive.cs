@@ -5,6 +5,7 @@ using UnityEngine;
 public class Explosive : MonoBehaviour {
 
   public int explosionSize = 0;
+  public int damage = 0;
 
   private Animator animator;
 
@@ -20,6 +21,13 @@ public class Explosive : MonoBehaviour {
       case 3:
         animator.SetTrigger("explodeBig");
         break;
+    }
+  }
+
+  private void OnTriggerEnter2D(Collider2D collision) {
+    LifeManager lifeManager = collision.gameObject.GetComponent<LifeManager>();
+    if (lifeManager) {
+      lifeManager.Hit(this.damage);
     }
   }
 

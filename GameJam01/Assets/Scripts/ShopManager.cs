@@ -288,7 +288,7 @@ public class ShopManager : MonoBehaviour {
     if (side == "left") {
       for (int i = 0; i < leftProjectilesSprites.Length; i++) {
         if (i <= (availableProjectile.Length - 1)) {
-          leftProjectilesSprites[i].sprite = availableProjectile[i].GetComponent<SpriteRenderer>().sprite;
+          leftProjectilesSprites[i].sprite = availableProjectile[i].iconSprite;
         } else {
           leftProjectilesSprites[i].sprite = noProjectileSprite;
         }
@@ -298,7 +298,7 @@ public class ShopManager : MonoBehaviour {
     if (side == "right") {
       for (int i = 0; i < rightProjectilesSprites.Length; i++) {
         if (i <= (availableProjectile.Length - 1)) {
-          rightProjectilesSprites[i].sprite = availableProjectile[i].GetComponent<SpriteRenderer>().sprite;
+          rightProjectilesSprites[i].sprite = availableProjectile[i].iconSprite;
         } else {
           rightProjectilesSprites[i].sprite = noProjectileSprite;
         }
