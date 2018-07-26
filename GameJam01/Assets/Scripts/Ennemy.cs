@@ -45,8 +45,10 @@ public class Ennemy : NetworkBehaviour
   private void OnTriggerEnter2D(Collider2D collision)
   {
 
-    Projectiles projectiles = collision.gameObject.GetComponent<Projectiles>();
-    if (projectiles && this.animator)
+    Projectiles isProjectiles = collision.gameObject.GetComponent<Projectiles>();
+    ProjectileInnerBody isProjectileInnerBody = collision.gameObject.GetComponent<ProjectileInnerBody>();
+    Explosive isExplosive = collision.gameObject.GetComponent<Explosive>();
+    if ((isProjectiles || isProjectileInnerBody || isExplosive) && this.animator)
     {
       animator.SetTrigger("BEING_HIT");
     }

@@ -44,7 +44,7 @@ public class Projectiles : NetworkBehaviour {
   }
 
   public void Fire(Quaternion projectilRotation) {
-      transform.rotation = projectilRotation;
+    transform.rotation = projectilRotation;
   }
 
   private void OnTriggerEnter2D(Collider2D collision) {
@@ -72,9 +72,17 @@ public class Projectiles : NetworkBehaviour {
   }
 
   public void CreateExplosion() {
-    GameObject theExplosion = Instantiate(explosion, innerBody.transform.position, transform.rotation);
+    GameObject theExplosion;
+    Quaternion randomRotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
+
+    if (!isMovingByAnimation) {
+      theExplosion = Instantiate(explosion, transform.position, randomRotation);
+    } else {
+      theExplosion = Instantiate(explosion, innerBody.transform.position, randomRotation);
+    }
+
     theExplosion.GetComponent<Explosive>().explosionSize = explosionSize;
-    theExplosion.GetComponent<Explosive>().damage = damage;
+    theExplosion.GetComponent<Explosive>().damage = damage/2;
     theExplosion.GetComponent<Explosive>().Explode();
     hasExploded = true;
     Destroy(gameObject);

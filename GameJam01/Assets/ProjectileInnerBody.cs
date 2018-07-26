@@ -14,10 +14,4 @@ public class ProjectileInnerBody : MonoBehaviour {
   private void OnTriggerEnter2D(Collider2D collision) {
     parentProjectile.Impact(collision);
   }
-
-
-  // Update is called once per frame
-  void Update () {
-		
-	}
 }

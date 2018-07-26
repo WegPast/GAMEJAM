@@ -22,11 +22,6 @@ public class LifeManager : NetworkBehaviour
     InitializeLife(lifeMax, isImmortal);
   }
 
-  // Update is called once per frame
-  void Update()
-  {
-  }
-
   //Hit and heal functions
   public void Hit(int damage) {
     lifeValue = (damage > lifeValue) ? 0 : lifeValue - damage;

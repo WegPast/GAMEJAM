@@ -24,9 +24,11 @@ public class Explosive : MonoBehaviour {
     }
   }
 
-  private void OnTriggerEnter2D(Collider2D collision) {
+  private void OnCollisionEnter2D(Collision2D collision) {
+
     LifeManager lifeManager = collision.gameObject.GetComponent<LifeManager>();
     if (lifeManager) {
+      Debug.Log("explosion hit");
       lifeManager.Hit(this.damage);
     }
   }
