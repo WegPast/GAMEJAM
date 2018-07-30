@@ -175,6 +175,7 @@ MonoBehaviour:
   lifeMax: 15
   lifePercent: 0
   isImmortal: 0
+  entityAnimator: {fileID: 95248178977344088}
 --- !u!114 &114216086475791658
 MonoBehaviour:
   m_ObjectHideFlags: 1

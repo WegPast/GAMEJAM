@@ -160,7 +160,7 @@ public class PlayerDataManager : MonoBehaviour
   }
 
   public bool IsWeaponPurchased(int index) {
-    Debug.Log("weapon " + index + " is purchased :" + (purchasedLeftWeapons.IndexOf(index) >= 0));
+    //Debug.Log("weapon " + index + " is purchased :" + (purchasedLeftWeapons.IndexOf(index) >= 0));
     return purchasedLeftWeapons.IndexOf(index) >= 0;
   }
 
@@ -168,12 +168,12 @@ public class PlayerDataManager : MonoBehaviour
     for (int weapIndex = 0; weapIndex < availableWeapons.Length; weapIndex++) {
       for (int projectIndex = 0; projectIndex < 6; projectIndex++) {
         if (projectIndex == index) {
-          Debug.Log("projectile " + index + " for weapon "+ weapIndex+" is purchased :" + purchasedLeftProjectiles[weapIndex, projectIndex]);
+          //Debug.Log("projectile " + index + " for weapon "+ weapIndex+" is purchased :" + purchasedLeftProjectiles[weapIndex, projectIndex]);
           return purchasedLeftProjectiles[weapIndex, projectIndex];
         }
       }
     }
-    Debug.Log("projectile " + index + " is purchased :" + false);
+    //Debug.Log("projectile " + index + " is purchased :" + false);
     return false;
   }
 
