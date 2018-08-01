@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114457626778933348}
   - component: {fileID: 114716198773357992}
   - component: {fileID: 50471868466567928}
+  - component: {fileID: 114104769706502956}
   m_Layer: 9
   m_Name: SmallFireBullet
   m_TagString: PlayerProjectiles
@@ -90,6 +91,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.061617337, y: 0.16355503}
   m_EdgeRadius: 0
+--- !u!114 &114104769706502956
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1821968161715884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7baf3f4db2885b49ba10acd5804b655, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offest: {x: 0, y: -0.2}
+  shadowMaterial: {fileID: 2100000, guid: 17160706a758da2449865248ae1a3cf7, type: 2}
+  shadowColor: {r: 0, g: 0, b: 0, a: 0.40784314}
 --- !u!114 &114398927931212290
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -105,6 +120,8 @@ MonoBehaviour:
   isFromMyPlayer: 0
   speed: 30
   damage: 2
+  isMovingByAnimation: 0
+  innerBody: {fileID: 0}
   isExplosive: 0
   explosion: {fileID: 0}
   explosionSize: 1
@@ -197,8 +214,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1131319315
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300014, guid: 84245fe34f0be7b44b8998daba56ef08, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
