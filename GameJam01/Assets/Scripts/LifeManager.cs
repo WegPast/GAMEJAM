@@ -18,9 +18,20 @@ public class LifeManager : NetworkBehaviour {
   [Tooltip("(optional) The animator of the attached gameObject. If defined, the LifeManager will try to trigger the 'BEIGN_HIT' animation if it exists")]
   public Animator entityAnimator;
 
+  private int damageDuration = 0;
+  private int damagePerSec = 0;
+
   // Use this for initialization
   void Start() {
     InitializeLife(lifeMax, isImmortal);
+  }
+
+  private void FixedUpdate() {
+    if(damageDuration < 0) {
+      if(damagePerSec < 0) {
+
+      }
+    }
   }
 
   //Hit and heal functions
@@ -36,6 +47,20 @@ public class LifeManager : NetworkBehaviour {
     }
     lifeValue = (damage > lifeValue) ? 0 : lifeValue - damage;
     UpdateLifePercent();
+  }
+
+  public void ApplyLifeDebuff(int damage, int duration) {
+    damagePerSec = damage;
+    damageDuration = duration;
+    Invoke("DealDebuffDamage", 1);
+  }
+
+  public void DealDebuffDamage() {
+    Hit(damagePerSec);
+    if(damageDuration > 0) {
+      damageDuration--;
+      Invoke("DealDebuffDamage", 1);
+    }
   }
 
   public void Heal(int value) {

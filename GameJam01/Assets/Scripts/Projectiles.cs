@@ -17,6 +17,11 @@ public class Projectiles : NetworkBehaviour {
   public GameObject innerBody;
   //public GameObject 
 
+  [Header("Does it deal damage over time ?")]
+  public bool isDealingDamageOverTime = false;
+  public int debuffDuration = 0;
+  public int debuffDamage = 0;
+
   [Header("Explosion options (if 'isExplosive' is checked)")]
   public bool isExplosive;
   public GameObject explosion;
@@ -61,6 +66,9 @@ public class Projectiles : NetworkBehaviour {
     LifeManager lifeManager = collision.gameObject.GetComponent<LifeManager>();
     if (lifeManager) {
       lifeManager.Hit(this.damage);
+      if (isDealingDamageOverTime) {
+        lifeManager.ApplyLifeDebuff(debuffDamage, debuffDuration);
+      }
       if (isExplosive && !hasExploded) {
         CreateExplosion();
       }
@@ -68,6 +76,10 @@ public class Projectiles : NetworkBehaviour {
 
 
     // Une fois l'application des dégat faite il faut destroy le gameObject.
+    DestroyProjectile();
+  }
+
+  public void DestroyProjectile() {
     Destroy(gameObject);
   }
 
@@ -82,9 +94,9 @@ public class Projectiles : NetworkBehaviour {
     }
 
     theExplosion.GetComponent<Explosive>().explosionSize = explosionSize;
-    theExplosion.GetComponent<Explosive>().damage = damage/2;
+    theExplosion.GetComponent<Explosive>().damage = damage / 2;
     theExplosion.GetComponent<Explosive>().Explode();
     hasExploded = true;
-    Destroy(gameObject);
+    DestroyProjectile();
   }
 }

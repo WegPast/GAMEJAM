@@ -109,7 +109,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.014248997, y: -0.029289499}
+  m_Offset: {x: 0.0017438941, y: 0.07352199}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -120,7 +120,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.15016407, y: 0.18238166}
+  m_Size: {x: 0.12274768, y: 0.2829083}
   m_EdgeRadius: 0
 --- !u!95 &95049514718633782
 Animator:
@@ -131,7 +131,7 @@ Animator:
   m_GameObject: {fileID: 1839673413012768}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 31dbd2c1a69078847b68fb3652cc6a27, type: 2}
+  m_Controller: {fileID: 9100000, guid: 895d996b503e9fc499fd7820a190016c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -153,7 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offest: {x: 0, y: -0.2}
   shadowMaterial: {fileID: 2100000, guid: 17160706a758da2449865248ae1a3cf7, type: 2}
-  shadowColor: {r: 0, g: 0, b: 0, a: 0.40784314}
+  shadowColor: {r: 0.05660379, g: 0.03853205, b: 0, a: 0.32156864}
 --- !u!114 &114279514268570896
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -198,17 +198,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 960bdeaa7e3d61d459dcdb55533c8a90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iconSprite: {fileID: 21300018, guid: 84245fe34f0be7b44b8998daba56ef08, type: 3}
+  iconSprite: {fileID: 21300030, guid: 84245fe34f0be7b44b8998daba56ef08, type: 3}
   isFromMyPlayer: 0
-  speed: 16.12
-  damage: 10
+  speed: 18
+  damage: 2
   isMovingByAnimation: 1
   innerBody: {fileID: 1344120193667034}
-  isExplosive: 1
-  explosion: {fileID: 1270963817246346, guid: 2cb6467100cc8734f9775ba50e0b690a, type: 2}
-  explosionSize: 2
-  description: Default grenade for the Grenade Launcher
-  shopName: Grenade
+  isDealingDamageOverTime: 1
+  debuffDuration: 4
+  debuffDamage: 2
+  isExplosive: 0
+  explosion: {fileID: 0}
+  explosionSize: 1
+  description: Default fuel for the FlameThrower
+  shopName: Fuel
   shopPrice: 0
 --- !u!114 &114676670086123116
 MonoBehaviour:
@@ -277,7 +280,7 @@ SpriteRenderer:
   m_SortingLayerID: -1131319315
   m_SortingLayer: 6
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300018, guid: 84245fe34f0be7b44b8998daba56ef08, type: 3}
+  m_Sprite: {fileID: 21300030, guid: 84245fe34f0be7b44b8998daba56ef08, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

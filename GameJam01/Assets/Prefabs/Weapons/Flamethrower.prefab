@@ -135,8 +135,8 @@ MonoBehaviour:
   projectileType: {fileID: 114339415727265694, guid: 114f48073d607b849a8bcd0e8699a38a,
     type: 2}
   availableProjectiles:
-  - {fileID: 114339415727265694, guid: 114f48073d607b849a8bcd0e8699a38a, type: 2}
-  - {fileID: 114339415727265694, guid: 19e41eb150d0c1e4d9e6a142e77ffa00, type: 2}
+  - {fileID: 114406472960766162, guid: 932b4991f51cb1443864b84d7eb5ac6d, type: 2}
+  - {fileID: 114406472960766162, guid: 932b4991f51cb1443864b84d7eb5ac6d, type: 2}
   description: FLAAAAAME
   shopName: Flame thrower
   shopPrice: 3000
