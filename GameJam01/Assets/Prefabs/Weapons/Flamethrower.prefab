@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8abf578dca4d84148b8758f4e2d9dfdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRate: 19.7
+  fireRate: 50
   projectileType: {fileID: 114406472960766162, guid: 932b4991f51cb1443864b84d7eb5ac6d,
     type: 2}
   availableProjectiles:
@@ -141,7 +141,7 @@ MonoBehaviour:
   shopName: Flame thrower
   shopPrice: 3000
   fireSpot: {fileID: 1457463025503110}
-  spreading: 5
+  spreading: 10
 --- !u!114 &114315224822168442
 MonoBehaviour:
   m_ObjectHideFlags: 1

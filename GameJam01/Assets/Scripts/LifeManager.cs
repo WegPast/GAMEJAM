@@ -6,8 +6,8 @@ using UnityEngine.Networking;
 
 public class LifeManager : NetworkBehaviour {
   [Header("Life Values")]
-  public int lifeValue = 1;
-  public int lifeMax = 1;
+  public float lifeValue = 1;
+  public float lifeMax = 1;
 
   [HideInInspector()]
   public float lifePercent = 1.0f;
@@ -19,7 +19,7 @@ public class LifeManager : NetworkBehaviour {
   public Animator entityAnimator;
 
   private int damageDuration = 0;
-  private int damagePerSec = 0;
+  private float damagePerSec = 0;
 
   // Use this for initialization
   void Start() {
@@ -35,7 +35,7 @@ public class LifeManager : NetworkBehaviour {
   }
 
   //Hit and heal functions
-  public void Hit(int damage) {
+  public void Hit(float damage) {
     if (entityAnimator) {
       AnimatorControllerParameter[] parameters = entityAnimator.parameters;
       foreach (var param in parameters) {
@@ -49,7 +49,7 @@ public class LifeManager : NetworkBehaviour {
     UpdateLifePercent();
   }
 
-  public void ApplyLifeDebuff(int damage, int duration) {
+  public void ApplyLifeDebuff(float damage, int duration) {
     damagePerSec = damage;
     damageDuration = duration;
     Invoke("DealDebuffDamage", 1);
@@ -63,7 +63,7 @@ public class LifeManager : NetworkBehaviour {
     }
   }
 
-  public void Heal(int value) {
+  public void Heal(float value) {
     if ((lifeValue + value) > lifeMax) {
       lifeValue = lifeMax;
       lifePercent = 100.0f;
@@ -74,14 +74,14 @@ public class LifeManager : NetworkBehaviour {
   }
 
   // Setters
-  void InitializeLife(int lifeMaxValue, bool isImmortalValue) {
+  void InitializeLife(float lifeMaxValue, bool isImmortalValue) {
     isImmortal = isImmortalValue;
     lifeMax = lifeMaxValue;
     lifeValue = lifeMaxValue;
     lifePercent = 100.0f;
   }
 
-  void ChangeLifeMax(int lifeMaxValue) {
+  void ChangeLifeMax(float lifeMaxValue) {
     lifeMax = lifeMaxValue;
     UpdateLifePercent();
   }

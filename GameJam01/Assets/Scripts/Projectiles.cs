@@ -10,7 +10,7 @@ public class Projectiles : NetworkBehaviour {
   public Sprite iconSprite;
   public bool isFromMyPlayer = false;
   public float speed = 30f;
-  public int damage = 10;
+  public float damage = 10;
 
   [Header("If is moving by animation (so it must have a body)")]
   public bool isMovingByAnimation = false;
@@ -94,7 +94,7 @@ public class Projectiles : NetworkBehaviour {
     }
 
     theExplosion.GetComponent<Explosive>().explosionSize = explosionSize;
-    theExplosion.GetComponent<Explosive>().damage = damage / 2;
+    theExplosion.GetComponent<Explosive>().damage = damage / 2f;
     theExplosion.GetComponent<Explosive>().Explode();
     hasExploded = true;
     DestroyProjectile();

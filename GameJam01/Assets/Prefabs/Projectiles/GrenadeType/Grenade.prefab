@@ -153,7 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offest: {x: 0, y: -0.2}
   shadowMaterial: {fileID: 2100000, guid: 17160706a758da2449865248ae1a3cf7, type: 2}
-  shadowColor: {r: 0, g: 0, b: 0, a: 0.40784314}
+  shadowColor: {r: 0, g: 0, b: 0, a: 0.27450982}
 --- !u!114 &114279514268570896
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -204,6 +204,9 @@ MonoBehaviour:
   damage: 10
   isMovingByAnimation: 1
   innerBody: {fileID: 1344120193667034}
+  isDealingDamageOverTime: 0
+  debuffDuration: 0
+  debuffDamage: 0
   isExplosive: 1
   explosion: {fileID: 1270963817246346, guid: 2cb6467100cc8734f9775ba50e0b690a, type: 2}
   explosionSize: 2

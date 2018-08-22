@@ -8,15 +8,15 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications: []
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 0}
+  m_SourcePrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1780859691034746}
-  m_IsPrefabParent: 1
+  m_IsPrefabAsset: 1
 --- !u!1 &1780859691034746
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
+  serializedVersion: 6
   m_Component:
   - component: {fileID: 4235255935937322}
   - component: {fileID: 212609774744230216}
@@ -36,7 +36,7 @@ GameObject:
 --- !u!4 &4235255935937322
 Transform:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1780859691034746}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -50,7 +50,7 @@ Transform:
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1780859691034746}
   m_BodyType: 1
@@ -69,7 +69,7 @@ Rigidbody2D:
 --- !u!61 &61512884028921352
 BoxCollider2D:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1780859691034746}
   m_Enabled: 1
@@ -94,7 +94,7 @@ BoxCollider2D:
 --- !u!114 &114079623793173746
 MonoBehaviour:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1780859691034746}
   m_Enabled: 1
@@ -108,6 +108,9 @@ MonoBehaviour:
   damage: 3
   isMovingByAnimation: 0
   innerBody: {fileID: 0}
+  isDealingDamageOverTime: 0
+  debuffDuration: 0
+  debuffDamage: 0
   isExplosive: 0
   explosion: {fileID: 0}
   explosionSize: 1
@@ -117,7 +120,7 @@ MonoBehaviour:
 --- !u!114 &114161209009561356
 MonoBehaviour:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1780859691034746}
   m_Enabled: 1
@@ -138,7 +141,7 @@ MonoBehaviour:
 --- !u!114 &114195728302592328
 MonoBehaviour:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1780859691034746}
   m_Enabled: 1
@@ -148,11 +151,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offest: {x: 0, y: -0.2}
   shadowMaterial: {fileID: 2100000, guid: 17160706a758da2449865248ae1a3cf7, type: 2}
-  shadowColor: {r: 0, g: 0, b: 0, a: 0.40784314}
+  shadowColor: {r: 0, g: 0, b: 0, a: 0.22352941}
 --- !u!114 &114363035789996418
 MonoBehaviour:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1780859691034746}
   m_Enabled: 1
@@ -184,7 +187,7 @@ MonoBehaviour:
 --- !u!212 &212609774744230216
 SpriteRenderer:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1780859691034746}
   m_Enabled: 1
@@ -226,3 +229,4 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+  m_SpriteSortPoint: 0

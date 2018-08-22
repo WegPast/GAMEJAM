@@ -7,7 +7,7 @@ public class Weapon : NetworkBehaviour {
 
 
   [Header("Weapon's properties")]
-  [Range(0.05f, 30f)]
+  [Range(0.05f, 50f)]
   public float fireRate;
   public Projectiles projectileType; // Contains damage, speed etc...
   [Tooltip("Weapon's availbale projectiles")]
@@ -23,7 +23,7 @@ public class Weapon : NetworkBehaviour {
 
   [Header("Behaviours"), Space(10f)]
   public GameObject fireSpot;
-  [Range(0f, 10f)]
+  [Range(0f, 20f)]
   public float spreading = 0f;
 
   private GameObject parentGameObject;
@@ -36,12 +36,13 @@ public class Weapon : NetworkBehaviour {
   public GameObject FireProjectile(GameObject gun, bool isFiredFromLocalPlayer) {
 
     Vector3 projectilePos = fireSpot.transform.position;
-    GameObject projectile = Instantiate(projectileType.gameObject, projectilePos, Quaternion.identity) as GameObject;
     Quaternion fireSpotRotation = fireSpot.transform.rotation;
     if (spreading > 0f) {
       float randomSpread = Random.Range(-spreading, spreading);
-      fireSpotRotation = Quaternion.Euler(fireSpot.transform.rotation.x, fireSpot.transform.rotation.y, fireSpot.transform.rotation.z + randomSpread);
+      Quaternion rotat = Quaternion.Euler(fireSpot.transform.rotation.x, fireSpot.transform.rotation.y, fireSpot.transform.rotation.z + randomSpread);
+      fireSpotRotation = fireSpot.transform.rotation * rotat;
     }
+    GameObject projectile = Instantiate(projectileType.gameObject, projectilePos, fireSpotRotation) as GameObject;
     projectile.GetComponent<Projectiles>().Fire(fireSpotRotation);
     if (isFiredFromLocalPlayer) {
       projectile.GetComponent<Projectiles>().isFromMyPlayer = true;

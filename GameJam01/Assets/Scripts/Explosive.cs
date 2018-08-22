@@ -5,7 +5,7 @@ using UnityEngine;
 public class Explosive : MonoBehaviour {
 
   public int explosionSize = 0;
-  public int damage = 0;
+  public float damage = 0;
 
   private Animator animator;
 

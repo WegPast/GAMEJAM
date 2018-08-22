@@ -60,7 +60,7 @@ public class Ennemy : NetworkBehaviour {
 
 
   private void HandleCollisionDamages(LifeManager playerLifeManager) {
-    int dammageToPlayer = this.lifeManager.lifeValue;
+    float dammageToPlayer = this.lifeManager.lifeValue;
     this.lifeManager.Hit(playerLifeManager.lifeValue);
     playerLifeManager.Hit(dammageToPlayer);
   }
