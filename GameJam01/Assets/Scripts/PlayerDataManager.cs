@@ -24,7 +24,7 @@ public class PlayerDataManager : MonoBehaviour
   public int localPlayerRightProjectilesIndex = 0;
 
   [Header("Local Player Bonus (Kept by this Player Data Manager)")]
-  public int localPlayerLifeMaxBonus;
+  public float localPlayerLifeMaxBonus;
   public int localPlayerSpeedBonus;
   public int localPlayerCredits;
   // end player data -------------------------
@@ -117,7 +117,7 @@ public class PlayerDataManager : MonoBehaviour
    * Apply the bonus to the player stat
    * 
    **/
-  public void ApplyLifeMaxBonus(int bonus) {
+  public void ApplyLifeMaxBonus(float bonus) {
     localPlayerLifeManager.lifeMax += bonus;
     localPlayerLifeManager.Heal(bonus);
   }
